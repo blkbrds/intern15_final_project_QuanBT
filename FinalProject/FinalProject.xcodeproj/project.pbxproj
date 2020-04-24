@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,7 +48,6 @@
 				0E6ED284269ACB16FE950D0A /* Pods-FinalProject.debug.xcconfig */,
 				E16B548E52F801DE259271BD /* Pods-FinalProject.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -104,6 +103,7 @@
 				6E91299A2452AA0300F89B26 /* Frameworks */,
 				6E91299B2452AA0300F89B26 /* Resources */,
 				42DA9212429AA97CF730AAC9 /* [CP] Embed Pods Frameworks */,
+				6E9129B42452BD3900F89B26 /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -177,6 +177,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FinalProject/Pods-FinalProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6E9129B42452BD3900F89B26 /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		AA0D8FF34D6AC9814FA10437 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
