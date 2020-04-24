@@ -26,7 +26,6 @@ excluded:
   - Carthage
   - Pods
   - vendor
-  - SukedachiTests
 cyclomatic_complexity:
   warning: 20
 line_length: 200
