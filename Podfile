@@ -7,5 +7,8 @@ target 'FinalProject' do
 
   # Pods for FinalProject
 pod 'SwiftLint'
-pod 'Alamofire'
+pod 'Alamofire', '~> 4.8.2'
+pod 'SwifterSwift'
+pod 'ObjectMapper'
+pod 'MVVM-Swift'
 end

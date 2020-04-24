@@ -1,20 +1,56 @@
 PODS:
-  - Alamofire (5.1.0)
+  - Alamofire (4.8.2)
+  - MVVM-Swift (5.0.1)
+  - ObjectMapper (3.5.2)
+  - SwifterSwift (5.2.0):
+    - SwifterSwift/AppKit (= 5.2.0)
+    - SwifterSwift/CoreAnimation (= 5.2.0)
+    - SwifterSwift/CoreGraphics (= 5.2.0)
+    - SwifterSwift/CoreLocation (= 5.2.0)
+    - SwifterSwift/Dispatch (= 5.2.0)
+    - SwifterSwift/Foundation (= 5.2.0)
+    - SwifterSwift/MapKit (= 5.2.0)
+    - SwifterSwift/SceneKit (= 5.2.0)
+    - SwifterSwift/SpriteKit (= 5.2.0)
+    - SwifterSwift/StoreKit (= 5.2.0)
+    - SwifterSwift/SwiftStdlib (= 5.2.0)
+    - SwifterSwift/UIKit (= 5.2.0)
+  - SwifterSwift/AppKit (5.2.0)
+  - SwifterSwift/CoreAnimation (5.2.0)
+  - SwifterSwift/CoreGraphics (5.2.0)
+  - SwifterSwift/CoreLocation (5.2.0)
+  - SwifterSwift/Dispatch (5.2.0)
+  - SwifterSwift/Foundation (5.2.0)
+  - SwifterSwift/MapKit (5.2.0)
+  - SwifterSwift/SceneKit (5.2.0)
+  - SwifterSwift/SpriteKit (5.2.0)
+  - SwifterSwift/StoreKit (5.2.0)
+  - SwifterSwift/SwiftStdlib (5.2.0)
+  - SwifterSwift/UIKit (5.2.0)
   - SwiftLint (0.39.2)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 4.8.2)
+  - MVVM-Swift
+  - ObjectMapper
+  - SwifterSwift
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - MVVM-Swift
+    - ObjectMapper
+    - SwifterSwift
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  MVVM-Swift: 0333cd8a16abfe0e93a1423bfddb49b8c11065e1
+  ObjectMapper: b53ae947d370bf89423e86be7d4e2d2b2a8d3f40
+  SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: 48667fefa23c3c0057535ff60616fc0d0933d993
+PODFILE CHECKSUM: 6ac0ddd0c28ed69fe869de8f549720e1d4413620
 
 COCOAPODS: 1.8.4
