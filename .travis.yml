@@ -8,9 +8,12 @@ xcode_scheme: FinalProject
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
 before_install:
   - cd FinalProject
+  - gem update --system
+  - gem install bundler
   - bundle install
-  - gem install linterbot
   - bundle exec pod install --repo-update
+  - gem install linterbot
+  - brew install swiftlint
 install:
   - set -o pipefail
   - sudo systemsetup -settimezone Asia/Ho_Chi_Minh
