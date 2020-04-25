@@ -18,4 +18,6 @@ extension UICollectionViewCell {
     var indexPath: IndexPath? {
         return collectionView?.indexPath(for: self)
     }
+
+
 }
