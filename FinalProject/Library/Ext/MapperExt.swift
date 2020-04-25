@@ -14,8 +14,6 @@ extension Mapper {
     func map(result: Result<Any>, type: DataType, completion: Completion) {
         switch result {
         case .success(let json):
-
-
             switch type {
             case .object:
                 if let json = json as? JSObject {
@@ -23,6 +21,8 @@ extension Mapper {
                 } else {
                     completion(.failure(Api.Error.json))
                 }
+
+
             case .array:
                 if let json = json as? JSArray {
                     completion(.success(json))
