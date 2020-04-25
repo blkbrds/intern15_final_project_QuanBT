@@ -52,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AA0AF8ACA4248B6640DD65E /* Pods-FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalProject/Pods-FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		0E6ED284269ACB16FE950D0A /* Pods-FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.debug.xcconfig"; path = "Target Support Files/Pods-FinalProject/Pods-FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		6E91299D2452AA0300F89B26 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9129A02452AA0300F89B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 			children = (
 				0E6ED284269ACB16FE950D0A /* Pods-FinalProject.debug.xcconfig */,
 				E16B548E52F801DE259271BD /* Pods-FinalProject.release.xcconfig */,
+				0AA0AF8ACA4248B6640DD65E /* Pods-FinalProject.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
