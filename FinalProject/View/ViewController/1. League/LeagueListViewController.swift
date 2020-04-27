@@ -30,37 +30,19 @@ final class LeagueListViewController: ViewController {
         super.setupUI()
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         sportSegmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
-        nationsButton[0].borderWidth = 3
-        nationsButton[0].borderColor = App.Color.greenCustomColor
+        nationsButton[0].borderWidth = 4
+        nationsButton[0].borderColor = App.Color.tabBarTintColor
     }
     
+    private func setupButton(index: Int) {
+        nationsButton.forEach { item in
+            item.borderWidth = 0
+        }
+        nationsButton[index].borderWidth = 4
+        nationsButton[index].borderColor = App.Color.tabBarTintColor
+    }
     // MARK: - IBAction
     @IBAction private func nationsButtonTouchUpInside(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            nationsButton.forEach { item in
-                item.borderWidth = 0
-            }
-            nationsButton[sender.tag].borderWidth = 3
-            nationsButton[sender.tag].borderColor = App.Color.greenCustomColor
-        case 1:
-            nationsButton.forEach { item in
-                item.borderWidth = 0
-            }
-            nationsButton[sender.tag].borderWidth = 3
-            nationsButton[sender.tag].borderColor = App.Color.greenCustomColor
-        case 2:
-            nationsButton.forEach { item in
-                item.borderWidth = 0
-            }
-            nationsButton[sender.tag].borderWidth = 3
-            nationsButton[sender.tag].borderColor = App.Color.greenCustomColor
-        default:
-            nationsButton.forEach { item in
-                item.borderWidth = 0
-            }
-            nationsButton[sender.tag].borderWidth = 3
-            nationsButton[sender.tag].borderColor = App.Color.greenCustomColor
-        }
+        setupButton(index: sender.tag)
     }
 }
