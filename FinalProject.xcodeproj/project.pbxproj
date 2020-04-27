@@ -49,6 +49,9 @@
 		6E912A102453592500F89B26 /* CollectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A0F2453592500F89B26 /* CollectionExt.swift */; };
 		6E912A122453596F00F89B26 /* BundleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A112453596F00F89B26 /* BundleExt.swift */; };
 		6E912A14245359C200F89B26 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A13245359C200F89B26 /* Color.swift */; };
+		A4133B7724572E310036C4DB /* LeagueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4133B7524572E310036C4DB /* LeagueTableCell.swift */; };
+		A4133B7824572E310036C4DB /* LeagueTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4133B7624572E310036C4DB /* LeagueTableCell.xib */; };
+		A4133B7A24572E6C0036C4DB /* LeagueTableCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4133B7924572E6C0036C4DB /* LeagueTableCellVM.swift */; };
 		A4CA43212456852300063EBF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CA43202456852300063EBF /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +102,9 @@
 		6E912A112453596F00F89B26 /* BundleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExt.swift; sourceTree = "<group>"; };
 		6E912A13245359C200F89B26 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8C84656D731A9EF57FF398C2 /* Pods_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4133B7524572E310036C4DB /* LeagueTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTableCell.swift; sourceTree = "<group>"; };
+		A4133B7624572E310036C4DB /* LeagueTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeagueTableCell.xib; sourceTree = "<group>"; };
+		A4133B7924572E6C0036C4DB /* LeagueTableCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTableCellVM.swift; sourceTree = "<group>"; };
 		A4CA43202456852300063EBF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E16B548E52F801DE259271BD /* Pods-FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.release.xcconfig"; path = "Target Support Files/Pods-FinalProject/Pods-FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +250,7 @@
 		6E9129BF245330DA00F89B26 /* 1. League */ = {
 			isa = PBXGroup;
 			children = (
+				A4133B7424572DEE0036C4DB /* Cell */,
 				6E9129C2245331E800F89B26 /* LeagueListViewController.swift */,
 				6E9129C3245331E800F89B26 /* LeagueListViewController.xib */,
 				6E9129C62453323500F89B26 /* LeagueListViewModel.swift */,
@@ -311,6 +318,16 @@
 				6E912A0D2453582800F89B26 /* Player.swift */,
 			);
 			path = Schema;
+			sourceTree = "<group>";
+		};
+		A4133B7424572DEE0036C4DB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A4133B7524572E310036C4DB /* LeagueTableCell.swift */,
+				A4133B7624572E310036C4DB /* LeagueTableCell.xib */,
+				A4133B7924572E6C0036C4DB /* LeagueTableCellVM.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F3CA9D46B538F796D41C795C /* Frameworks */ = {
@@ -387,6 +404,7 @@
 				6E9129CB2453326800F89B26 /* SearchViewController.xib in Resources */,
 				6E9129D12453329C00F89B26 /* FavoriteViewController.xib in Resources */,
 				6E9129C5245331E800F89B26 /* LeagueListViewController.xib in Resources */,
+				A4133B7824572E310036C4DB /* LeagueTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +501,7 @@
 				6E9129F02453443000F89B26 /* UIViewExt.swift in Sources */,
 				6E9129F92453478200F89B26 /* Router.swift in Sources */,
 				6E912A0E2453582800F89B26 /* Player.swift in Sources */,
+				A4133B7A24572E6C0036C4DB /* LeagueTableCellVM.swift in Sources */,
 				6E9129FF24534DA100F89B26 /* NSURL.swift in Sources */,
 				6E9129E62453429F00F89B26 /* UILabelExt.swift in Sources */,
 				6E9129A32452AA0300F89B26 /* SceneDelegate.swift in Sources */,
@@ -494,6 +513,7 @@
 				6E912A102453592500F89B26 /* CollectionExt.swift in Sources */,
 				6E9129FD24534A7800F89B26 /* Error.swift in Sources */,
 				6E9129C4245331E800F89B26 /* LeagueListViewController.swift in Sources */,
+				A4133B7724572E310036C4DB /* LeagueTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
