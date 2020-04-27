@@ -38,6 +38,15 @@ DEPENDENCIES:
   - SwiftLint
   - SwiftUtils (= 4.2)
 
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - MVVM-Swift
+    - ObjectMapper
+    - SwifterSwift
+    - SwiftLint
+    - SwiftUtils
+
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   MVVM-Swift: 0333cd8a16abfe0e93a1423bfddb49b8c11065e1
@@ -48,4 +57,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a567e9c350e9d2acbfa5e1bb96b973ac314432f0
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.9.1
