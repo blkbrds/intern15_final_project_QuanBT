@@ -27,7 +27,7 @@ let api = ApiManager()
 final class ApiManager {
 
     var defaultHTTPHeaders: [String: String] {
-        var headers: [String: String] = [:]
+        let headers: [String: String] = [:]
         return headers
     }
 }
