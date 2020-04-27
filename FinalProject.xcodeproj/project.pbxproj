@@ -49,6 +49,7 @@
 		6E912A102453592500F89B26 /* CollectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A0F2453592500F89B26 /* CollectionExt.swift */; };
 		6E912A122453596F00F89B26 /* BundleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A112453596F00F89B26 /* BundleExt.swift */; };
 		6E912A14245359C200F89B26 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A13245359C200F89B26 /* Color.swift */; };
+		A4CA43212456852300063EBF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CA43202456852300063EBF /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		6E912A112453596F00F89B26 /* BundleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExt.swift; sourceTree = "<group>"; };
 		6E912A13245359C200F89B26 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8C84656D731A9EF57FF398C2 /* Pods_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4CA43202456852300063EBF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E16B548E52F801DE259271BD /* Pods-FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.release.xcconfig"; path = "Target Support Files/Pods-FinalProject/Pods-FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 				6E912A06245356D300F89B26 /* NavigationController.swift */,
 				6E912A082453570000F89B26 /* Popup.swift */,
 				6E912A0A245357AC00F89B26 /* View.swift */,
+				A4CA43202456852300063EBF /* TabBarViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				6E9129D824533F6300F89B26 /* App.swift in Sources */,
 				6E912A07245356D300F89B26 /* NavigationController.swift in Sources */,
 				6E912A032453541200F89B26 /* NSDataExt.swift in Sources */,
+				A4CA43212456852300063EBF /* TabBarViewController.swift in Sources */,
 				6E9129E82453430200F89B26 /* UINavigationItemExt.swift in Sources */,
 				6E9129EE2453438600F89B26 /* UITableViewExt.swift in Sources */,
 				6E9129CD2453327C00F89B26 /* SearchViewModel.swift in Sources */,
