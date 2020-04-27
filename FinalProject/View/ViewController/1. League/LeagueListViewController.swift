@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeagueListViewController: UIViewController {
+class LeagueListViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
