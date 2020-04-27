@@ -21,7 +21,7 @@ final class TabBarViewController: UITabBarController {
         let homeVC = LeagueListViewController()
         let homeNavi = UINavigationController(rootViewController: homeVC)
         homeNavi.isNavigationBarHidden = true
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: " ic-home"), tag: 0)
+        homeVC.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "ic-home"), tag: 0)
         
         //Search
         let searchVC = SearchViewController()
@@ -33,7 +33,7 @@ final class TabBarViewController: UITabBarController {
         let favoritesVC = FavoriteViewController()
         let favoritesNavi = UINavigationController(rootViewController: favoritesVC)
         favoritesNavi.isNavigationBarHidden = true
-        favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.fill"), tag: 2)
+        favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 2)
         
         //tabbar controller
         self.viewControllers = [homeNavi, searchNavi, favoritesNavi]
