@@ -18,25 +18,28 @@ final class TabBarViewController: UITabBarController {
     
     private func setupUI() {
         //Home
-        let homeVC = LeagueListViewController()
-        let homeNavi = UINavigationController(rootViewController: homeVC)
-        homeNavi.isNavigationBarHidden = true
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "ic-home"), tag: 0)
+        let leagueVC = LeagueListViewController()
+        let leagueNavi = UINavigationController(rootViewController: leagueVC)
+        leagueNavi.isNavigationBarHidden = true
+        leagueVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-League"), tag: 0)
+        leagueVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         
         //Search
         let searchVC = SearchViewController()
         let searchNavi = UINavigationController(rootViewController: searchVC)
         searchNavi.isNavigationBarHidden = true
-        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        searchVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-Search"), tag: 1)
+        searchVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         
         //Favorites
         let favoritesVC = FavoriteViewController()
         let favoritesNavi = UINavigationController(rootViewController: favoritesVC)
         favoritesNavi.isNavigationBarHidden = true
-        favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 2)
+        favoritesVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-Heart"), tag: 2)
+        favoritesVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         
         //tabbar controller
-        self.viewControllers = [homeNavi, searchNavi, favoritesNavi]
+        self.viewControllers = [leagueNavi, searchNavi, favoritesNavi]
         self.selectedIndex = 0
         self.tabBar.tintColor = App.Color.tabBarTintColor
         self.tabBar.unselectedItemTintColor = App.Color.tabBarUnselectedItemTintColor
