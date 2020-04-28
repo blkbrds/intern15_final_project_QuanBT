@@ -8,17 +8,37 @@
 
 import UIKit
 
-class LeagueTableCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+final class LeagueTableCell: UITableViewCell {
+    // MARK: - IBOutlet
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var nameLeagueLabel: UILabel!
+    @IBOutlet weak var formedYearLable: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    // MARK: - Properties
+    var viewModel = LeagueTableCellVM() {
+        didSet {
+            updateView()
+        }
     }
     
+    // MARK: - Override
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    // MARK: - Function
+    private func updateView() {
+        let dataAPI = viewModel.dataAPI
+        nameLeagueLabel.text = dataAPI.strLeague
+        formedYearLable.text = dataAPI.intFormedYear
+    }
+    
+    func configImage(image: UIImage?) {
+        logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
+    }
 }

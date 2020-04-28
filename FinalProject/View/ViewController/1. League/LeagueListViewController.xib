@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeagueListViewController" customModule="FinalProject" customModuleProvider="target">
             <connections>
                 <outlet property="sportSegmentedControl" destination="uJz-gr-tUY" id="Rzh-Fa-yS3"/>
+                <outlet property="tableView" destination="I5y-Aa-8Ta" id="XoV-aa-vE6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="nationsButton" destination="Xlb-PC-cyr" collectionClass="NSMutableArray" id="xv7-bo-o5p"/>
                 <outletCollection property="nationsButton" destination="fxk-DH-0WW" collectionClass="NSMutableArray" id="anR-bS-26g"/>
@@ -27,10 +28,13 @@
                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <segments>
                         <segment title="Soccer"/>
-                        <segment title="Motosport"/>
+                        <segment title="Motorsport"/>
                         <segment title="Fighting"/>
                     </segments>
                     <color key="selectedSegmentTintColor" red="0.28235294117647058" green="0.31764705882352939" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="changedSportSegmentedControl:" destination="-1" eventType="valueChanged" id="yya-Rs-v6j"/>
+                    </connections>
                 </segmentedControl>
                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlb-PC-cyr">
                     <rect key="frame" x="56" y="112.66666666666669" width="53.666666666666657" height="54"/>
@@ -73,14 +77,9 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I5y-Aa-8Ta">
-                    <rect key="frame" x="20.666666666666657" y="181.66666666666669" width="372.66666666666674" height="670.33333333333326"/>
+                    <rect key="frame" x="0.0" y="181.66666666666669" width="414" height="670.33333333333326"/>
                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="separatorColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="20"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.070588235294117646" green="0.11764705882352941" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -92,15 +91,16 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uJz-gr-tUY" secondAttribute="trailing" id="KjS-9L-8ct"/>
                 <constraint firstItem="I5y-Aa-8Ta" firstAttribute="top" secondItem="Xlb-PC-cyr" secondAttribute="bottom" constant="15" id="L9u-XC-Oif"/>
                 <constraint firstItem="fxk-DH-0WW" firstAttribute="height" secondItem="RLr-OZ-CEE" secondAttribute="height" id="Len-3y-S9B"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="I5y-Aa-8Ta" secondAttribute="trailing" id="Q2l-5z-vHH"/>
                 <constraint firstItem="Xlb-PC-cyr" firstAttribute="height" secondItem="fxk-DH-0WW" secondAttribute="height" id="SKj-H2-h56"/>
                 <constraint firstItem="fxk-DH-0WW" firstAttribute="top" secondItem="uJz-gr-tUY" secondAttribute="bottom" constant="15" id="Swa-ZJ-zdq"/>
+                <constraint firstItem="I5y-Aa-8Ta" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WrN-iM-Zc4"/>
                 <constraint firstItem="HHr-od-efK" firstAttribute="height" secondItem="uJz-gr-tUY" secondAttribute="height" id="Xnw-NL-LEy"/>
                 <constraint firstItem="HHr-od-efK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.6" id="ZA2-b2-IFu"/>
                 <constraint firstItem="HHr-od-efK" firstAttribute="top" secondItem="uJz-gr-tUY" secondAttribute="bottom" constant="15" id="aRJ-EN-IVK"/>
                 <constraint firstItem="uJz-gr-tUY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f9D-gr-Biu"/>
                 <constraint firstItem="RLr-OZ-CEE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.2" id="fXm-ff-ZJ0"/>
                 <constraint firstItem="I5y-Aa-8Ta" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="j9O-nB-MiS"/>
-                <constraint firstItem="I5y-Aa-8Ta" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="k52-Ed-0E1"/>
                 <constraint firstItem="uJz-gr-tUY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="rQQ-hV-0cg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="I5y-Aa-8Ta" secondAttribute="bottom" constant="10" id="xkR-k1-uXj"/>
                 <constraint firstItem="fxk-DH-0WW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.8" id="xub-aJ-KSR"/>

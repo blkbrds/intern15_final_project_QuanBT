@@ -9,5 +9,11 @@
 import Foundation
 
 final class LeagueTableCellVM {
+    // MARK: - Properties
+    var dataAPI: League = League()
     
+    // MARK: - Init
+    init(dataAPI: League = League()) {
+        self.dataAPI = dataAPI
+    }
 }
