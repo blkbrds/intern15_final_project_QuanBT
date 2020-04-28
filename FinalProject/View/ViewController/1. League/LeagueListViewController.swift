@@ -8,24 +8,6 @@
 
 import UIKit
 
-enum Sport: String {
-    case soccer = "Soccer"
-    case motorsport = "Motorsport"
-    case fighting = "Fighting"
-}
-
-enum Country: String {
-    case england = "England"
-    case germany = "Germany"
-    case italy = "Italy"
-    case spain = "Spain"
-    case worldwide = "Worldwide"
-    case usa = "USA"
-    case international = "International"
-    case europe = "Europe"
-    case japan = "Japan"
-}
-
 final class LeagueListViewController: ViewController {
     // MARK: - IBOutlet
     @IBOutlet private weak var tableView: UITableView!
@@ -69,11 +51,12 @@ final class LeagueListViewController: ViewController {
     
     private func loadAPI(sport: String, country: String) {
         print("Load API")
-        viewModel.loadAPI(sport: sport, country: country) {  (done, msg) in
+        viewModel.loadAPI(sport: sport, country: country) { [weak self] (done, msg) in
+            guard let this = self else { return }
             if done {
-                self.tableView.reloadData()
+                this.tableView.reloadData()
             } else {
-                print("API erorr: \(msg)")
+                this.showAlert(title: "Erorr API", message: msg)
             }
         }
         tableView.alpha = 0
@@ -89,42 +72,6 @@ final class LeagueListViewController: ViewController {
         }
         nationsButton[index].borderWidth = 4
         nationsButton[index].borderColor = App.Color.tabBarTintColor
-        switch sport {
-        case .soccer:
-            switch index {
-            case 0:
-                country = .england
-            case 1:
-                country = .germany
-            case 2:
-                country = .italy
-            default:
-                country = .spain
-            }
-        case .motorsport:
-            switch index {
-            case 0:
-                country = .worldwide
-            case 1:
-                country = .usa
-            case 2:
-                country = .international
-            default:
-                country = .england
-            }
-        default:
-            switch index {
-            case 0:
-                country = .worldwide
-            case 1:
-                country = .japan
-            case 2:
-                country = .europe
-            default:
-                country = .usa
-            }
-        }
-        loadAPI(sport: sport.rawValue, country: country.rawValue)
     }
     
     private func resetNationsButton() {
@@ -143,32 +90,28 @@ final class LeagueListViewController: ViewController {
         }
     }
     
+    private func setupUINationsButton(sport: Sport) {
+        for (index, item) in nationsButton.enumerated() {
+            item.setImage(sport.country[index].flag, for: .normal)
+        }
+    }
+    
     // MARK: - IBAction
     @IBAction private func nationsButtonTouchUpInside(_ sender: UIButton) {
         setupNationsButton(index: sender.tag)
+        loadAPI(sport: sport.rawValue, country: sport.country[sender.tag].rawValue)
     }
     
     @IBAction func changedSportSegmentedControl(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            sport = .soccer
-            nationsButton[0].setImage(#imageLiteral(resourceName: "img-England"), for: .normal)
-            nationsButton[1].setImage(#imageLiteral(resourceName: "img-Germany"), for: .normal)
-            nationsButton[2].setImage(#imageLiteral(resourceName: "img-Italia"), for: .normal)
-            nationsButton[3].setImage(#imageLiteral(resourceName: "img-Spain"), for: .normal)
-        case 1:
-            sport = .motorsport
-            nationsButton[0].setImage(#imageLiteral(resourceName: "img-World"), for: .normal)
-            nationsButton[1].setImage(#imageLiteral(resourceName: "img-USA"), for: .normal)
-            nationsButton[2].setImage(#imageLiteral(resourceName: "img-International"), for: .normal)
-            nationsButton[3].setImage(#imageLiteral(resourceName: "img-England"), for: .normal)
-        default:
-            sport = .fighting
-            nationsButton[0].setImage(#imageLiteral(resourceName: "img-World"), for: .normal)
-            nationsButton[1].setImage(#imageLiteral(resourceName: "img-Japan"), for: .normal)
-            nationsButton[2].setImage(#imageLiteral(resourceName: "img-Europe"), for: .normal)
-            nationsButton[3].setImage(#imageLiteral(resourceName: "img-USA"), for: .normal)
-        }
+            switch sender.selectedSegmentIndex {
+            case 0:
+                sport = .soccer
+            case 1:
+                sport = .motorsport
+            default:
+                sport = .fighting
+            }
+        setupUINationsButton(sport: sport)
         resetNationsButton()
         loadAPI(sport: sport.rawValue, country: country.rawValue)
     }
