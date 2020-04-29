@@ -20,21 +20,21 @@ final class TabBarViewController: UITabBarController {
         //Home
         let leagueVC = LeagueListViewController()
         let leagueNavi = UINavigationController(rootViewController: leagueVC)
-        leagueNavi.isNavigationBarHidden = true
+        leagueNavi.navigationBar.barTintColor = App.Color.backgroundColor
         leagueVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-League"), tag: 0)
         leagueVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         
         //Search
         let searchVC = SearchViewController()
         let searchNavi = UINavigationController(rootViewController: searchVC)
-        searchNavi.isNavigationBarHidden = true
+        searchNavi.navigationBar.barTintColor = App.Color.backgroundColor
         searchVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-Search"), tag: 1)
         searchVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         
         //Favorites
         let favoritesVC = FavoriteViewController()
         let favoritesNavi = UINavigationController(rootViewController: favoritesVC)
-        favoritesNavi.isNavigationBarHidden = true
+        favoritesNavi.navigationBar.barTintColor = App.Color.backgroundColor
         favoritesVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-Heart"), tag: 2)
         favoritesVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         

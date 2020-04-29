@@ -25,6 +25,11 @@ final class LeagueListViewController: ViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         for item in nationsButton {
@@ -46,6 +51,7 @@ final class LeagueListViewController: ViewController {
         let nib = UINib(nibName: "LeagueTableCell", bundle: .main)
         tableView.register(nib, forCellReuseIdentifier: "LeagueTableCell")
         tableView.dataSource = self
+        tableView.delegate = self
         loadAPI(sport: sport.rawValue, country: country.rawValue)
     }
     
@@ -135,5 +141,14 @@ extension LeagueListViewController: UITableViewDataSource {
             }
         }
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension LeagueListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailLeagueVC = DetailLeagueViewController()
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.pushViewController(detailLeagueVC, animated: true)
     }
 }
