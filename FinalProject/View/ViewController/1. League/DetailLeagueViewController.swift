@@ -8,9 +8,14 @@
 
 import UIKit
 
-class DetailLeagueViewController: UIViewController {
+final class DetailLeagueViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func setupUI() {
+        super.setupUI()
+        title = "League"
     }
 }
