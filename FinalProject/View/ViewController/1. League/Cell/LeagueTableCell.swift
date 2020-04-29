@@ -36,9 +36,29 @@ final class LeagueTableCell: UITableViewCell {
         let dataAPI = viewModel.dataAPI
         nameLeagueLabel.text = dataAPI.strLeague
         formedYearLable.text = dataAPI.intFormedYear
+        if dataAPI.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.isSelected = false
+        } else {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.isSelected = true
+        }
     }
     
     func configImage(image: UIImage?) {
         logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
+    }
+    
+    // MARK: - IBAction
+    @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
+        if favoriteButton.isSelected {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.favorite = true
+        } else {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.favorite = false
+        }
     }
 }
