@@ -30,6 +30,7 @@
                             <constraint firstItem="kxA-J8-hZB" firstAttribute="leading" secondItem="js7-Je-UR4" secondAttribute="leading" constant="10" id="9iI-Kh-jAa"/>
                             <constraint firstAttribute="trailing" secondItem="kxA-J8-hZB" secondAttribute="trailing" constant="10" id="jCi-Hh-wvP"/>
                             <constraint firstAttribute="bottom" secondItem="kxA-J8-hZB" secondAttribute="bottom" constant="10" id="l1r-pE-pTf"/>
+                            <constraint firstAttribute="width" secondItem="js7-Je-UR4" secondAttribute="height" multiplier="207:100" id="udg-eM-yvP"/>
                         </constraints>
                     </view>
                 </subviews>
