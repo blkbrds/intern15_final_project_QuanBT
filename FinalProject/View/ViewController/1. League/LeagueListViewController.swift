@@ -148,6 +148,9 @@ extension LeagueListViewController: UITableViewDataSource {
 extension LeagueListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailLeagueVC = DetailLeagueViewController()
+        let data = viewModel.dataAPIs[indexPath.row]
+        let vm = DetailLeagueViewModel(idLeague: data.idLeague)
+        detailLeagueVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)
     }

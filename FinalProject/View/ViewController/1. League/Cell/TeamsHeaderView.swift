@@ -8,11 +8,10 @@
 
 import UIKit
 
-class TeamsHeaderView: UICollectionReusableView {
-
+final class TeamsHeaderView: UICollectionReusableView {
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-    
 }

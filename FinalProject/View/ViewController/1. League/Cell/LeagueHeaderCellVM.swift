@@ -8,5 +8,12 @@
 
 import Foundation
 
-class LeagueHeaderCellVM {
+final class LeagueHeaderCellVM {
+    // MARK: - Properties
+    var dataAPI: DetailLeague = DetailLeague()
+    
+    // MARK: - Init
+    init(dataAPI: DetailLeague = DetailLeague()) {
+        self.dataAPI = dataAPI
+    }
 }

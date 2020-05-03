@@ -62,6 +62,12 @@
                 <constraint firstAttribute="trailing" secondItem="ICa-ea-dms" secondAttribute="trailing" id="zZU-PA-qUV"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="contentViewCell" destination="ICa-ea-dms" id="fyi-zg-eTF"/>
+                <outlet property="textLabel" destination="Sla-Qc-vSO" id="8bp-yh-a81"/>
+                <outlet property="titleLabel" destination="dbJ-0a-D9S" id="aGT-wa-45J"/>
+                <outlet property="widthLayout" destination="EMi-ew-XG2" id="Akn-YD-WEh"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
         </collectionViewCell>
     </objects>

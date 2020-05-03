@@ -66,12 +66,12 @@
                             <constraint firstItem="58w-ZH-FqH" firstAttribute="width" secondItem="fWx-8j-9rV" secondAttribute="width" multiplier="35/200" id="Om2-Lh-GVM"/>
                             <constraint firstItem="xEq-FY-fhq" firstAttribute="top" secondItem="fWx-8j-9rV" secondAttribute="top" constant="20" id="PgS-uo-QuU"/>
                             <constraint firstItem="M3B-Om-mhp" firstAttribute="width" secondItem="vXp-3m-YJS" secondAttribute="width" id="W8o-DB-sNk"/>
+                            <constraint firstAttribute="height" constant="250" id="ZYH-hx-Yw7"/>
                             <constraint firstItem="vXp-3m-YJS" firstAttribute="centerX" secondItem="M3B-Om-mhp" secondAttribute="centerX" id="cCP-yn-Qnw"/>
                             <constraint firstAttribute="trailing" secondItem="58w-ZH-FqH" secondAttribute="trailing" constant="5" id="gnw-ZC-h6U"/>
                             <constraint firstItem="M3B-Om-mhp" firstAttribute="top" secondItem="xEq-FY-fhq" secondAttribute="bottom" constant="20" id="gpZ-RS-8xn"/>
                             <constraint firstAttribute="width" constant="200" id="mnC-4n-e3v"/>
                             <constraint firstItem="vXp-3m-YJS" firstAttribute="top" secondItem="M3B-Om-mhp" secondAttribute="bottom" constant="10.5" id="oU4-j1-WsA"/>
-                            <constraint firstAttribute="bottom" secondItem="vXp-3m-YJS" secondAttribute="bottom" constant="25.5" id="q7t-yD-bOk"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -83,7 +83,14 @@
                 <constraint firstItem="fWx-8j-9rV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="x6q-3i-pFH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <point key="canvasLocation" x="139" y="101"/>
+            <connections>
+                <outlet property="badgeImageView" destination="xEq-FY-fhq" id="T7l-6e-tSi"/>
+                <outlet property="contentViewCell" destination="fWx-8j-9rV" id="ygH-l7-pjc"/>
+                <outlet property="nameTeamLabel" destination="M3B-Om-mhp" id="G5i-xm-3H0"/>
+                <outlet property="stadiumLabel" destination="vXp-3m-YJS" id="ZfV-y0-qUi"/>
+                <outlet property="widthLayout" destination="mnC-4n-e3v" id="N9t-ez-PfQ"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
         </collectionViewCell>
     </objects>
     <resources>
