@@ -54,6 +54,9 @@
                                 </constraints>
                                 <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" backgroundImage="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="favoriteButtonTouchUpInside:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Csn-Uj-BLR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,6 +89,7 @@
             <connections>
                 <outlet property="badgeImageView" destination="xEq-FY-fhq" id="T7l-6e-tSi"/>
                 <outlet property="contentViewCell" destination="fWx-8j-9rV" id="ygH-l7-pjc"/>
+                <outlet property="favoriteButton" destination="58w-ZH-FqH" id="87P-Fj-SdI"/>
                 <outlet property="nameTeamLabel" destination="M3B-Om-mhp" id="G5i-xm-3H0"/>
                 <outlet property="stadiumLabel" destination="vXp-3m-YJS" id="ZfV-y0-qUi"/>
                 <outlet property="widthLayout" destination="mnC-4n-e3v" id="N9t-ez-PfQ"/>

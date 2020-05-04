@@ -15,6 +15,7 @@ final class TeamsCollectionCell: UICollectionViewCell {
     @IBOutlet weak var stadiumLabel: UILabel!
     @IBOutlet weak var contentViewCell: UIView!
     @IBOutlet weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Properties
     var viewModel = TeamsCollectionCellVM() {
@@ -25,11 +26,6 @@ final class TeamsCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        let screenWidth = UIScreen.main.bounds.size.width
-        widthLayout.constant = screenWidth / 2 - (20)
-        contentViewCell.layer.cornerRadius = 10
-        contentViewCell.clipsToBounds = true
     }
     
     // MARK: - Function
@@ -37,9 +33,29 @@ final class TeamsCollectionCell: UICollectionViewCell {
         let dataAPI = viewModel.dataAPI
         nameTeamLabel.text = dataAPI.strTeam
         stadiumLabel.text = dataAPI.strStadium
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        let screenWidth = UIScreen.main.bounds.size.width
+        widthLayout.constant = screenWidth / 2 - (16)
+        contentViewCell.layer.cornerRadius = 10
+        contentViewCell.clipsToBounds = true
+        if dataAPI.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+        }
     }
     
     func configbadgeImage(image: UIImage?) {
         badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
+    }
+    
+    @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
+        if !viewModel.dataAPI.favorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            viewModel.dataAPI.favorite = true
+        } else {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            viewModel.dataAPI.favorite = false
+        }
     }
 }
