@@ -42,6 +42,10 @@
                 <constraint firstItem="js7-Je-UR4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lQ3-OO-ceE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="contentViewCell" destination="js7-Je-UR4" id="SGD-Z8-1fY"/>
+                <outlet property="photoImageView" destination="kxA-J8-hZB" id="afc-k7-fKs"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
         </collectionViewCell>
     </objects>

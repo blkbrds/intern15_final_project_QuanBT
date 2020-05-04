@@ -14,6 +14,7 @@ final class DetailLeagueViewModel {
     var idLeague: String = ""
     var informationData: [String] = []
     var teams: [Team] = []
+    var photos: [String] = []
     
     init(idLeague: String = "") {
         self.idLeague = idLeague
@@ -36,6 +37,7 @@ final class DetailLeagueViewModel {
                     }
                     self.dataAPI = dataDetail
                     self.informationData.append(contentsOf: [dataDetail.strDescriptionEN, dataDetail.strFacebook, dataDetail.strYoutube, dataDetail.strTwitter, dataDetail.strWebsite])
+                    self.photos.append(contentsOf: [dataDetail.strPoster, dataDetail.strTrophy, dataDetail.strFanart1, dataDetail.strFanart2, dataDetail.strFanart3, dataDetail.strFanart4])
                     completion(true, "")
                 } else {
                     completion(false, "Data format is error.")
@@ -68,7 +70,7 @@ final class DetailLeagueViewModel {
        }
     
     func numberOfSections() -> Int {
-        return 2
+        return 3
     }
     
     func numberOfRowInInformation() -> Int {
@@ -96,4 +98,8 @@ final class DetailLeagueViewModel {
         let viewModel = TeamsCollectionCellVM(dataAPI: item)
         return viewModel
     }
+    
+    func numberOfRowInPhotos() -> Int {
+           return photos.count
+       }
 }

@@ -31,13 +31,13 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sla-Qc-vSO">
-                                <rect key="frame" x="20" y="57" width="374" height="22.5"/>
-                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <rect key="frame" x="20" y="57" width="374" height="20"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                        <real key="value" value="17"/>
+                                        <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -48,7 +48,7 @@
                             <constraint firstItem="dbJ-0a-D9S" firstAttribute="leading" secondItem="ICa-ea-dms" secondAttribute="leading" constant="20" id="5p1-yl-eD4"/>
                             <constraint firstAttribute="width" constant="414" id="EMi-ew-XG2"/>
                             <constraint firstItem="dbJ-0a-D9S" firstAttribute="top" secondItem="ICa-ea-dms" secondAttribute="top" constant="20" id="O9A-bs-AYy"/>
-                            <constraint firstAttribute="bottom" secondItem="Sla-Qc-vSO" secondAttribute="bottom" constant="20.5" id="izI-Nt-3Dv"/>
+                            <constraint firstAttribute="bottom" secondItem="Sla-Qc-vSO" secondAttribute="bottom" constant="23" id="Pzw-UZ-i9w"/>
                             <constraint firstAttribute="trailing" secondItem="Sla-Qc-vSO" secondAttribute="trailing" constant="20" id="qZ5-Qv-DuF"/>
                             <constraint firstItem="Sla-Qc-vSO" firstAttribute="top" secondItem="dbJ-0a-D9S" secondAttribute="bottom" constant="10" id="zJB-oW-Req"/>
                         </constraints>
