@@ -1,5 +1,5 @@
 //
-//  DetailLeagueViewModel.swift
+//  LeagueHeaderCellVM.swift
 //  FinalProject
 //
 //  Created by Sếp Quân on 4/29/20.
@@ -8,5 +8,5 @@
 
 import Foundation
 
-class DetailLeagueViewModel {
+class LeagueHeaderCellVM {
 }
