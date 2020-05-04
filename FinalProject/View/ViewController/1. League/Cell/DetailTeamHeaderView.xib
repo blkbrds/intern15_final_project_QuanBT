@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="DetailTeamHeaderView" customModule="FinalProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="325"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-logo" translatesAutoresizingMaskIntoConstraints="NO" id="YCW-Yg-b1H">
+                    <rect key="frame" x="19.5" y="10" width="375" height="125"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="YCW-Yg-b1H" secondAttribute="height" multiplier="3" id="Gv6-48-phk"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-DefaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="Cft-vR-5Bi">
+                    <rect key="frame" x="314" y="135" width="80.5" height="80.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Cft-vR-5Bi" secondAttribute="height" id="ERS-Iw-2NK"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Team" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itm-Px-8p3">
+                    <rect key="frame" x="19.5" y="145" width="284.5" height="26.5"/>
+                    <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XVn-Lu-CHk">
+                    <rect key="frame" x="19.5" y="182.5" width="32" height="29.5"/>
+                    <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="XVn-Lu-CHk" secondAttribute="height" multiplier="1:1" id="bg1-g7-sjw"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-League" translatesAutoresizingMaskIntoConstraints="NO" id="Lgl-AC-MZe">
+                    <rect key="frame" x="149.5" y="181.5" width="32" height="32"/>
+                    <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Lgl-AC-MZe" secondAttribute="height" multiplier="1:1" id="bId-fk-EkV"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-stadium" translatesAutoresizingMaskIntoConstraints="NO" id="Ww0-Ra-i3z">
+                    <rect key="frame" x="150.5" y="224.5" width="30" height="30"/>
+                    <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ww0-Ra-i3z" secondAttribute="height" multiplier="1:1" id="oe1-JF-Qm7"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gIU-6U-Eyy">
+                    <rect key="frame" x="19.5" y="223" width="32" height="33"/>
+                    <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="gIU-6U-Eyy" secondAttribute="height" multiplier="1:1" id="e6Y-Gy-Z6s"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1998" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttx-kP-FBR">
+                    <rect key="frame" x="61.5" y="187.5" width="35" height="20"/>
+                    <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyY-gE-YSa">
+                    <rect key="frame" x="191.5" y="187.5" width="112.5" height="20"/>
+                    <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="England" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNo-wm-gkG">
+                    <rect key="frame" x="61.5" y="229.5" width="55" height="20"/>
+                    <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6X7-Mi-3s5">
+                    <rect key="frame" x="19.5" y="288" width="115" height="27"/>
+                    <fontDescription key="fontDescription" name="EuphemiaUCAS-Italic" family="Euphemia UCAS" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stadium" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7X-9x-VqO">
+                    <rect key="frame" x="190.5" y="229.5" width="113.5" height="20"/>
+                    <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.070588235289999995" green="0.1176470588" blue="0.15686274510000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Lgl-AC-MZe" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" multiplier="0.8" id="0Qr-iS-aBt"/>
+                <constraint firstItem="Cft-vR-5Bi" firstAttribute="width" secondItem="YCW-Yg-b1H" secondAttribute="width" multiplier="75/350" id="2zi-pf-9jW"/>
+                <constraint firstItem="Lgl-AC-MZe" firstAttribute="centerY" secondItem="XVn-Lu-CHk" secondAttribute="centerY" id="6jt-6A-uCP"/>
+                <constraint firstItem="Cft-vR-5Bi" firstAttribute="leading" secondItem="Itm-Px-8p3" secondAttribute="trailing" constant="10" id="BVc-C9-ms6"/>
+                <constraint firstItem="YCW-Yg-b1H" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="Cbk-U7-nVf"/>
+                <constraint firstItem="Z7X-9x-VqO" firstAttribute="centerY" secondItem="LNo-wm-gkG" secondAttribute="centerY" id="Do3-RJ-ypK"/>
+                <constraint firstItem="eyY-gE-YSa" firstAttribute="centerY" secondItem="ttx-kP-FBR" secondAttribute="centerY" id="FdS-Vj-H0s"/>
+                <constraint firstItem="6X7-Mi-3s5" firstAttribute="leading" secondItem="gIU-6U-Eyy" secondAttribute="leading" id="Fyb-GC-gc8"/>
+                <constraint firstItem="Cft-vR-5Bi" firstAttribute="leading" secondItem="eyY-gE-YSa" secondAttribute="trailing" constant="10" id="HmV-5a-rDj"/>
+                <constraint firstItem="ttx-kP-FBR" firstAttribute="leading" secondItem="XVn-Lu-CHk" secondAttribute="trailing" constant="10" id="IB4-ZP-zOM"/>
+                <constraint firstItem="Z7X-9x-VqO" firstAttribute="leading" secondItem="Ww0-Ra-i3z" secondAttribute="trailing" constant="10" id="Jts-kw-Czq"/>
+                <constraint firstItem="LNo-wm-gkG" firstAttribute="centerY" secondItem="gIU-6U-Eyy" secondAttribute="centerY" id="Kvr-TW-rOY"/>
+                <constraint firstItem="gIU-6U-Eyy" firstAttribute="width" secondItem="XVn-Lu-CHk" secondAttribute="width" id="Mkl-vH-4Sb"/>
+                <constraint firstItem="Ww0-Ra-i3z" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" multiplier="0.8" id="Ouz-rG-Bog"/>
+                <constraint firstItem="XVn-Lu-CHk" firstAttribute="width" secondItem="YCW-Yg-b1H" secondAttribute="width" multiplier="30/350" id="S1N-Mq-JRb"/>
+                <constraint firstItem="LNo-wm-gkG" firstAttribute="leading" secondItem="gIU-6U-Eyy" secondAttribute="trailing" constant="10" id="VOG-lT-YO7"/>
+                <constraint firstItem="XVn-Lu-CHk" firstAttribute="leading" secondItem="Itm-Px-8p3" secondAttribute="leading" id="WDJ-3t-pip"/>
+                <constraint firstItem="ttx-kP-FBR" firstAttribute="centerY" secondItem="XVn-Lu-CHk" secondAttribute="centerY" id="Wrh-hb-gqM"/>
+                <constraint firstItem="XVn-Lu-CHk" firstAttribute="top" secondItem="Itm-Px-8p3" secondAttribute="bottom" constant="10" id="aUb-m6-2nm"/>
+                <constraint firstItem="YCW-Yg-b1H" firstAttribute="width" secondItem="U6b-Vx-4bR" secondAttribute="width" multiplier="375/414" id="btF-fd-Joe"/>
+                <constraint firstItem="eyY-gE-YSa" firstAttribute="leading" secondItem="Lgl-AC-MZe" secondAttribute="trailing" constant="10" id="gyd-GC-5R5"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="6X7-Mi-3s5" secondAttribute="bottom" constant="10" id="ieJ-B0-Dpm"/>
+                <constraint firstItem="Itm-Px-8p3" firstAttribute="top" secondItem="YCW-Yg-b1H" secondAttribute="bottom" constant="10" id="jNL-zo-JjP"/>
+                <constraint firstItem="Z7X-9x-VqO" firstAttribute="trailing" secondItem="eyY-gE-YSa" secondAttribute="trailing" id="kaU-Ai-yOL"/>
+                <constraint firstItem="YCW-Yg-b1H" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="10" id="l8A-yn-Fjh"/>
+                <constraint firstItem="Cft-vR-5Bi" firstAttribute="top" secondItem="YCW-Yg-b1H" secondAttribute="bottom" id="lhy-ZH-2So"/>
+                <constraint firstItem="gIU-6U-Eyy" firstAttribute="top" secondItem="XVn-Lu-CHk" secondAttribute="bottom" constant="10" id="qA7-Hp-e69"/>
+                <constraint firstItem="gIU-6U-Eyy" firstAttribute="leading" secondItem="XVn-Lu-CHk" secondAttribute="leading" id="rqm-Mr-brx"/>
+                <constraint firstItem="Itm-Px-8p3" firstAttribute="leading" secondItem="YCW-Yg-b1H" secondAttribute="leading" id="tZ1-OL-kgA"/>
+                <constraint firstItem="Lgl-AC-MZe" firstAttribute="width" secondItem="XVn-Lu-CHk" secondAttribute="width" id="tbb-ky-Bw6"/>
+                <constraint firstItem="Ww0-Ra-i3z" firstAttribute="centerY" secondItem="LNo-wm-gkG" secondAttribute="centerY" id="vVe-B6-5eH"/>
+                <constraint firstItem="Cft-vR-5Bi" firstAttribute="trailing" secondItem="YCW-Yg-b1H" secondAttribute="trailing" id="ypx-av-JR5"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="countryLabel" destination="LNo-wm-gkG" id="Xdc-gj-sTx"/>
+                <outlet property="formedYearLable" destination="ttx-kP-FBR" id="Adm-th-bRV"/>
+                <outlet property="jerseyImageView" destination="Cft-vR-5Bi" id="ZQQ-bM-nSX"/>
+                <outlet property="leagueImageVIew" destination="Lgl-AC-MZe" id="dDz-xi-Zql"/>
+                <outlet property="logoImageView" destination="YCW-Yg-b1H" id="Uc8-dQ-E3H"/>
+                <outlet property="nameLeagueLabel" destination="eyY-gE-YSa" id="Gc5-nx-npH"/>
+                <outlet property="nameTeamLabel" destination="Itm-Px-8p3" id="GYO-Kf-Hk9"/>
+                <outlet property="stadiumImageView" destination="Ww0-Ra-i3z" id="0Vf-Y1-jr8"/>
+                <outlet property="stadiumLabel" destination="Z7X-9x-VqO" id="5Qo-EY-pZY"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="100.78125"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="calendar" catalog="system" width="64" height="52"/>
+        <image name="ic-League" width="30" height="30"/>
+        <image name="ic-stadium" width="30" height="30"/>
+        <image name="img-DefaultImage" width="250" height="250"/>
+        <image name="img-logo" width="500" height="252"/>
+        <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
+    </resources>
+</document>
