@@ -10,11 +10,11 @@ import UIKit
 
 final class TeamsCollectionCell: UICollectionViewCell {
     // MARK: - IBOutlet
-    @IBOutlet weak var nameTeamLabel: UILabel!
-    @IBOutlet weak var badgeImageView: UIImageView!
-    @IBOutlet weak var stadiumLabel: UILabel!
-    @IBOutlet weak var contentViewCell: UIView!
-    @IBOutlet weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var nameTeamLabel: UILabel!
+    @IBOutlet private weak var badgeImageView: UIImageView!
+    @IBOutlet private weak var stadiumLabel: UILabel!
+    @IBOutlet private weak var contentViewCell: UIView!
+    @IBOutlet private weak var widthLayout: NSLayoutConstraint!
     
     // MARK: - Properties
     var viewModel = TeamsCollectionCellVM() {
@@ -23,20 +23,16 @@ final class TeamsCollectionCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        let screenWidth = UIScreen.main.bounds.size.width
-        widthLayout.constant = screenWidth / 2 - (20)
-        contentViewCell.layer.cornerRadius = 10
-        contentViewCell.clipsToBounds = true
-    }
-    
     // MARK: - Function
     private func updateView() {
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        let screenWidth = UIScreen.main.bounds.size.width
+        widthLayout.constant = screenWidth / 2 - (16)
+        contentViewCell.layer.cornerRadius = 10
+        contentViewCell.clipsToBounds = true
         let dataAPI = viewModel.dataAPI
-        nameTeamLabel.text = dataAPI.strTeam
-        stadiumLabel.text = dataAPI.strStadium
+        nameTeamLabel.text = dataAPI.name
+        stadiumLabel.text = dataAPI.stadium
     }
     
     func configbadgeImage(image: UIImage?) {

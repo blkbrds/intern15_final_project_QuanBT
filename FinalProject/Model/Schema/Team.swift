@@ -9,15 +9,15 @@
 import Foundation
 
 final class Team {
-    var idTeam: String
-    var strTeam: String
-    var strStadium: String
-    var strTeamBadge: String
+    var id: String
+    var name: String
+    var stadium: String
+    var badge: String
     
     init(json: JSObject = JSObject()) {
-        self.idTeam = json["idTeam"] as? String ?? ""
-        self.strTeam = json["strTeam"] as? String ?? ""
-        self.strStadium = json["strStadium"] as? String ?? ""
-        self.strTeamBadge = json["strTeamBadge"] as? String ?? ""
+        self.id = json["idTeam"] as? String ?? ""
+        self.name = json["strTeam"] as? String ?? ""
+        self.stadium = json["strStadium"] as? String ?? ""
+        self.badge = json["strTeamBadge"] as? String ?? ""
     }
 }

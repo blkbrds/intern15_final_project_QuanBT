@@ -10,10 +10,10 @@ import UIKit
 
 final class LeagueTableCell: UITableViewCell {
     // MARK: - IBOutlet
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var nameLeagueLabel: UILabel!
-    @IBOutlet weak var formedYearLable: UILabel!
-    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var nameLeagueLabel: UILabel!
+    @IBOutlet private weak var formedYearLable: UILabel!
+    @IBOutlet private weak var favoriteButton: UIButton!
     
     // MARK: - Properties
     var viewModel = LeagueTableCellVM() {
@@ -22,20 +22,12 @@ final class LeagueTableCell: UITableViewCell {
         }
     }
     
-    // MARK: - Override
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
     // MARK: - Function
     private func updateView() {
         let dataAPI = viewModel.dataAPI
-        nameLeagueLabel.text = dataAPI.strLeague
-        formedYearLable.text = dataAPI.intFormedYear
+        nameLeagueLabel.text = dataAPI.name
+        formedYearLable.text = dataAPI.year
+        logoImageView.image = dataAPI.logoImage
         if dataAPI.favorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             favoriteButton.isSelected = false

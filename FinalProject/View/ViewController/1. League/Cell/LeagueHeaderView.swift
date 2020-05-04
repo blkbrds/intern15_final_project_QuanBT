@@ -10,11 +10,11 @@ import UIKit
 
 final class LeagueHeaderView: UICollectionReusableView {
     // MARK: - IBOutlet
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var badgeImageView: UIImageView!
-    @IBOutlet weak var nameLeagueLabel: UILabel!
-    @IBOutlet weak var formedYearLable: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var badgeImageView: UIImageView!
+    @IBOutlet private weak var nameLeagueLabel: UILabel!
+    @IBOutlet private weak var formedYearLable: UILabel!
+    @IBOutlet private weak var countryLabel: UILabel!
     
     // MARK: - Properties
     var viewModel = LeagueHeaderCellVM() {
@@ -23,16 +23,12 @@ final class LeagueHeaderView: UICollectionReusableView {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     // MARK: - Function
     private func updateView() {
         let dataAPI = viewModel.dataAPI
-        nameLeagueLabel.text = dataAPI.strLeague
-        formedYearLable.text = dataAPI.intFormedYear
-        countryLabel.text = dataAPI.strCountry
+        nameLeagueLabel.text = dataAPI.name
+        formedYearLable.text = dataAPI.year
+        countryLabel.text = dataAPI.country
     }
     
     func configLogoImage(image: UIImage?) {
