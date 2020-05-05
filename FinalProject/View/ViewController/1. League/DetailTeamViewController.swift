@@ -9,7 +9,7 @@
 import UIKit
 
 final class DetailTeamViewController: UIViewController {
-    
+    // MARK: - IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
