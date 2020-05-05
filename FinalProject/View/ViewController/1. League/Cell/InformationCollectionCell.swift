@@ -10,10 +10,10 @@ import UIKit
 
 final class InformationCollectionCell: UICollectionViewCell {
     // MARK: - IBOutlet
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var contentViewCell: UIView!
-    @IBOutlet weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var textLabel: UILabel!
+    @IBOutlet private weak var contentViewCell: UIView!
+    @IBOutlet private weak var widthLayout: NSLayoutConstraint!
     
     // MARK: - Properties
     var viewModel = InformationCollectionCellVM() {
@@ -22,33 +22,37 @@ final class InformationCollectionCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    // MARK: - Function
+    private func updateView() {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         let screenWidth = UIScreen.main.bounds.size.width
         widthLayout.constant = screenWidth - (20)
         contentViewCell.layer.cornerRadius = 10
         contentViewCell.clipsToBounds = true
-    }
-    
-    // MARK: - Function
-    private func updateView() {
-        let dataAPI = viewModel.dataAPI
         switch viewModel.index {
         case 0:
             titleLabel.text = "Description"
-            textLabel.text = dataAPI
+            setupTitle()
         case 1:
             titleLabel.text = "Facebook"
-            textLabel.text = dataAPI
+            setupTitle()
         case 2:
             titleLabel.text = "Youtube"
-            textLabel.text = dataAPI
+            setupTitle()
         case 3:
             titleLabel.text = "Twitter"
-            textLabel.text = dataAPI
+            setupTitle()
         default:
             titleLabel.text = "Website"
+            setupTitle()
+        }
+    }
+    
+    private func setupTitle() {
+        let dataAPI = viewModel.dataAPI
+        if dataAPI == "" {
+            textLabel.text = "---"
+        } else {
             textLabel.text = dataAPI
         }
     }

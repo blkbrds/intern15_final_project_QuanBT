@@ -9,9 +9,19 @@
 import UIKit
 
 final class TeamsHeaderView: UICollectionReusableView {
-    @IBOutlet weak var titleLabel: UILabel!
+    // MARK: - IBOutlet
+    @IBOutlet private weak var titleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    // MARK: - Properties
+       var viewModel = TeamsHeaderVM() {
+           didSet {
+               updateView()
+           }
+       }
+    
+    // MARK: - Function
+    private func updateView() {
+        let title = viewModel.title
+        titleLabel.text = title
     }
 }

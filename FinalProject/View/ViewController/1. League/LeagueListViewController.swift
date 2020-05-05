@@ -132,7 +132,7 @@ extension LeagueListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
-        let item = viewModel.dataAPIs[indexPath.row].strLogo
+        let item = viewModel.dataAPIs[indexPath.row].logo
         Networking.shared().downloadImage(url: item) { (image) in
             if let image = image {
                 cell.configImage(image: image)
@@ -149,7 +149,7 @@ extension LeagueListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailLeagueVC = DetailLeagueViewController()
         let data = viewModel.dataAPIs[indexPath.row]
-        let vm = DetailLeagueViewModel(idLeague: data.idLeague)
+        let vm = DetailLeagueViewModel(idLeague: data.id)
         detailLeagueVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)

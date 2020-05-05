@@ -9,5 +9,11 @@
 import Foundation
 
 final class TeamsHeaderVM {
+    // MARK: - Properties
+    var title: String
     
+    // MARK: - Init
+    init(title: String = "") {
+        self.title = title
+    }
 }

@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-typealias CompletionAPI = (Bool, String) -> Void
-
 final class LeagueListViewModel {
     // MARK: - Properties
     var dataAPIs: [League] = []

@@ -10,9 +10,9 @@ import UIKit
 
 final class PhotosCollectionCell: UICollectionViewCell {
     // MARK: - IBOutlet
-    @IBOutlet weak var contentViewCell: UIView!
-    @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var contentViewCell: UIView!
+    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet private weak var widthLayout: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
