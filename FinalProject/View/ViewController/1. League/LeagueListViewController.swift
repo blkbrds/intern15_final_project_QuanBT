@@ -60,15 +60,13 @@ final class LeagueListViewController: ViewController {
         viewModel.loadAPI(sport: sport, country: country) { [weak self] (done, msg) in
             guard let this = self else { return }
             if done {
+                this.viewModel.downloadImage()
                 this.tableView.reloadData()
             } else {
                 this.showAlert(title: "Erorr API", message: msg)
             }
         }
-        tableView.alpha = 0
-        UIView.animate(withDuration: 2) {
-            self.tableView.alpha = 1
-        }
+        
         tableView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
@@ -109,14 +107,14 @@ final class LeagueListViewController: ViewController {
     }
     
     @IBAction func changedSportSegmentedControl(_ sender: UISegmentedControl) {
-            switch sender.selectedSegmentIndex {
-            case 0:
-                sport = .soccer
-            case 1:
-                sport = .motorsport
-            default:
-                sport = .fighting
-            }
+        switch sender.selectedSegmentIndex {
+        case 0:
+            sport = .soccer
+        case 1:
+            sport = .motorsport
+        default:
+            sport = .fighting
+        }
         setupUINationsButton(sport: sport)
         resetNationsButton()
         loadAPI(sport: sport.rawValue, country: country.rawValue)
@@ -132,14 +130,6 @@ extension LeagueListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
-        let item = viewModel.dataAPIs[indexPath.row].strLogo
-        Networking.shared().downloadImage(url: item) { (image) in
-            if let image = image {
-                cell.configImage(image: image)
-            } else {
-                cell.configImage(image: #imageLiteral(resourceName: "img-logo"))
-            }
-        }
         return cell
     }
 }
@@ -148,6 +138,9 @@ extension LeagueListViewController: UITableViewDataSource {
 extension LeagueListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailLeagueVC = DetailLeagueViewController()
+        let data = viewModel.dataAPIs[indexPath.row]
+        let vm = DetailLeagueViewModel(idLeague: data.id)
+        detailLeagueVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)
     }

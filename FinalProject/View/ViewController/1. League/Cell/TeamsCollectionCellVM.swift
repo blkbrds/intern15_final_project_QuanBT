@@ -9,5 +9,11 @@
 import Foundation
 
 final class TeamsCollectionCellVM {
+    // MARK: - Properties
+    var dataAPI: Team = Team()
     
+    // MARK: - Init
+    init(dataAPI: Team = Team()) {
+        self.dataAPI = dataAPI
+    }
 }

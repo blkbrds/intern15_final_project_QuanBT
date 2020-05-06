@@ -8,11 +8,26 @@
 
 import UIKit
 
-class PhotosCollectionCell: UICollectionViewCell {
-
+final class PhotosCollectionCell: UICollectionViewCell {
+    // MARK: - IBOutlet
+    @IBOutlet private weak var contentViewCell: UIView!
+    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet private weak var widthLayout: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupView()
     }
 
+    // MARK: - Function
+    func configbadgeImage(image: UIImage?) {
+        photoImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
+    }
+    
+    private func setupView() {
+        let screenWidth = UIScreen.main.bounds.size.width
+        widthLayout.constant = screenWidth - (20)
+        contentViewCell.layer.cornerRadius = 10
+        contentViewCell.clipsToBounds = true
+    }
 }

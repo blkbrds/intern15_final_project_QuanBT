@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="TeamsHeaderView" customModule="FinalProject" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -31,6 +31,9 @@
                 <constraint firstItem="DVb-rq-Q3j" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="20" id="wcB-Kn-nHW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="titleLabel" destination="DVb-rq-Q3j" id="5Gh-Ph-MvY"/>
+            </connections>
             <point key="canvasLocation" x="139" y="101"/>
         </collectionReusableView>
     </objects>

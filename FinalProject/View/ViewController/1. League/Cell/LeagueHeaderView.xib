@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="LeagueHeaderView" customModule="FinalProject" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -58,7 +58,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3SE-tF-zzE">
-                    <rect key="frame" x="19.5" y="266" width="115" height="27"/>
+                    <rect key="frame" x="19.5" y="263" width="115" height="27"/>
                     <fontDescription key="fontDescription" name="EuphemiaUCAS-Italic" family="Euphemia UCAS" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -66,8 +66,8 @@
             </subviews>
             <color key="backgroundColor" red="0.070588235294117646" green="0.11764705882352941" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="3SE-tF-zzE" secondAttribute="bottom" constant="10" id="0em-Su-Nt6"/>
                 <constraint firstItem="zrG-1S-1LY" firstAttribute="leading" secondItem="o3T-tA-GaX" secondAttribute="trailing" constant="10" id="9js-pf-emR"/>
-                <constraint firstItem="3SE-tF-zzE" firstAttribute="top" secondItem="o3T-tA-GaX" secondAttribute="bottom" constant="10" id="H6u-W3-jRU"/>
                 <constraint firstItem="5au-Gl-fPw" firstAttribute="centerY" secondItem="bat-p6-PKI" secondAttribute="centerY" id="HhJ-j4-cdY"/>
                 <constraint firstItem="o3T-tA-GaX" firstAttribute="width" secondItem="bat-p6-PKI" secondAttribute="width" id="K6Q-Rr-EIr"/>
                 <constraint firstItem="o3T-tA-GaX" firstAttribute="leading" secondItem="bat-p6-PKI" secondAttribute="leading" id="M78-YJ-RZy"/>
@@ -89,6 +89,13 @@
                 <constraint firstItem="G0c-5K-6o9" firstAttribute="leading" secondItem="cmC-nj-Pjs" secondAttribute="trailing" constant="10" id="zDj-h8-AFe"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="badgeImageView" destination="G0c-5K-6o9" id="e0b-cj-eoG"/>
+                <outlet property="countryLabel" destination="zrG-1S-1LY" id="Eey-k9-vg4"/>
+                <outlet property="formedYearLable" destination="5au-Gl-fPw" id="fw0-2C-eam"/>
+                <outlet property="logoImageView" destination="AVc-zb-EtB" id="Ucc-fi-Y0n"/>
+                <outlet property="nameLeagueLabel" destination="cmC-nj-Pjs" id="1om-Cd-JpL"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
         </collectionReusableView>
     </objects>

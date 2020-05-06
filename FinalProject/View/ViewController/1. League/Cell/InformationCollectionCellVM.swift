@@ -9,5 +9,13 @@
 import Foundation
 
 final class InformationCollectionCellVM {
+    // MARK: - Properties
+    var dataAPI: String = ""
+    var index: Int = 0
     
+    // MARK: - Init
+    init(dataAPI: String = "", index: Int = 0) {
+        self.dataAPI = dataAPI
+        self.index = index
+    }
 }
