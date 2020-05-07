@@ -60,15 +60,13 @@ final class LeagueListViewController: ViewController {
         viewModel.loadAPI(sport: sport, country: country) { [weak self] (done, msg) in
             guard let this = self else { return }
             if done {
+                this.viewModel.downloadImage()
                 this.tableView.reloadData()
             } else {
                 this.showAlert(title: "Erorr API", message: msg)
             }
         }
-        tableView.alpha = 0
-        UIView.animate(withDuration: 2) {
-            self.tableView.alpha = 1
-        }
+        
         tableView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
@@ -109,14 +107,14 @@ final class LeagueListViewController: ViewController {
     }
     
     @IBAction func changedSportSegmentedControl(_ sender: UISegmentedControl) {
-            switch sender.selectedSegmentIndex {
-            case 0:
-                sport = .soccer
-            case 1:
-                sport = .motorsport
-            default:
-                sport = .fighting
-            }
+        switch sender.selectedSegmentIndex {
+        case 0:
+            sport = .soccer
+        case 1:
+            sport = .motorsport
+        default:
+            sport = .fighting
+        }
         setupUINationsButton(sport: sport)
         resetNationsButton()
         loadAPI(sport: sport.rawValue, country: country.rawValue)

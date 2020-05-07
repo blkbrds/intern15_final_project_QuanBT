@@ -9,6 +9,7 @@
 import UIKit
 
 final class TeamsCollectionCell: UICollectionViewCell {
+    
     // MARK: - IBOutlet
     @IBOutlet private weak var nameTeamLabel: UILabel!
     @IBOutlet private weak var badgeImageView: UIImageView!

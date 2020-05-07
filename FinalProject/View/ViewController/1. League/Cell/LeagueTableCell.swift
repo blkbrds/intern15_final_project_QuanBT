@@ -27,6 +27,7 @@ final class LeagueTableCell: UITableViewCell {
         let dataAPI = viewModel.dataAPI
         nameLeagueLabel.text = dataAPI.name
         formedYearLable.text = dataAPI.year
+        logoImageView.image = dataAPI.logoImage
         if dataAPI.favorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {

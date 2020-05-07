@@ -47,27 +47,27 @@ final class DetailLeagueViewModel {
     }
     
     func loadAPITeams(completion: @escaping CompletionAPI) {
-           var teams: [Team] = []
-           let urlString = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=\(idLeague)"
-           Networking.shared().request(with: urlString) { (data, error) in
-               if let error = error {
-                   completion(false, error.localizedDescription)
-               } else {
-                   if let data = data {
-                       let json = data.tojson()
-                       let items = json["teams"] as? JSArray ?? JSArray()
-                       for item in items {
-                           let teamAPI = Team(json: item)
+        var teams: [Team] = []
+        let urlString = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=\(idLeague)"
+        Networking.shared().request(with: urlString) { (data, error) in
+            if let error = error {
+                completion(false, error.localizedDescription)
+            } else {
+                if let data = data {
+                    let json = data.tojson()
+                    let items = json["teams"] as? JSArray ?? JSArray()
+                    for item in items {
+                        let teamAPI = Team(json: item)
                         teams.append(teamAPI)
-                       }
-                       self.teams = teams
-                       completion(true, "")
-                   } else {
-                       completion(false, "Data format is error.")
-                   }
-               }
-           }
-       }
+                    }
+                    self.teams = teams
+                    completion(true, "")
+                } else {
+                    completion(false, "Data format is error.")
+                }
+            }
+        }
+    }
     
     func numberOfSections() -> Int {
         return 3
@@ -76,7 +76,7 @@ final class DetailLeagueViewModel {
     func numberOfRowInInformation() -> Int {
         return informationData.count
     }
-
+    
     func viewModelForCellInformation(at indexPath: IndexPath) -> InformationCollectionCellVM {
         let item = informationData[indexPath.row]
         let viewModel = InformationCollectionCellVM(dataAPI: item, index: indexPath.row)
@@ -92,7 +92,7 @@ final class DetailLeagueViewModel {
     func numberOfRowInTeams() -> Int {
         return teams.count
     }
-
+    
     func viewModelForCellTeams(at indexPath: IndexPath) -> TeamsCollectionCellVM {
         let item = teams[indexPath.row]
         let viewModel = TeamsCollectionCellVM(dataAPI: item)

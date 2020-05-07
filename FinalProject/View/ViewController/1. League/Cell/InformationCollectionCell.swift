@@ -32,23 +32,23 @@ final class InformationCollectionCell: UICollectionViewCell {
         switch viewModel.index {
         case 0:
             titleLabel.text = "Description"
-            setupTitle()
+            setupTitleLabel()
         case 1:
             titleLabel.text = "Facebook"
-            setupTitle()
+            setupTitleLabel()
         case 2:
             titleLabel.text = "Youtube"
-            setupTitle()
+            setupTitleLabel()
         case 3:
             titleLabel.text = "Twitter"
-            setupTitle()
+            setupTitleLabel()
         default:
             titleLabel.text = "Website"
-            setupTitle()
+            setupTitleLabel()
         }
     }
     
-    private func setupTitle() {
+    private func setupTitleLabel() {
         let dataAPI = viewModel.dataAPI
         if dataAPI == "" {
             textLabel.text = "---"
