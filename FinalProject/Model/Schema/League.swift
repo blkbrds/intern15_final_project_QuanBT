@@ -10,18 +10,18 @@ import Foundation
 import UIKit
  
 final class League {
-    var idLeague: String
-    var strLeague: String
-    var intFormedYear: String
-    var strLogo: String
+    var id: String
+    var name: String
+    var year: String
+    var logo: String
     var favorite: Bool = false
-    var thumbnailImage: UIImage?
+    var logoImage: UIImage?
     
     init(json: JSObject = JSObject()) {
-        self.idLeague = json["idLeague"] as? String ?? ""
-        self.strLeague = json["strLeague"] as? String ?? ""
-        self.intFormedYear = json["intFormedYear"] as? String ?? "1998"
-        self.strLogo = json["strLogo"] as? String ?? ""
+        self.id = json["idLeague"] as? String ?? ""
+        self.name = json["strLeague"] as? String ?? ""
+        self.year = json["intFormedYear"] as? String ?? "1998"
+        self.logo = json["strLogo"] as? String ?? ""
     }
 }
 

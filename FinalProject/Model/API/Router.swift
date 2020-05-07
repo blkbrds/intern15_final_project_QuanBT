@@ -12,11 +12,18 @@ import Alamofire
 final class Api {
     struct Path {
         static let domain = "https://www.thesportsdb.com"
-        static let baseURL = domain / "api"
+        static let baseURL = domain / "api" / "v1" / "json" / "1"
     }
+    
+    struct League { }
 }
 
-extension Api.Path { }
+extension Api.Path {
+    struct League {
+        static var path: String { return baseURL }
+        static var urlString: String { return Api.Path.League.path / "search_all_leagues.php" }
+    }
+}
 
 protocol URLStringConvertible {
     var urlString: String { get }

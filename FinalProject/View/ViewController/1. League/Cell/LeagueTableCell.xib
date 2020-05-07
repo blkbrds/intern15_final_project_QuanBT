@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6u5-Hu-hvs">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-logo" translatesAutoresizingMaskIntoConstraints="NO" id="6u5-Hu-hvs">
                         <rect key="frame" x="32" y="10" width="350" height="125"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="6u5-Hu-hvs" secondAttribute="height" multiplier="14:5" id="PM4-nc-MPx"/>
@@ -100,5 +100,6 @@
     <resources>
         <image name="calendar" catalog="system" width="64" height="52"/>
         <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="img-logo" width="500" height="252"/>
     </resources>
 </document>
