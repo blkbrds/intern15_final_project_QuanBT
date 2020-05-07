@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-typealias CompletionAPI = (Bool, String) -> Void
-
 final class LeagueListViewModel {
     // MARK: - Properties
     var dataAPIs: [League] = []
@@ -47,6 +45,18 @@ final class LeagueListViewModel {
         let item = dataAPIs[indexPath.row]
         let viewModel = LeagueTableCellVM(dataAPI: item)
         return viewModel
+    }
+    
+    func downloadImage() {
+        for item in dataAPIs {
+            Networking.shared().downloadImage(url: item.logo) { (image) in
+                if let image = image {
+                    item.logoImage = image
+                } else {
+                    item.logoImage = #imageLiteral(resourceName: "img-logo")
+                }
+            }
+        }
     }
 }
 

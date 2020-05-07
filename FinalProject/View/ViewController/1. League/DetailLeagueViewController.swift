@@ -98,7 +98,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
         } else if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamsCollectionCell", for: indexPath) as? TeamsCollectionCell ?? TeamsCollectionCell()
             cell.viewModel = viewModel.viewModelForCellTeams(at: indexPath)
-            let badge = viewModel.teams[indexPath.row].strTeamBadge
+            let badge = viewModel.teams[indexPath.row].badge
             Networking.shared().downloadImage(url: badge) { (image) in
                 if let image = image {
                     cell.configbadgeImage(image: image)
@@ -133,7 +133,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
         if indexPath.section == 0 {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LeagueHeaderView", for: indexPath) as? LeagueHeaderView {
                 sectionHeader.viewModel = viewModel.viewModelForHeader()
-                let logo = viewModel.dataAPI.strLogo
+                let logo = viewModel.dataAPI.logo
                 Networking.shared().downloadImage(url: logo) { (image) in
                     if let image = image {
                         sectionHeader.configLogoImage(image: image)
@@ -141,7 +141,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
                         sectionHeader.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
                     }
                 }
-                let badge = viewModel.dataAPI.strBadge
+                let badge = viewModel.dataAPI.badge
                 Networking.shared().downloadImage(url: badge) { (image) in
                     if let image = image {
                         sectionHeader.configbadgeImage(image: image)
@@ -154,13 +154,13 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
             return UICollectionReusableView()
         } else if indexPath.section == 1 {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TeamsHeaderView", for: indexPath) as? TeamsHeaderView {
-                sectionHeader.titleLabel.text = "Teams"
+                sectionHeader.viewModel = TeamsHeaderVM(title: "Teams")
                 return sectionHeader
             }
             return UICollectionReusableView()
         } else {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TeamsHeaderView", for: indexPath) as? TeamsHeaderView {
-                sectionHeader.titleLabel.text = "Photos"
+                sectionHeader.viewModel = TeamsHeaderVM(title: "Photos")
                 return sectionHeader
             }
             return UICollectionReusableView()
@@ -171,7 +171,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
         if indexPath.section == 1 {
             let detailTeamVC = DetailTeamViewController()
             let data = viewModel.teams[indexPath.row]
-            let vm = DetailTeamViewModel(idTeam: data.idTeam)
+            let vm = DetailTeamViewModel(idTeam: data.id)
             detailTeamVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
