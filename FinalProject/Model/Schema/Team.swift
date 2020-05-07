@@ -13,6 +13,7 @@ final class Team {
     var name: String
     var stadium: String
     var badge: String
+    var favorite: Bool = false
     
     init(json: JSObject = JSObject()) {
         self.id = json["idTeam"] as? String ?? ""

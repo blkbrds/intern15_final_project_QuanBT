@@ -46,6 +46,11 @@ final class DetailLeagueViewController: ViewController {
         }
         loadAPI()
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2743943632, green: 0.7092565894, blue: 0.5255461931, alpha: 1)
+        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+        navigationItem.rightBarButtonItem = favoriteButton
+    }
+    
+    @objc private func favoriteButtonTouchUpInside() {
     }
     
     private func loadAPI() {
@@ -159,6 +164,17 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
                 return sectionHeader
             }
             return UICollectionReusableView()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let detailTeamVC = DetailTeamViewController()
+            let data = viewModel.teams[indexPath.row]
+            let vm = DetailTeamViewModel(idTeam: data.id)
+            detailTeamVC.viewModel = vm
+            navigationController?.isNavigationBarHidden = false
+            navigationController?.pushViewController(detailTeamVC, animated: true)
         }
     }
 }

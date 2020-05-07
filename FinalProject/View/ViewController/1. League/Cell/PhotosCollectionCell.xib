@@ -45,7 +45,7 @@
             <connections>
                 <outlet property="contentViewCell" destination="js7-Je-UR4" id="SGD-Z8-1fY"/>
                 <outlet property="photoImageView" destination="kxA-J8-hZB" id="afc-k7-fKs"/>
-                <outlet property="widthLayout" destination="5nL-5l-38r" id="PDc-aq-qNg"/>
+                <outlet property="widthLayout" destination="5nL-5l-38r" id="uXu-yf-Fe8"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
         </collectionViewCell>
