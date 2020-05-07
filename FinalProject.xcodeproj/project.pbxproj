@@ -324,16 +324,9 @@
 		6E9129BF245330DA00F89B26 /* 1. League */ = {
 			isa = PBXGroup;
 			children = (
-				A4133B7424572DEE0036C4DB /* Cell */,
-				6E9129C2245331E800F89B26 /* LeagueListViewController.swift */,
-				6E9129C3245331E800F89B26 /* LeagueListViewController.xib */,
-				6E9129C62453323500F89B26 /* LeagueListViewModel.swift */,
-				A4547CFF24596BD80084314C /* DetailLeagueViewController.swift */,
-				A4547D0024596BD80084314C /* DetailLeagueViewController.xib */,
-				A4547D0324596BEE0084314C /* DetailLeagueViewModel.swift */,
-				A48F63DB245FC97800D23BD4 /* DetailTeamViewController.swift */,
-				A48F63DC245FC97800D23BD4 /* DetailTeamViewController.xib */,
-				A48F63DF245FC9A000D23BD4 /* DetailTeamViewModel.swift */,
+				A475921224640FCB001AB823 /* 1.1 League List */,
+				A4759215246410B8001AB823 /* 1.2 Detail League */,
+				A47592172464112B001AB823 /* 1.3 Detail Team */,
 			);
 			path = "1. League";
 			sourceTree = "<group>";
@@ -411,21 +404,6 @@
 		A4133B7424572DEE0036C4DB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				A4133B7524572E310036C4DB /* LeagueTableCell.swift */,
-				A4133B7624572E310036C4DB /* LeagueTableCell.xib */,
-				A4133B7924572E6C0036C4DB /* LeagueTableCellVM.swift */,
-				A4547D0524596F560084314C /* LeagueHeaderView.swift */,
-				A4547D0624596F560084314C /* LeagueHeaderView.xib */,
-				A4547D0924596F8B0084314C /* LeagueHeaderCellVM.swift */,
-				A4507748245C5D2A0011F0A4 /* InformationCollectionCell.swift */,
-				A4507749245C5D2A0011F0A4 /* InformationCollectionCell.xib */,
-				A450774C245C5D580011F0A4 /* InformationCollectionCellVM.swift */,
-				A450774E245C607C0011F0A4 /* TeamsCollectionCell.swift */,
-				A450774F245C607C0011F0A4 /* TeamsCollectionCell.xib */,
-				A4507752245C609D0011F0A4 /* TeamsCollectionCellVM.swift */,
-				A4507754245C6C220011F0A4 /* PhotosCollectionCell.swift */,
-				A4507755245C6C220011F0A4 /* PhotosCollectionCell.xib */,
-				A4507758245C6C400011F0A4 /* PhotosCollectionCellVM.swift */,
 				A450775A245C70230011F0A4 /* TeamsHeaderView.swift */,
 				A450775B245C70230011F0A4 /* TeamsHeaderView.xib */,
 				A450775E245C71440011F0A4 /* TeamsHeaderVM.swift */,
@@ -447,6 +425,68 @@
 				A45B3EE3246304A400B3081E /* PlayerTableCellVM.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		A475921224640FCB001AB823 /* 1.1 League List */ = {
+			isa = PBXGroup;
+			children = (
+				A475921424641076001AB823 /* Cell */,
+				6E9129C2245331E800F89B26 /* LeagueListViewController.swift */,
+				6E9129C3245331E800F89B26 /* LeagueListViewController.xib */,
+				6E9129C62453323500F89B26 /* LeagueListViewModel.swift */,
+			);
+			path = "1.1 League List";
+			sourceTree = "<group>";
+		};
+		A475921424641076001AB823 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A4133B7524572E310036C4DB /* LeagueTableCell.swift */,
+				A4133B7624572E310036C4DB /* LeagueTableCell.xib */,
+				A4133B7924572E6C0036C4DB /* LeagueTableCellVM.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A4759215246410B8001AB823 /* 1.2 Detail League */ = {
+			isa = PBXGroup;
+			children = (
+				A4759216246410DB001AB823 /* Cell */,
+				A4547CFF24596BD80084314C /* DetailLeagueViewController.swift */,
+				A4547D0024596BD80084314C /* DetailLeagueViewController.xib */,
+				A4547D0324596BEE0084314C /* DetailLeagueViewModel.swift */,
+			);
+			path = "1.2 Detail League";
+			sourceTree = "<group>";
+		};
+		A4759216246410DB001AB823 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A4547D0524596F560084314C /* LeagueHeaderView.swift */,
+				A4547D0624596F560084314C /* LeagueHeaderView.xib */,
+				A4547D0924596F8B0084314C /* LeagueHeaderCellVM.swift */,
+				A4507748245C5D2A0011F0A4 /* InformationCollectionCell.swift */,
+				A4507749245C5D2A0011F0A4 /* InformationCollectionCell.xib */,
+				A450774C245C5D580011F0A4 /* InformationCollectionCellVM.swift */,
+				A450774E245C607C0011F0A4 /* TeamsCollectionCell.swift */,
+				A450774F245C607C0011F0A4 /* TeamsCollectionCell.xib */,
+				A4507752245C609D0011F0A4 /* TeamsCollectionCellVM.swift */,
+				A4507754245C6C220011F0A4 /* PhotosCollectionCell.swift */,
+				A4507755245C6C220011F0A4 /* PhotosCollectionCell.xib */,
+				A4507758245C6C400011F0A4 /* PhotosCollectionCellVM.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A47592172464112B001AB823 /* 1.3 Detail Team */ = {
+			isa = PBXGroup;
+			children = (
+				A4133B7424572DEE0036C4DB /* Cell */,
+				A48F63DB245FC97800D23BD4 /* DetailTeamViewController.swift */,
+				A48F63DC245FC97800D23BD4 /* DetailTeamViewController.xib */,
+				A48F63DF245FC9A000D23BD4 /* DetailTeamViewModel.swift */,
+			);
+			path = "1.3 Detail Team";
 			sourceTree = "<group>";
 		};
 		F3CA9D46B538F796D41C795C /* Frameworks */ = {
