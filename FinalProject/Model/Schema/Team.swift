@@ -52,3 +52,8 @@ final class Team {
         self.fanart4 = json["strTeamFanart4"] as? String ?? ""
     }
 }
+
+enum Search {
+    case team
+    case player
+}
