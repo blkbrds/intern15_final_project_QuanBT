@@ -13,11 +13,12 @@ final class TeamsHeaderView: UICollectionReusableView {
     @IBOutlet private weak var titleLabel: UILabel!
     
     // MARK: - Properties
-    var viewModel = TeamsHeaderVM() {
-        didSet {
-            updateView()
-        }
-    }
+       var viewModel = TeamsHeaderVM() {
+           didSet {
+               updateView()
+           }
+       }
+    
     // MARK: - Function
     private func updateView() {
         let title = viewModel.title

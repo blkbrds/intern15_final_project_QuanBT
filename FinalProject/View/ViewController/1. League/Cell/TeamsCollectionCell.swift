@@ -24,7 +24,7 @@ final class TeamsCollectionCell: UICollectionViewCell {
             updateView()
         }
     }
-
+    
     // MARK: - Function
     private func updateView() {
         let dataAPI = viewModel.dataAPI

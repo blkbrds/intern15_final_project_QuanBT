@@ -130,6 +130,14 @@ extension LeagueListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
+        let item = viewModel.dataAPIs[indexPath.row].logo
+        Networking.shared().downloadImage(url: item) { (image) in
+            if let image = image {
+                cell.configImage(image: image)
+            } else {
+                cell.configImage(image: #imageLiteral(resourceName: "img-logo"))
+            }
+        }
         return cell
     }
 }

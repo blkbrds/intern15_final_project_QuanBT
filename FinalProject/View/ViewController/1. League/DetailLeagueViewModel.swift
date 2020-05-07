@@ -100,6 +100,11 @@ final class DetailLeagueViewModel {
     }
     
     func numberOfRowInPhotos() -> Int {
-        return photos.count
+           return photos.count
+    }
+    
+    func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
+        let viewModel = TeamsHeaderVM(title: title)
+        return viewModel
     }
 }

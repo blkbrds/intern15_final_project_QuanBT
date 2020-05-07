@@ -21,10 +21,6 @@ final class DetailLeagueViewController: ViewController {
         setupView()
     }
     
-    override func setupUI() {
-        super.setupUI()
-    }
-    
     // MARK: - Function
     private func setupView() {
         let nib1 = UINib(nibName: "InformationCollectionCell", bundle: Bundle.main)
@@ -154,13 +150,13 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
             return UICollectionReusableView()
         } else if indexPath.section == 1 {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TeamsHeaderView", for: indexPath) as? TeamsHeaderView {
-                sectionHeader.viewModel = TeamsHeaderVM(title: "Teams")
+                sectionHeader.viewModel = viewModel.viewModelForHeaderTeam(title: "Teams")
                 return sectionHeader
             }
             return UICollectionReusableView()
         } else {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TeamsHeaderView", for: indexPath) as? TeamsHeaderView {
-                sectionHeader.viewModel = TeamsHeaderVM(title: "Photos")
+                sectionHeader.viewModel = viewModel.viewModelForHeaderTeam(title: "Photos")
                 return sectionHeader
             }
             return UICollectionReusableView()
