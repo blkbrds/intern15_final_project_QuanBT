@@ -10,7 +10,7 @@ import UIKit
 
 final class PlayerViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     var viewModel = PlayerViewModel()

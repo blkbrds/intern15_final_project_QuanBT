@@ -10,17 +10,17 @@ import UIKit
 
 final class PlayerHeaderView: UICollectionReusableView {
     // MARK: - IBOutlet
-    @IBOutlet weak var contentViewPlayer: UIView!
-    @IBOutlet weak var cutoutImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var teamImageView: UIImageView!
-    @IBOutlet weak var nationalityImageView: UIImageView!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var positionLabel: UILabel!
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var weightLabel: UILabel!
-    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet private weak var contentViewPlayer: UIView!
+    @IBOutlet private weak var cutoutImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var teamImageView: UIImageView!
+    @IBOutlet private weak var nationalityImageView: UIImageView!
+    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var positionLabel: UILabel!
+    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var weightLabel: UILabel!
+    @IBOutlet private weak var heightLabel: UILabel!
     
     // MARK: - Properties
     var viewModel = PlayerHeaderVM() {
