@@ -9,5 +9,13 @@
 import Foundation
 
 final class PlayerHeaderVM {
+    // MARK: - Properties
+    var dataAPI: Player = Player()
+    var teamAPI: Team = Team()
     
+    // MARK: - Init
+    init(dataAPI: Player = Player(), teamAPI: Team = Team()) {
+        self.dataAPI = dataAPI
+        self.teamAPI = teamAPI
+    }
 }

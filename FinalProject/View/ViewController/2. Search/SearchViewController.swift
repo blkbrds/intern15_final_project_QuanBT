@@ -178,6 +178,13 @@ extension SearchViewController: UITableViewDelegate {
             detailTeamVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
+        } else {
+            let playerVC = PlayerViewController()
+            let data = viewModel.dataPlayers[indexPath.row]
+            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam)
+            playerVC.viewModel = vm
+            navigationController?.isNavigationBarHidden = false
+            navigationController?.pushViewController(playerVC, animated: true)
         }
     }
 }
