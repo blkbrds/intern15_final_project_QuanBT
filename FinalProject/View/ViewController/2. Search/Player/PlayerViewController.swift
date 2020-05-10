@@ -109,6 +109,7 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == 0 {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PlayerHeaderView", for: indexPath) as? PlayerHeaderView {
+                sectionHeader.delegate = self
                 sectionHeader.viewModel = viewModel.viewModelForHeader()
                 let cutout = viewModel.dataAPI.cutout
                 Networking.shared().downloadImage(url: cutout) { (image) in
@@ -136,5 +137,15 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
             }
             return UICollectionReusableView()
         }
+    }
+}
+
+extension PlayerViewController: PlayerHeaderDelegate {
+    func getIdTeam(idTeam: String) {
+        let detailTeamVC = DetailTeamViewController()
+        let vm = DetailTeamViewModel(idTeam: idTeam)
+        detailTeamVC.viewModel = vm
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.pushViewController(detailTeamVC, animated: true)
     }
 }
