@@ -7,5 +7,6 @@
 //
 
 import Foundation
-class FavoriteViewModel {
+
+final class FavoriteViewModel {
 }
