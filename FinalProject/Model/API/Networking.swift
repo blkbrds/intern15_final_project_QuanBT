@@ -40,7 +40,7 @@ final class Networking {
     // MARK: - request
     func request(with urlString: String, completion: @escaping (Data?, APIError?) -> Void) {
         guard let url = URL(string: urlString) else {
-            let error = APIError.error("URL lỗi")
+            let error = APIError.error("Empty Data")
             completion(nil, error)
             return
         }

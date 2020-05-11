@@ -52,6 +52,13 @@ enum Country: String {
     case international = "International"
     case europe = "Europe"
     case japan = "Japan"
+    case argentine = "Argentine"
+    case brazil = "Brazil"
+    case australia = "Australia"
+    case canada = "Canada"
+    case chile = "Chile"
+    case china = "China"
+    case colombia = "Colombia"
     
     var flag: UIImage {
         switch self {
@@ -73,6 +80,20 @@ enum Country: String {
             return #imageLiteral(resourceName: "img-Europe")
         case .japan:
             return #imageLiteral(resourceName: "img-Japan")
+        case .argentine:
+            return #imageLiteral(resourceName: "img-Argentine")
+        case .brazil:
+            return #imageLiteral(resourceName: "img-Brazil")
+        case .australia:
+            return #imageLiteral(resourceName: "img-Australia")
+        case .canada:
+            return #imageLiteral(resourceName: "img-Canada")
+        case .chile:
+            return #imageLiteral(resourceName: "img-Chile")
+        case .china:
+            return #imageLiteral(resourceName: "img-China")
+        case .colombia:
+            return #imageLiteral(resourceName: "img-Colombia")
         }
     }
 }

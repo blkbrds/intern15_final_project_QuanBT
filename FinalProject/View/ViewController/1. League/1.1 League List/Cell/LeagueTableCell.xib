@@ -94,7 +94,7 @@
                 <outlet property="logoImageView" destination="6u5-Hu-hvs" id="ajt-O0-8uO"/>
                 <outlet property="nameLeagueLabel" destination="N5M-wl-f1G" id="wSN-I2-wnb"/>
             </connections>
-            <point key="canvasLocation" x="91" y="80"/>
+            <point key="canvasLocation" x="89.855072463768124" y="79.6875"/>
         </tableViewCell>
     </objects>
     <resources>
