@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PlayerCollectionCell" customModule="FinalProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="275"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="275"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEx-kT-6cK">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="275"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9y5-ai-UWz">
+                                <rect key="frame" x="37.5" y="20" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9y5-ai-UWz" secondAttribute="height" id="gRt-Ma-Axo"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Player" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-gc-wed">
+                                <rect key="frame" x="12.5" y="165" width="175" height="22.5"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZH-Gv-HZl">
+                                <rect key="frame" x="12.5" y="197.5" width="175" height="20"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cg8-gc-wed" firstAttribute="top" secondItem="9y5-ai-UWz" secondAttribute="bottom" constant="20" id="1DQ-bY-OtJ"/>
+                            <constraint firstItem="Cg8-gc-wed" firstAttribute="centerX" secondItem="SEx-kT-6cK" secondAttribute="centerX" id="Bl7-Gk-gdV"/>
+                            <constraint firstAttribute="width" secondItem="SEx-kT-6cK" secondAttribute="height" multiplier="8:11" id="Ccn-47-57W"/>
+                            <constraint firstAttribute="width" constant="200" id="LnE-77-eqH"/>
+                            <constraint firstItem="9y5-ai-UWz" firstAttribute="centerX" secondItem="SEx-kT-6cK" secondAttribute="centerX" id="S9K-DT-yMN"/>
+                            <constraint firstItem="Cg8-gc-wed" firstAttribute="width" secondItem="SEx-kT-6cK" secondAttribute="width" multiplier="175/200" id="WNq-Li-2UF"/>
+                            <constraint firstItem="eZH-Gv-HZl" firstAttribute="width" secondItem="Cg8-gc-wed" secondAttribute="width" id="Xac-cg-DHM"/>
+                            <constraint firstItem="9y5-ai-UWz" firstAttribute="top" secondItem="SEx-kT-6cK" secondAttribute="top" constant="20" id="iN8-Eh-sJ4"/>
+                            <constraint firstItem="eZH-Gv-HZl" firstAttribute="top" secondItem="Cg8-gc-wed" secondAttribute="bottom" constant="10" id="sOg-6s-oK3"/>
+                            <constraint firstItem="eZH-Gv-HZl" firstAttribute="centerX" secondItem="SEx-kT-6cK" secondAttribute="centerX" id="vNK-lB-cCJ"/>
+                            <constraint firstItem="9y5-ai-UWz" firstAttribute="width" secondItem="SEx-kT-6cK" secondAttribute="width" multiplier="125/200" id="yjz-gD-8bd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="SEx-kT-6cK" secondAttribute="trailing" id="6d1-fu-dtS"/>
+                <constraint firstItem="SEx-kT-6cK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Hke-2W-ok0"/>
+                <constraint firstItem="SEx-kT-6cK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ob6-aS-mjp"/>
+                <constraint firstAttribute="bottom" secondItem="SEx-kT-6cK" secondAttribute="bottom" id="nCG-Zc-IDK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <point key="canvasLocation" x="137.68115942028987" y="107.8125"/>
+        </collectionViewCell>
+    </objects>
+</document>
