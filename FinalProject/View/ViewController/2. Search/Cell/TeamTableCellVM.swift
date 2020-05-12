@@ -11,9 +11,11 @@ import Foundation
 final class TeamTableCellVM {
     // MARK: - Properties
     var dataAPI: Team = Team()
+    var favorite: Bool = false
     
     // MARK: - Init
-    init(dataAPI: Team = Team()) {
+    init(dataAPI: Team = Team(), favorite: Bool = false) {
         self.dataAPI = dataAPI
+        self.favorite = favorite 
     }
 }

@@ -38,7 +38,7 @@ final class PlayerViewModel {
                         dataPlayer = dataAPI
                     }
                     self.dataAPI = dataPlayer
-                    self.informationData.append(contentsOf: [dataPlayer.description, dataPlayer.facebook, dataPlayer.youtube, dataPlayer.twitter, dataPlayer.website])
+                    self.informationData.append(contentsOf: [dataPlayer.descriptionEN, dataPlayer.facebook, dataPlayer.youtube, dataPlayer.twitter, dataPlayer.website])
                     self.photos.append(contentsOf: [dataPlayer.banner, dataPlayer.fanart1, dataPlayer.fanart2, dataPlayer.fanart3, dataPlayer.fanart4])
                     completion(true, "")
                 } else {

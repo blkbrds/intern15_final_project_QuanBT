@@ -7,30 +7,32 @@
 //
 
 import Foundation
+import RealmSwift
 
-final class Team {
-    var id: String
-    var name: String
-    var stadium: String
-    var badge: String
-    var year: String
-    var nameLeague: String
-    var country: String
-    var description: String
-    var facebook: String
-    var youtube: String
-    var twitter: String
-    var website: String
-    var jersey: String
-    var logo: String
-    var banner: String
-    var fanart1: String
-    var fanart2: String
-    var fanart3: String
-    var fanart4: String
+final class Team: Object {
+    @objc dynamic var id: String = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var stadium: String = ""
+    @objc dynamic var badge: String = ""
+    @objc dynamic var year: String = "1998"
+    @objc dynamic var nameLeague: String = ""
+    @objc dynamic var country: String = ""
+    @objc dynamic var descriptionEN: String = ""
+    @objc dynamic var facebook: String = ""
+    @objc dynamic var youtube: String = ""
+    @objc dynamic var twitter: String = ""
+    @objc dynamic var website: String = ""
+    @objc dynamic var jersey: String = ""
+    @objc dynamic var logo: String = ""
+    @objc dynamic var banner: String = ""
+    @objc dynamic var fanart1: String = ""
+    @objc dynamic var fanart2: String = ""
+    @objc dynamic var fanart3: String = ""
+    @objc dynamic var fanart4: String = ""
     var favorite: Bool = false
     
-    init(json: JSObject = JSObject()) {
+    convenience init(json: JSObject = JSObject()) {
+        self.init()
         self.id = json["idTeam"] as? String ?? ""
         self.name = json["strTeam"] as? String ?? ""
         self.stadium = json["strStadium"] as? String ?? ""
@@ -38,7 +40,7 @@ final class Team {
         self.year = json["intFormedYear"] as? String ?? ""
         self.nameLeague = json["strLeague"] as? String ?? ""
         self.country = json["strCountry"] as? String ?? ""
-        self.description = json["strDescriptionEN"] as? String ?? ""
+        self.descriptionEN = json["strDescriptionEN"] as? String ?? ""
         self.facebook = json["strFacebook"] as? String ?? ""
         self.youtube = json["strYoutube"] as? String ?? ""
         self.twitter = json["strTwitter"] as? String ?? ""
@@ -50,6 +52,10 @@ final class Team {
         self.fanart2 = json["strTeamFanart2"] as? String ?? ""
         self.fanart3 = json["strTeamFanart3"] as? String ?? ""
         self.fanart4 = json["strTeamFanart4"] as? String ?? ""
+    }
+    
+    override class func primaryKey() -> String? {
+        return "id"
     }
 }
 

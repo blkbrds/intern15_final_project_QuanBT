@@ -2,6 +2,11 @@ PODS:
   - Alamofire (4.8.2)
   - MVVM-Swift (5.0.1)
   - ObjectMapper (3.5.2)
+  - Realm (4.4.0):
+    - Realm/Headers (= 4.4.0)
+  - Realm/Headers (4.4.0)
+  - RealmSwift (4.4.0):
+    - Realm (= 4.4.0)
   - SwifterSwift (5.2.0):
     - SwifterSwift/AppKit (= 5.2.0)
     - SwifterSwift/CoreAnimation (= 5.2.0)
@@ -34,6 +39,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.8.2)
   - MVVM-Swift
   - ObjectMapper
+  - RealmSwift
   - SwifterSwift
   - SwiftLint
   - SwiftUtils (= 4.2)
@@ -43,6 +49,8 @@ SPEC REPOS:
     - Alamofire
     - MVVM-Swift
     - ObjectMapper
+    - Realm
+    - RealmSwift
     - SwifterSwift
     - SwiftLint
     - SwiftUtils
@@ -51,10 +59,12 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   MVVM-Swift: 0333cd8a16abfe0e93a1423bfddb49b8c11065e1
   ObjectMapper: b53ae947d370bf89423e86be7d4e2d2b2a8d3f40
+  Realm: e125f464884cda953ebefe70c671b75b03b81b9b
+  RealmSwift: 33656a42bd300959a081fc13347376bc478071af
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   SwiftUtils: de77bcd1df216c9be6ec7011777302c60a2018a6
 
-PODFILE CHECKSUM: a567e9c350e9d2acbfa5e1bb96b973ac314432f0
+PODFILE CHECKSUM: cacdcbc8053b17342df25a8c1cb07c832fdd78df
 
 COCOAPODS: 1.9.1

@@ -18,6 +18,6 @@ extension App {
         static let tabBarUnselectedItemTintColor: UIColor = #colorLiteral(red: 0.2823529412, green: 0.3176470588, blue: 0.3568627451, alpha: 1)
         static let tabBarBackgroundColor: UIColor = #colorLiteral(red: 0.1333333333, green: 0.1764705882, blue: 0.2117647059, alpha: 1)
         static let greenCustomColor: UIColor = #colorLiteral(red: 0, green: 0.9529411765, blue: 0.4509803922, alpha: 1)
-        static let backgroundTableView = #colorLiteral(red: 0.162512362, green: 0.211795181, blue: 0.252785027, alpha: 1)
+        static let backgroundTableView = #colorLiteral(red: 0.1607843137, green: 0.2117647059, blue: 0.2509803922, alpha: 1)
     }
 }
