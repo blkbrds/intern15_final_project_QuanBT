@@ -34,9 +34,9 @@ final class FavoriteViewController: ViewController {
         viewModel.delegate = self
         viewModel.setUpObsever(index: 0, type: DetailLeague.self)
         viewModel.setUpObsever(index: 1, type: Team.self)
-        viewModel.setUpObsever(index: 3, type: Player.self)
-        fetchData()
+        viewModel.setUpObsever(index: 2, type: Player.self)
         tableView.separatorColor = App.Color.backgroundTableView
+        fetchData()
     }
     
     func fetchData() {
@@ -131,12 +131,15 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             if indexPath.section == 0 {
                 RealmManager.shared.deleteObject(with: viewModel.getLeague(in: indexPath))
+                viewModel.dataLeagues.remove(at: indexPath.row)
                 updateUI()
             } else if indexPath.section == 1 {
                 RealmManager.shared.deleteObject(with: viewModel.getTeam(in: indexPath))
+                viewModel.dataTeams.remove(at: indexPath.row)
                 updateUI()
             } else {
                 RealmManager.shared.deleteObject(with: viewModel.getPlayer(in: indexPath))
+                viewModel.dataPlayers.remove(at: indexPath.row)
                 updateUI()
             }
         }

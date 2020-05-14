@@ -51,6 +51,10 @@
 		6E912A102453592500F89B26 /* CollectionExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A0F2453592500F89B26 /* CollectionExt.swift */; };
 		6E912A122453596F00F89B26 /* BundleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A112453596F00F89B26 /* BundleExt.swift */; };
 		6E912A14245359C200F89B26 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E912A13245359C200F89B26 /* Color.swift */; };
+		7DE8AE89246D2C9B00192CDD /* FavoriteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8AE87246D2C9B00192CDD /* FavoriteCollectionViewController.swift */; };
+		7DE8AE8A246D2C9B00192CDD /* FavoriteCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DE8AE88246D2C9B00192CDD /* FavoriteCollectionViewController.xib */; };
+		7DE8AE8C246D2CCB00192CDD /* FavoriteCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8AE8B246D2CCB00192CDD /* FavoriteCollectionViewModel.swift */; };
+		7DE8AE8E246D4E3D00192CDD /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8AE8D246D4E3D00192CDD /* PageViewController.swift */; };
 		A4133B7724572E310036C4DB /* LeagueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4133B7524572E310036C4DB /* LeagueTableCell.swift */; };
 		A4133B7824572E310036C4DB /* LeagueTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4133B7624572E310036C4DB /* LeagueTableCell.xib */; };
 		A4133B7A24572E6C0036C4DB /* LeagueTableCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4133B7924572E6C0036C4DB /* LeagueTableCellVM.swift */; };
@@ -153,6 +157,10 @@
 		6E912A0F2453592500F89B26 /* CollectionExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExt.swift; sourceTree = "<group>"; };
 		6E912A112453596F00F89B26 /* BundleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExt.swift; sourceTree = "<group>"; };
 		6E912A13245359C200F89B26 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		7DE8AE87246D2C9B00192CDD /* FavoriteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewController.swift; sourceTree = "<group>"; };
+		7DE8AE88246D2C9B00192CDD /* FavoriteCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteCollectionViewController.xib; sourceTree = "<group>"; };
+		7DE8AE8B246D2CCB00192CDD /* FavoriteCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewModel.swift; sourceTree = "<group>"; };
+		7DE8AE8D246D4E3D00192CDD /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		8C84656D731A9EF57FF398C2 /* Pods_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4133B7524572E310036C4DB /* LeagueTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTableCell.swift; sourceTree = "<group>"; };
 		A4133B7624572E310036C4DB /* LeagueTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeagueTableCell.xib; sourceTree = "<group>"; };
@@ -326,6 +334,7 @@
 				6E912A082453570000F89B26 /* Popup.swift */,
 				6E912A0A245357AC00F89B26 /* View.swift */,
 				A4CA43202456852300063EBF /* TabBarViewController.swift */,
+				7DE8AE8D246D4E3D00192CDD /* PageViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -376,6 +385,9 @@
 				6E9129CE2453329C00F89B26 /* FavoriteViewController.swift */,
 				6E9129CF2453329C00F89B26 /* FavoriteViewController.xib */,
 				6E9129D2245332B500F89B26 /* FavoriteViewModel.swift */,
+				7DE8AE87246D2C9B00192CDD /* FavoriteCollectionViewController.swift */,
+				7DE8AE88246D2C9B00192CDD /* FavoriteCollectionViewController.xib */,
+				7DE8AE8B246D2CCB00192CDD /* FavoriteCollectionViewModel.swift */,
 			);
 			path = "3. Favorite";
 			sourceTree = "<group>";
@@ -636,6 +648,7 @@
 				6E9129C5245331E800F89B26 /* LeagueListViewController.xib in Resources */,
 				A49E623C245FFED600E98646 /* DetailTeamHeaderView.xib in Resources */,
 				A4133B7824572E310036C4DB /* LeagueTableCell.xib in Resources */,
+				7DE8AE8A246D2C9B00192CDD /* FavoriteCollectionViewController.xib in Resources */,
 				A4547D0224596BD80084314C /* DetailLeagueViewController.xib in Resources */,
 				A48F63DE245FC97800D23BD4 /* DetailTeamViewController.xib in Resources */,
 				A45FFA752464F78000A6E77C /* PlayerHeaderView.xib in Resources */,
@@ -731,6 +744,7 @@
 				6E912A032453541200F89B26 /* NSDataExt.swift in Sources */,
 				A4CA43212456852300063EBF /* TabBarViewController.swift in Sources */,
 				A45FFA742464F78000A6E77C /* PlayerHeaderView.swift in Sources */,
+				7DE8AE89246D2C9B00192CDD /* FavoriteCollectionViewController.swift in Sources */,
 				A4507756245C6C220011F0A4 /* PhotosCollectionCell.swift in Sources */,
 				A45B3EDE2462F52A00B3081E /* TeamTableCellVM.swift in Sources */,
 				6E9129E82453430200F89B26 /* UINavigationItemExt.swift in Sources */,
@@ -773,6 +787,7 @@
 				A492BE842457D26D00D32CA3 /* Networking.swift in Sources */,
 				6E9129D02453329C00F89B26 /* FavoriteViewController.swift in Sources */,
 				6E9129E22453420500F89B26 /* UIColorExt.swift in Sources */,
+				7DE8AE8C246D2CCB00192CDD /* FavoriteCollectionViewModel.swift in Sources */,
 				A49E623B245FFED600E98646 /* DetailTeamHeaderView.swift in Sources */,
 				6E912A102453592500F89B26 /* CollectionExt.swift in Sources */,
 				A450774A245C5D2A0011F0A4 /* InformationCollectionCell.swift in Sources */,
@@ -784,6 +799,7 @@
 				A45B3EE12463046400B3081E /* PlayerTableCell.swift in Sources */,
 				A450774D245C5D580011F0A4 /* InformationCollectionCellVM.swift in Sources */,
 				A4507753245C609D0011F0A4 /* TeamsCollectionCellVM.swift in Sources */,
+				7DE8AE8E246D4E3D00192CDD /* PageViewController.swift in Sources */,
 				A48F63DD245FC97800D23BD4 /* DetailTeamViewController.swift in Sources */,
 				A4312EA524692BEF009B87D1 /* PlayerCollectionCellVM.swift in Sources */,
 			);
