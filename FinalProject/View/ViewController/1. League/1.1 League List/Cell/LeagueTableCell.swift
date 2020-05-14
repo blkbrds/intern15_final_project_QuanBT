@@ -24,7 +24,7 @@ final class LeagueTableCell: UITableViewCell {
     
     // MARK: - Function
     private func updateView() {
-        let favorite = viewModel.favorite
+        let favorite = viewModel.isFavorite
         if favorite {
             let dataFavorite = viewModel.dataFavorite
             nameLeagueLabel.text = dataFavorite.name

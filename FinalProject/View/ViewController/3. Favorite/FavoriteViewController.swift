@@ -60,7 +60,7 @@ final class FavoriteViewController: ViewController {
     }
 }
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource & UITableViewDelegate
 extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -150,6 +150,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - FavoriteViewModelDelegate
 extension FavoriteViewController: FavoriteViewModelDelegate {
     func viewModel(viewModel: FavoriteViewModel, needperform action: FavoriteViewModel.Action) {
         fetchData()

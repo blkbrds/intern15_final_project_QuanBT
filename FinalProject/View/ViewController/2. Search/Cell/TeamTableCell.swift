@@ -23,7 +23,7 @@ final class TeamTableCell: UITableViewCell {
     }
     
     private func updateView() {
-        let favorite = viewModel.favorite
+        let favorite = viewModel.isFavorite
         if favorite {
             let dataFavorite = viewModel.dataAPI
             nameTeamLabel.text = dataFavorite.name

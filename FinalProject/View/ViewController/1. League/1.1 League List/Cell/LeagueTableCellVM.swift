@@ -12,12 +12,12 @@ final class LeagueTableCellVM {
     // MARK: - Properties
     var dataAPI: League = League()
     var dataFavorite: DetailLeague = DetailLeague()
-    var favorite: Bool = false
+    var isFavorite: Bool = false
     
     // MARK: - Init
     init(dataAPI: League = League(), dataFavorite: DetailLeague = DetailLeague(), favorite: Bool = false) {
         self.dataAPI = dataAPI
         self.dataFavorite = dataFavorite
-        self.favorite = favorite
+        self.isFavorite = favorite
     }
 }
