@@ -57,6 +57,7 @@
                         </constraints>
                         <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" backgroundImage="heart" catalog="system"/>
+                        <state key="selected" backgroundImage="heart.fill" catalog="system"/>
                         <connections>
                             <action selector="favoriteButtonTouchUpInside:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xK8-Hu-PYz"/>
                         </connections>
@@ -94,6 +95,7 @@
     </objects>
     <resources>
         <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="ic-stadium" width="32" height="32"/>
         <image name="img-logo" width="500" height="252"/>
     </resources>

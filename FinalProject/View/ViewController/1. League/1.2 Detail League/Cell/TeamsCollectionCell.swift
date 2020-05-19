@@ -35,10 +35,16 @@ final class TeamsCollectionCell: UICollectionViewCell {
         widthLayout.constant = screenWidth / 2 - (16)
         contentViewCell.layer.cornerRadius = 10
         contentViewCell.clipsToBounds = true
-        if dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        guard let realm = RealmManager.shared.realm else { return }
+        if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+            dataAPI.isFavorite = false
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            dataAPI.isFavorite = true
+        }
+        if dataAPI.isFavorite {
+            favoriteButton.isSelected = true
+        } else {
+            favoriteButton.isSelected = false
         }
     }
     
@@ -47,18 +53,14 @@ final class TeamsCollectionCell: UICollectionViewCell {
     }
     
     @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
-        if !viewModel.dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            viewModel.dataAPI.favorite = true
-            let data: Team = Team()
-            data.id = viewModel.dataAPI.id
-            data.name = viewModel.dataAPI.name
-            data.logo = viewModel.dataAPI.logo
-            data.stadium = viewModel.dataAPI.stadium
-            RealmManager.shared.addObject(with: data)
+        if !viewModel.dataAPI.isFavorite {
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.isFavorite = true
+            viewModel.addFavorite()
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            viewModel.dataAPI.favorite = false
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.isFavorite = false
+            viewModel.deleteFavorite()
         }
     }
 }

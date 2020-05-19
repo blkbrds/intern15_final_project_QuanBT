@@ -14,12 +14,14 @@ final class PlayerViewModel {
     var dataTeam: Team = Team()
     var idPlayer: String = ""
     var idTeam: String = ""
+    var isFavorite: Bool = false
     var informationData: [String] = []
     var photos: [String] = []
     
-    init(idPlayer: String = "", idTeam: String = "") {
+    init(idPlayer: String = "", idTeam: String = "", isFavorite: Bool = false) {
         self.idPlayer = idPlayer
         self.idTeam = idTeam
+        self.isFavorite = isFavorite
     }
     
     // MARK: - Function
@@ -99,5 +101,40 @@ final class PlayerViewModel {
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
         let viewModel = TeamsHeaderVM(title: title)
         return viewModel
+    }
+    
+    func addFavorite() {
+        let data: Player = Player()
+        data.id = dataAPI.id
+        data.name = dataAPI.name
+        data.cutout = dataAPI.cutout
+        data.date = dataAPI.date
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteFavorite() {
+        guard let realm = RealmManager.shared.realm else { return }
+        let result = realm.objects(Player.self).filter(NSPredicate(format: "id = %@", dataAPI.id))
+        var data: [Player] = []
+        data = Array(result)
+        RealmManager.shared.deleteAllObject(with: data)
+    }
+    
+    func updateFavorite() {
+        guard let realm = RealmManager.shared.realm else { return }
+        if realm.objects(Player.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+            isFavorite = false
+        } else {
+            isFavorite = true
+        }
+    }
+    
+    func updateFavoriteTeam(id: String) -> Bool {
+        guard let realm = RealmManager.shared.realm else { return false }
+        if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", id)).isEmpty {
+            return false
+        } else {
+            return true
+        }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class LeagueTableCell: UITableViewCell {
     // MARK: - IBOutlet
@@ -24,8 +25,8 @@ final class LeagueTableCell: UITableViewCell {
     
     // MARK: - Function
     private func updateView() {
-        let favorite = viewModel.isFavorite
-        if favorite {
+        let isFavorite = viewModel.isFavorite
+        if isFavorite {
             let dataFavorite = viewModel.dataFavorite
             nameLeagueLabel.text = dataFavorite.name
             formedYearLable.text = dataFavorite.year
@@ -34,11 +35,17 @@ final class LeagueTableCell: UITableViewCell {
             let dataAPI = viewModel.dataAPI
             nameLeagueLabel.text = dataAPI.name
             formedYearLable.text = dataAPI.year
-            logoImageView.image = dataAPI.logoImage
-            if dataAPI.favorite {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+
+            guard let realm = RealmManager.shared.realm else { return }
+            if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+                dataAPI.isFavorite = false
             } else {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                dataAPI.isFavorite = true
+            }
+            if dataAPI.isFavorite {
+                favoriteButton.isSelected = true
+            } else {
+                favoriteButton.isSelected = false
             }
         }
     }
@@ -49,18 +56,14 @@ final class LeagueTableCell: UITableViewCell {
     
     // MARK: - IBAction
     @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
-        if !viewModel.dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            viewModel.dataAPI.favorite = true
-            let data: DetailLeague = DetailLeague()
-            data.id = viewModel.dataAPI.id
-            data.name = viewModel.dataAPI.name
-            data.logo = viewModel.dataAPI.logo
-            data.year = viewModel.dataAPI.year
-            RealmManager.shared.addObject(with: data)
+        if !viewModel.dataAPI.isFavorite {
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.isFavorite = true
+            viewModel.addFavorite()
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            viewModel.dataAPI.favorite = false
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.isFavorite = false
+            viewModel.deleteFavorite()
         }
     }
 }

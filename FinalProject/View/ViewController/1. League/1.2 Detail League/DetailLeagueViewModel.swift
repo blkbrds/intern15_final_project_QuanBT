@@ -12,12 +12,14 @@ final class DetailLeagueViewModel {
     // MARK: - Properties
     var dataAPI: DetailLeague = DetailLeague()
     var idLeague: String = ""
+    var isFavorite: Bool = false
     var informationData: [String] = []
     var teams: [Team] = []
     var photos: [String] = []
     
-    init(idLeague: String = "") {
+    init(idLeague: String = "", isFavorite: Bool = false) {
         self.idLeague = idLeague
+        self.isFavorite = isFavorite
     }
     
     // MARK: - Function
@@ -28,7 +30,7 @@ final class DetailLeagueViewModel {
             if let error = error {
                 completion(false, error.localizedDescription)
             } else {
-                if let data = data {
+                if let data = data {	
                     let json = data.tojson()
                     let items = json["leagues"] as? JSArray ?? JSArray()
                     for item in items {
@@ -100,11 +102,37 @@ final class DetailLeagueViewModel {
     }
     
     func numberOfRowInPhotos() -> Int {
-           return photos.count
+        return photos.count
     }
     
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
         let viewModel = TeamsHeaderVM(title: title)
         return viewModel
+    }
+    
+    func addFavorite() {
+        let data: DetailLeague = DetailLeague()
+        data.id = dataAPI.id
+        data.name = dataAPI.name
+        data.logo = dataAPI.logo
+        data.year = dataAPI.year
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteFavorite() {
+        guard let realm = RealmManager.shared.realm else { return }
+        let result = realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id))
+        var data: [DetailLeague] = []
+        data = Array(result)
+        RealmManager.shared.deleteAllObject(with: data)
+    }
+    
+    func updateFavorite() {
+        guard let realm = RealmManager.shared.realm else { return }
+        if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+            isFavorite = false
+        } else {
+            isFavorite = true
+        }
     }
 }

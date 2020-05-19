@@ -11,7 +11,7 @@ import UIKit
 final class LeagueCollectionCell: UICollectionViewCell {
     // MARK: - IBOutlet
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var badgeImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var informationLabel: UILabel!
     @IBOutlet weak var contentViewCell: UIView!
     @IBOutlet weak var widthLayout: NSLayoutConstraint!
@@ -44,8 +44,8 @@ final class LeagueCollectionCell: UICollectionViewCell {
         }
     }
     
-    func configbadgeImage(image: UIImage?) {
-        badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
+    func configLogoImage(image: UIImage?) {
+        logoImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
     }
     
     private func setupUI() {

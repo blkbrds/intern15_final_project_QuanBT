@@ -47,6 +47,7 @@
                         </constraints>
                         <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <state key="normal" backgroundImage="heart" catalog="system"/>
+                        <state key="selected" backgroundImage="heart.fill" catalog="system"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintcolor">
                                 <color key="value" red="0.23137254901960785" green="0.66274509803921566" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -100,6 +101,7 @@
     <resources>
         <image name="calendar" catalog="system" width="64" height="52"/>
         <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="img-logo" width="500" height="252"/>
     </resources>
 </document>

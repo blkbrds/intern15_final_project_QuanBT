@@ -13,5 +13,4 @@ final class PlayerCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
 }

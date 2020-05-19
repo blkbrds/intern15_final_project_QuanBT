@@ -14,7 +14,7 @@ final class League {
     var name: String
     var year: String
     var logo: String
-    var favorite: Bool = false
+    var isFavorite: Bool = false
     var logoImage: UIImage?
     
     init(json: JSObject = JSObject()) {

@@ -21,9 +21,24 @@ final class DetailLeagueViewController: ViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+        if viewModel.dataAPI.id != "" {
+            viewModel.updateFavorite()
+        }
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
+    
     // MARK: - Function
     private func setupView() {
-        let nib1 = UINib(nibName: "InformationCollectionCell", bundle: Bundle.main)
+        let nib1 = UINib(nibName: "InformationCollectionCell",	bundle: Bundle.main)
         collectionView.register(nib1, forCellWithReuseIdentifier: "InformationCollectionCell")
         let nib2 = UINib(nibName: "TeamsCollectionCell", bundle: Bundle.main)
         collectionView.register(nib2, forCellWithReuseIdentifier: "TeamsCollectionCell")
@@ -37,16 +52,36 @@ final class DetailLeagueViewController: ViewController {
         collectionView.register(headerNib3, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TeamsHeaderView")
         collectionView.dataSource = self
         collectionView.delegate = self
+        loadAPI()
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
-        loadAPI()
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2743943632, green: 0.7092565894, blue: 0.5255461931, alpha: 1)
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-        navigationItem.rightBarButtonItem = favoriteButton
+        
     }
     
     @objc private func favoriteButtonTouchUpInside() {
+        viewModel.addFavorite()
+        viewModel.isFavorite = true
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
+    
+    @objc private func unFavoriteButtonTouchUpInside() {
+        viewModel.deleteFavorite()
+        viewModel.isFavorite = false
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
     }
     
     private func loadAPI() {
@@ -55,6 +90,7 @@ final class DetailLeagueViewController: ViewController {
             guard let this = self else { return }
             if done {
                 this.collectionView.reloadData()
+                
             } else {
                 this.showAlert(title: "Erorr API", message: msg)
             }
@@ -167,7 +203,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
         if indexPath.section == 1 {
             let detailTeamVC = DetailTeamViewController()
             let data = viewModel.teams[indexPath.row]
-            let vm = DetailTeamViewModel(idTeam: data.id)
+            let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: data.isFavorite)
             detailTeamVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)

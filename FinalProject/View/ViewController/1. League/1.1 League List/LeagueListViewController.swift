@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class LeagueListViewController: ViewController {
     // MARK: - IBOutlet
@@ -27,6 +28,7 @@ final class LeagueListViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -56,7 +58,6 @@ final class LeagueListViewController: ViewController {
     }
     
     private func loadAPI(sport: String, country: String) {
-        print("Load API")
         viewModel.loadAPI(sport: sport, country: country) { [weak self] (done, msg) in
             guard let this = self else { return }
             if done {
@@ -66,7 +67,6 @@ final class LeagueListViewController: ViewController {
                 this.showAlert(title: "Erorr API", message: msg)
             }
         }
-        
         tableView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
@@ -147,7 +147,7 @@ extension LeagueListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailLeagueVC = DetailLeagueViewController()
         let data = viewModel.dataAPIs[indexPath.row]
-        let vm = DetailLeagueViewModel(idLeague: data.id)
+        let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: data.isFavorite)
         detailLeagueVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)

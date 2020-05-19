@@ -12,11 +12,13 @@ final class DetailTeamViewModel {
     // MARK: - Properties
     var dataAPI: Team = Team()
     var idTeam: String = ""
+    var isFavorite: Bool = false
     var informationData: [String] = []
     var photos: [String] = []
     
-    init(idTeam: String = "") {
+    init(idTeam: String = "", isFavorite: Bool = false) {
         self.idTeam = idTeam
+        self.isFavorite = isFavorite
     }
     
     func getDataTeam(completion: @escaping CompletionAPI) {
@@ -71,5 +73,31 @@ final class DetailTeamViewModel {
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
         let viewModel = TeamsHeaderVM(title: title)
         return viewModel
+    }
+    
+    func addFavorite() {
+           let data: Team = Team()
+           data.id = dataAPI.id
+           data.name = dataAPI.name
+           data.logo = dataAPI.logo
+           data.stadium = dataAPI.stadium
+           RealmManager.shared.addObject(with: data)
+       }
+       
+       func deleteFavorite() {
+           guard let realm = RealmManager.shared.realm else { return }
+           let result = realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id))
+           var data: [Team] = []
+           data = Array(result)
+           RealmManager.shared.deleteAllObject(with: data)
+       }
+    
+    func updateFavorite() {
+        guard let realm = RealmManager.shared.realm else { return }
+        if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+            isFavorite = false
+        } else {
+            isFavorite = true
+        }
     }
 }

@@ -23,8 +23,8 @@ final class TeamTableCell: UITableViewCell {
     }
     
     private func updateView() {
-        let favorite = viewModel.isFavorite
-        if favorite {
+        let isFavorite = viewModel.isFavorite
+        if isFavorite {
             let dataFavorite = viewModel.dataAPI
             nameTeamLabel.text = dataFavorite.name
             nameStadiumLabel.text = dataFavorite.stadium
@@ -33,10 +33,17 @@ final class TeamTableCell: UITableViewCell {
             let dataAPI = viewModel.dataAPI
             nameTeamLabel.text = dataAPI.name
             nameStadiumLabel.text = dataAPI.stadium
-            if dataAPI.favorite {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+            guard let realm = RealmManager.shared.realm else { return }
+            if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+                dataAPI.isFavorite = false
             } else {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                dataAPI.isFavorite = true
+            }
+            if dataAPI.isFavorite {
+                favoriteButton.isSelected = true
+            } else {
+                favoriteButton.isSelected = false
             }
         }
     }
@@ -47,18 +54,14 @@ final class TeamTableCell: UITableViewCell {
     
     // MARK: - IBAction
     @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
-        if !viewModel.dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            viewModel.dataAPI.favorite = true
-            let data: Team = Team()
-            data.id = viewModel.dataAPI.id
-            data.name = viewModel.dataAPI.name
-            data.logo = viewModel.dataAPI.logo
-            data.stadium = viewModel.dataAPI.stadium
-            RealmManager.shared.addObject(with: data)
+        if !viewModel.dataAPI.isFavorite {
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.isFavorite = true
+            viewModel.addFavorite()
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            viewModel.dataAPI.favorite = false
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.isFavorite = false
+            viewModel.deleteFavorite()
         }
     }
 }

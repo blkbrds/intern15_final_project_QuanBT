@@ -11,17 +11,86 @@ import UIKit
 final class PageViewController: UIPageViewController {
     lazy var subViewControllers: [UIViewController] = {
         return [
-           FavoriteViewController(), FavoriteCollectionViewController()
+            FavoriteCollectionViewController(), FavoriteViewController()
         ]
     }()
-
+    
+    var mode: Mode = .view {
+        didSet {
+            switch mode {
+            case .view:
+                selectBarButton.title = "Select"
+            case .select:
+                selectBarButton.title = "Cancel"
+            }
+        }
+    }
+    
+    lazy var selectBarButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(didSelectButtonClicked))
+        return barButtonItem
+    }()
+    
+    lazy var deleteBarButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didDeleteButtonClicked))
+        return barButtonItem
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBarButtonItems()
         self.delegate = self
         self.dataSource = self
         setViewControllers([subViewControllers[0]], direction: .forward, animated: true, completion: nil)
     }
-
+    
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .vertical, options: options)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupBarButtonItems() {
+        navigationController?.navigationBar.tintColor = App.Color.tabBarTintColor
+        navigationItem.rightBarButtonItem = selectBarButton
+        navigationItem.leftBarButtonItem = deleteBarButton
+    }
+    
+    @objc private func didSelectButtonClicked() {
+        mode = mode == .view ? .select : .view
+    }
+    
+    @objc private func didDeleteButtonClicked() {
+        var message = "You want to delete all?"
+        guard let realm = RealmManager.shared.realm else { return }
+        let league = realm.objects(DetailLeague.self)
+        var dataLeague: [DetailLeague] = []
+        dataLeague = Array(league)
+        let team = realm.objects(Team.self)
+        var dataTeam: [Team] = []
+        dataTeam = Array(team)
+        let player = realm.objects(Player.self)
+        var dataPlayer: [Player] = []
+        dataPlayer = Array(player)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+            RealmManager.shared.deleteAllObject(with: dataTeam)
+            RealmManager.shared.deleteAllObject(with: dataLeague)
+            RealmManager.shared.deleteAllObject(with: dataPlayer)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            return 
+        }
+        var actions: [UIAlertAction] = [cancelAction, okAction]
+        if dataLeague == [] && dataTeam == [] && dataPlayer == [] {
+            message = "No data"
+            actions = [cancelAction]
+        }
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        actions.forEach { alert.addAction($0) }
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {

@@ -20,6 +20,21 @@ final class DetailTeamViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           collectionView.reloadData()
+           if viewModel.dataAPI.id != "" {
+               viewModel.updateFavorite()
+           }
+           if viewModel.isFavorite {
+               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+               navigationItem.rightBarButtonItem = favoriteButton
+           } else {
+               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+               navigationItem.rightBarButtonItem = favoriteButton
+           }
+       }
+    
     // MARK: - Function
     private func setupView() {
         let nib1 = UINib(nibName: "InformationCollectionCell", bundle: Bundle.main)
@@ -37,12 +52,31 @@ final class DetailTeamViewController: UIViewController {
         }
         loadAPI()
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2743943632, green: 0.7092565894, blue: 0.5255461931, alpha: 1)
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-        navigationItem.rightBarButtonItem = favoriteButton
     }
     
-    @objc private func favoriteButtonTouchUpInside() {
-    }
+     @objc private func favoriteButtonTouchUpInside() {
+           viewModel.addFavorite()
+           viewModel.isFavorite = true
+           if viewModel.isFavorite {
+               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+               navigationItem.rightBarButtonItem = favoriteButton
+           } else {
+               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+               navigationItem.rightBarButtonItem = favoriteButton
+           }
+       }
+       
+       @objc private func unFavoriteButtonTouchUpInside() {
+           viewModel.deleteFavorite()
+           viewModel.isFavorite = false
+           if viewModel.isFavorite {
+               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+               navigationItem.rightBarButtonItem = favoriteButton
+           } else {
+               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+               navigationItem.rightBarButtonItem = favoriteButton
+           }
+       }
     
     private func loadAPI() {
         print("Load API")

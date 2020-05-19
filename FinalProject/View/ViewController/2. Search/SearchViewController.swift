@@ -27,6 +27,7 @@ final class SearchViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        tableView.reloadData()
     }
     
     override func setupUI() {
@@ -174,14 +175,14 @@ extension SearchViewController: UITableViewDelegate {
         if status == .team {
             let detailTeamVC = DetailTeamViewController()
             let data = viewModel.dataTeams[indexPath.row]
-            let vm = DetailTeamViewModel(idTeam: data.id)
+            let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: data.isFavorite)
             detailTeamVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
         } else {
             let playerVC = PlayerViewController()
             let data = viewModel.dataPlayers[indexPath.row]
-            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam)
+            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: data.isFavorite)
             playerVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(playerVC, animated: true)

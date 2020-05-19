@@ -32,14 +32,12 @@ final class FavoriteViewController: ViewController {
         tableView.dataSource = self
         tableView.delegate = self
         viewModel.delegate = self
-        viewModel.setUpObsever(index: 0, type: DetailLeague.self)
-        viewModel.setUpObsever(index: 1, type: Team.self)
-        viewModel.setUpObsever(index: 2, type: Player.self)
+        viewModel.setUpObsever()
         tableView.separatorColor = App.Color.backgroundTableView
         fetchData()
     }
     
-    func fetchData() {
+    private func fetchData() {
         viewModel.fetchData { (done) in
             if done {
                 self.updateUI()
@@ -49,7 +47,7 @@ final class FavoriteViewController: ViewController {
         }
     }
     
-    func updateUI() {
+    private func updateUI() {
         let test = viewModel.separatorColorTableView()
         if test {
             tableView.separatorColor = App.Color.backgroundTableView
@@ -92,7 +90,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell ?? TeamTableCell()
             cell.viewModel = viewModel.viewModelForCellTeam(at: indexPath)
-            let item = viewModel.dataTeams[indexPath.row].logo
+            let item = viewModel.dataTeams[indexPath.row].badge
             Networking.shared().downloadImage(url: item) { (image) in
                 if let image = image {
                     cell.configLogoImage(image: image)
@@ -151,11 +149,36 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             header.textLabel?.textColor = UIColor.white
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let detailLeagueVC = DetailLeagueViewController()
+            let data = viewModel.dataLeagues[indexPath.row]
+            let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: true)
+            detailLeagueVC.viewModel = vm
+            navigationController?.isNavigationBarHidden = false
+            navigationController?.pushViewController(detailLeagueVC, animated: true)
+        } else if indexPath.section == 1 {
+            let detailTeamVC = DetailTeamViewController()
+            let data = viewModel.dataTeams[indexPath.row]
+            let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: true)
+            detailTeamVC.viewModel = vm
+            navigationController?.isNavigationBarHidden = false
+            navigationController?.pushViewController(detailTeamVC, animated: true)
+        } else {
+            let detailPlayerVC = PlayerViewController()
+            let data = viewModel.dataPlayers[indexPath.row]
+            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: true)
+            detailPlayerVC.viewModel = vm
+            navigationController?.isNavigationBarHidden = false
+            navigationController?.pushViewController(detailPlayerVC, animated: true)
+        }
+    }
 }
 
 // MARK: - FavoriteViewModelDelegate
 extension FavoriteViewController: FavoriteViewModelDelegate {
-    func viewModel(viewModel: FavoriteViewModel, needperform action: FavoriteViewModel.Action) {
+    func viewModel(viewModel: FavoriteViewModel, needperform action: Action) {
         fetchData()
     }
 }
