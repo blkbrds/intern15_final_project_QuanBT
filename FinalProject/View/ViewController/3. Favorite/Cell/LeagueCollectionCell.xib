@@ -72,6 +72,13 @@
                 <constraint firstAttribute="trailing" secondItem="yJt-yb-sNo" secondAttribute="trailing" id="xCw-E3-TP1"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="badgeImageView" destination="CsT-nR-vcE" id="d1a-VG-CWw"/>
+                <outlet property="contentViewCell" destination="yJt-yb-sNo" id="jmD-Jv-gjn"/>
+                <outlet property="informationLabel" destination="zdN-Ne-Z8J" id="Z2j-It-muz"/>
+                <outlet property="nameLabel" destination="D0K-0F-wEJ" id="bay-Rs-oRX"/>
+                <outlet property="widthLayout" destination="03L-yp-2dU" id="ctM-7s-YNu"/>
+            </connections>
             <point key="canvasLocation" x="139" y="108"/>
         </collectionViewCell>
     </objects>

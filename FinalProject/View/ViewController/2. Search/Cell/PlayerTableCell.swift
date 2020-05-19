@@ -23,13 +23,21 @@ final class PlayerTableCell: UITableViewCell {
     }
     
     private func updateView() {
-        let dataAPI = viewModel.dataAPI
-        namePlayerLabel.text = dataAPI.name
-        ageLabel.text = dataAPI.date
-        if dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        let favorite = viewModel.isFavorite
+        if favorite {
+            let dataFavorite = viewModel.dataAPI
+            namePlayerLabel.text = dataFavorite.name
+            ageLabel.text = dataFavorite.date
+            favoriteButton.isHidden = true
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            let dataAPI = viewModel.dataAPI
+            namePlayerLabel.text = dataAPI.name
+            ageLabel.text = dataAPI.date
+            if dataAPI.favorite {
+                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            }
         }
     }
     
@@ -42,6 +50,12 @@ final class PlayerTableCell: UITableViewCell {
         if !viewModel.dataAPI.favorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             viewModel.dataAPI.favorite = true
+            let data: Player = Player()
+            data.id = viewModel.dataAPI.id
+            data.name = viewModel.dataAPI.name
+            data.cutout = viewModel.dataAPI.cutout
+            data.date = viewModel.dataAPI.date
+            RealmManager.shared.addObject(with: data)
         } else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             viewModel.dataAPI.favorite = false

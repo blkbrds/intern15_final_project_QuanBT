@@ -10,10 +10,12 @@ import Foundation
 
 final class PlayerTableCellVM {
     // MARK: - Properties
-      var dataAPI: Player = Player()
-      
-      // MARK: - Init
-      init(dataAPI: Player = Player()) {
-          self.dataAPI = dataAPI
-      }
+    var dataAPI: Player = Player()
+    var isFavorite: Bool = false
+    
+    // MARK: - Init
+    init(dataAPI: Player = Player(), favorite: Bool = false) {
+        self.dataAPI = dataAPI
+        self.isFavorite = favorite
+    }
 }

@@ -9,5 +9,15 @@
 import Foundation
 
 final class LeagueCollectionCellVM {
+    var dataLeague: DetailLeague = DetailLeague()
+    var dataTeam: Team = Team()
+    var dataPlayer: Player = Player()
+    var index: Int = 0
     
+    init(dataLeagues: DetailLeague = DetailLeague(), dataTeams: Team = Team(), dataPlayers: Player = Player(), index: Int = 0) {
+        self.dataLeague = dataLeagues
+        self.dataTeam = dataTeams
+        self.dataPlayer = dataPlayers
+        self.index = index
+    }
 }

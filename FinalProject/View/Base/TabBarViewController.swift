@@ -32,7 +32,7 @@ final class TabBarViewController: UITabBarController {
         searchVC.tabBarItem.imageInsets = UIEdgeInsets(top: tabBar.frame.height / 2 - 15, left: 0, bottom: -(tabBar.frame.height / 2 - 15), right: 0)
         
         //Favorites
-        let favoritesVC = FavoriteViewController()
+        let favoritesVC = PageViewController()
         let favoritesNavi = UINavigationController(rootViewController: favoritesVC)
         favoritesNavi.navigationBar.barTintColor = App.Color.backgroundColor
         favoritesVC.tabBarItem = UITabBarItem(title: "", image: #imageLiteral(resourceName: "ic-Heart"), tag: 2)

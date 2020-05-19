@@ -34,7 +34,7 @@ final class DetailTeamViewModel {
                         team = teamAPI
                     }
                     self.dataAPI = team
-                    self.informationData.append(contentsOf: [team.description, team.facebook, team.youtube, team.twitter, team.website])
+                    self.informationData.append(contentsOf: [team.descriptions, team.facebook, team.youtube, team.twitter, team.website])
                     self.photos.append(contentsOf: [team.jersey, team.banner, team.fanart1, team.fanart2, team.fanart3, team.fanart4])
                     completion(true, "")
                 } else {

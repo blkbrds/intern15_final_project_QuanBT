@@ -50,6 +50,12 @@ final class TeamsCollectionCell: UICollectionViewCell {
         if !viewModel.dataAPI.favorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             viewModel.dataAPI.favorite = true
+            let data: Team = Team()
+            data.id = viewModel.dataAPI.id
+            data.name = viewModel.dataAPI.name
+            data.logo = viewModel.dataAPI.logo
+            data.stadium = viewModel.dataAPI.stadium
+            RealmManager.shared.addObject(with: data)
         } else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             viewModel.dataAPI.favorite = false

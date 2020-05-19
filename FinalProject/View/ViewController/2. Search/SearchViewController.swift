@@ -137,7 +137,7 @@ extension SearchViewController: UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell ?? PlayerTableCell()
             cell.viewModel = viewModel.viewModelForCellInPlayer(at: indexPath)
-            let thumb = viewModel.dataPlayers[indexPath.row].thumb
+            let thumb = viewModel.dataPlayers[indexPath.row].cutout
             Networking.shared().downloadImage(url: thumb) { (image) in
                 if let image = image {
                     cell.configPlayerImage(image: image)
