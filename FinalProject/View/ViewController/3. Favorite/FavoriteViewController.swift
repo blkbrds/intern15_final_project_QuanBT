@@ -126,7 +126,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellLeague(at: indexPath)
             let item = viewModel.dataLeagues[indexPath.row].logo
             Networking.shared().downloadImage(url: item) { (image) in
@@ -138,7 +138,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell ?? TeamTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellTeam(at: indexPath)
             let item = viewModel.dataTeams[indexPath.row].badge
             Networking.shared().downloadImage(url: item) { (image) in
@@ -150,7 +150,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell ?? PlayerTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellPlayer(at: indexPath)
             let item = viewModel.dataPlayers[indexPath.row].cutout
             Networking.shared().downloadImage(url: item) { (image) in

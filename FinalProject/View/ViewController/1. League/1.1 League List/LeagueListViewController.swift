@@ -63,6 +63,7 @@ final class LeagueListViewController: ViewController {
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
+                this.tableView.separatorColor = .white
                 this.viewModel.downloadImage()
                 this.tableView.reloadData()
             } else {
@@ -130,7 +131,7 @@ extension LeagueListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell else { return UITableViewCell() }
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
         cell.delegate = self
         let item = viewModel.dataAPIs[indexPath.row].logo

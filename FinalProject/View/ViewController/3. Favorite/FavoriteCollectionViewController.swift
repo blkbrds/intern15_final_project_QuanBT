@@ -118,7 +118,7 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell ?? LeagueCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellLeague(at: indexPath)
             let item = viewModel.dataLeagues[indexPath.row].logo
             Networking.shared().downloadImage(url: item) { (image) in
@@ -130,7 +130,7 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
             }
             return cell
         } else if indexPath.section == 1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell ?? LeagueCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellTeam(at: indexPath)
             let item = viewModel.dataTeams[indexPath.row].badge
             Networking.shared().downloadImage(url: item) { (image) in
@@ -142,9 +142,7 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
             }
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else {
-                return UICollectionViewCell()
-            }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellPlayer(at: indexPath)
             let item = viewModel.dataPlayers[indexPath.row].cutout
             Networking.shared().downloadImage(url: item) { (image) in

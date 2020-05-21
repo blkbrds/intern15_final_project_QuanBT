@@ -128,11 +128,11 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InformationCollectionCell", for: indexPath) as? InformationCollectionCell ?? InformationCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InformationCollectionCell", for: indexPath) as? InformationCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellInformation(at: indexPath)
             return cell
         } else if indexPath.section == 1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamsCollectionCell", for: indexPath) as? TeamsCollectionCell ?? TeamsCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamsCollectionCell", for: indexPath) as? TeamsCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellTeams(at: indexPath)
             cell.delegate = self
             let badge = viewModel.teams[indexPath.row].badge
@@ -145,7 +145,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
             }
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell ?? PhotosCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell else { return UICollectionViewCell() }
             let photo = viewModel.photos[indexPath.row]
             Networking.shared().downloadImage(url: photo) { (image) in
                 if let image = image {

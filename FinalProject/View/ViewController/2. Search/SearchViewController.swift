@@ -127,7 +127,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if status == .team {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell ?? TeamTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInTeam(at: indexPath)
             cell.delegate = self
             let team = viewModel.dataTeams[indexPath.row].logo
@@ -140,7 +140,7 @@ extension SearchViewController: UITableViewDataSource {
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell ?? PlayerTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInPlayer(at: indexPath)
             cell.delegate = self
             let thumb = viewModel.dataPlayers[indexPath.row].cutout
