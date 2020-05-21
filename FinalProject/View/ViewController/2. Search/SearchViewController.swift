@@ -129,6 +129,7 @@ extension SearchViewController: UITableViewDataSource {
         if status == .team {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell ?? TeamTableCell()
             cell.viewModel = viewModel.viewModelForCellInTeam(at: indexPath)
+            cell.delegate = self
             let team = viewModel.dataTeams[indexPath.row].logo
             Networking.shared().downloadImage(url: team) { (image) in
                 if let image = image {
@@ -141,6 +142,7 @@ extension SearchViewController: UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell ?? PlayerTableCell()
             cell.viewModel = viewModel.viewModelForCellInPlayer(at: indexPath)
+            cell.delegate = self
             let thumb = viewModel.dataPlayers[indexPath.row].cutout
             Networking.shared().downloadImage(url: thumb) { (image) in
                 if let image = image {
@@ -190,5 +192,24 @@ extension SearchViewController: UITableViewDelegate {
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(playerVC, animated: true)
         }
+    }
+}
+
+
+extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
+    func addTeamTableCell(cell: TeamTableCell, didFavoriteButton data: Team) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteTeamTableCell(cell: TeamTableCell, didFavoriteButton data: [Team]) {
+        RealmManager.shared.deleteAllObject(with: data)
+    }
+    
+    func addPlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: Player) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deletePlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: [Player]) {
+        RealmManager.shared.deleteAllObject(with: data)
     }
 }

@@ -63,10 +63,30 @@
                             <action selector="favoriteButtonTouchUpInside:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uAx-GH-SMZ"/>
                         </connections>
                     </button>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mze-Gd-38Y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                        <subviews>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="IjI-bA-3WZ">
+                                <rect key="frame" x="364" y="200.5" width="40" height="39"/>
+                                <color key="tintColor" red="0.0" green="0.95294117649999999" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="IjI-bA-3WZ" secondAttribute="height" multiplier="1:1" id="Jx5-0q-tJ5"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="IjI-bA-3WZ" secondAttribute="bottom" constant="10" id="Nx5-x9-tPO"/>
+                            <constraint firstAttribute="trailing" secondItem="IjI-bA-3WZ" secondAttribute="trailing" constant="10" id="c81-JB-d4z"/>
+                            <constraint firstItem="IjI-bA-3WZ" firstAttribute="width" secondItem="mze-Gd-38Y" secondAttribute="width" multiplier="40/414" id="r5j-Tj-3P3"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.070588235289999995" green="0.1176470588" blue="0.15686274510000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="sm7-OI-y5h" firstAttribute="leading" secondItem="wth-ox-OPi" secondAttribute="leading" id="DPH-bL-8eP"/>
+                    <constraint firstAttribute="bottom" secondItem="mze-Gd-38Y" secondAttribute="bottom" id="NJ1-S7-tny"/>
+                    <constraint firstItem="mze-Gd-38Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TVe-S2-vFN"/>
                     <constraint firstItem="wth-ox-OPi" firstAttribute="leading" secondItem="6UE-xd-USU" secondAttribute="leading" id="UdL-dU-WCO"/>
                     <constraint firstItem="sm7-OI-y5h" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="30/414" id="Zfc-Oq-xkW"/>
                     <constraint firstAttribute="bottom" secondItem="sm7-OI-y5h" secondAttribute="bottom" constant="3.5" id="aLt-tT-5sk"/>
@@ -74,9 +94,11 @@
                     <constraint firstItem="sm7-OI-y5h" firstAttribute="top" secondItem="wth-ox-OPi" secondAttribute="bottom" constant="5" id="cNC-Mn-OM1"/>
                     <constraint firstItem="WL9-hI-bOc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ckW-vX-Clt"/>
                     <constraint firstItem="wth-ox-OPi" firstAttribute="trailing" secondItem="6UE-xd-USU" secondAttribute="trailing" id="dSo-v2-de6"/>
+                    <constraint firstItem="mze-Gd-38Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dyB-OQ-k2g"/>
                     <constraint firstItem="6UE-xd-USU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fjx-Yh-CS9"/>
                     <constraint firstItem="6UE-xd-USU" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="300/414" id="gmp-RU-YdB"/>
                     <constraint firstItem="wth-ox-OPi" firstAttribute="top" secondItem="6UE-xd-USU" secondAttribute="bottom" constant="5" id="pN6-ql-bVT"/>
+                    <constraint firstAttribute="trailing" secondItem="mze-Gd-38Y" secondAttribute="trailing" id="pqD-wc-pWa"/>
                     <constraint firstItem="Kvx-QG-Qgu" firstAttribute="centerY" secondItem="sm7-OI-y5h" secondAttribute="centerY" id="rNH-0s-dyt"/>
                     <constraint firstItem="WL9-hI-bOc" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="35/414" id="sdk-x9-IYW"/>
                     <constraint firstAttribute="trailing" secondItem="WL9-hI-bOc" secondAttribute="trailing" constant="5" id="uHY-ue-roQ"/>
@@ -87,14 +109,17 @@
             <connections>
                 <outlet property="ageLabel" destination="Kvx-QG-Qgu" id="YEt-yN-KP0"/>
                 <outlet property="favoriteButton" destination="WL9-hI-bOc" id="hWS-7J-Ais"/>
+                <outlet property="highlightIndicator" destination="mze-Gd-38Y" id="PxE-lR-eOG"/>
                 <outlet property="namePlayerLabel" destination="wth-ox-OPi" id="ZYa-g1-Urz"/>
                 <outlet property="playerImageView" destination="6UE-xd-USU" id="nDL-rE-qhy"/>
+                <outlet property="selectIndicator" destination="IjI-bA-3WZ" id="jdq-OR-cb4"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="107.8125"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="calendar" catalog="system" width="64" height="52"/>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
         <image name="heart" catalog="system" width="64" height="54"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
     </resources>

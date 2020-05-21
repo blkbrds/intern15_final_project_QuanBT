@@ -18,21 +18,4 @@ final class TeamTableCellVM {
         self.dataAPI = dataAPI
         self.isFavorite = favorite 
     }
-    
-    func addFavorite() {
-        let data: Team = Team()
-        data.id = dataAPI.id
-        data.name = dataAPI.name
-        data.logo = dataAPI.logo
-        data.stadium = dataAPI.stadium
-        RealmManager.shared.addObject(with: data)
-    }
-    
-    func deleteFavorite() {
-        guard let realm = RealmManager.shared.realm else { return }
-        let result = realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id))
-        var data: [Team] = []
-        data = Array(result)
-        RealmManager.shared.deleteAllObject(with: data)
-    }
 }

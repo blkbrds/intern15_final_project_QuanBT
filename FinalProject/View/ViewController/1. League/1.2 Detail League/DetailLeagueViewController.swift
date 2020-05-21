@@ -134,6 +134,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
         } else if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamsCollectionCell", for: indexPath) as? TeamsCollectionCell ?? TeamsCollectionCell()
             cell.viewModel = viewModel.viewModelForCellTeams(at: indexPath)
+            cell.delegate = self
             let badge = viewModel.teams[indexPath.row].badge
             Networking.shared().downloadImage(url: badge) { (image) in
                 if let image = image {
@@ -212,5 +213,15 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
         }
+    }
+}
+
+extension DetailLeagueViewController: TeamsCollectionCellDelegate {
+    func addTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: Team) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: [Team]) {
+        RealmManager.shared.deleteAllObject(with: data)
     }
 }

@@ -8,17 +8,38 @@
 
 import UIKit
 
+protocol PlayerTableCellDelegate: class {
+    func addPlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: Player)
+    func deletePlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: [Player])
+}
+
 final class PlayerTableCell: UITableViewCell {
     // MARK: - IBOutlet
     @IBOutlet private weak var playerImageView: UIImageView!
     @IBOutlet private weak var namePlayerLabel: UILabel!
     @IBOutlet private weak var ageLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
+    @IBOutlet weak var highlightIndicator: UIView!
+    @IBOutlet weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = PlayerTableCellVM() {
         didSet {
             updateView()
+        }
+    }
+    weak var delegate: PlayerTableCellDelegate?
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isHighlighted
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isSelected
+            selectIndicator.isHidden = !isSelected
         }
     }
     
@@ -55,13 +76,22 @@ final class PlayerTableCell: UITableViewCell {
     // MARK: - IBAction
     @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
         if !viewModel.dataAPI.isFavorite {
+            let data: Player = Player()
+            data.id = viewModel.dataAPI.id
+            data.name = viewModel.dataAPI.name
+            data.cutout = viewModel.dataAPI.cutout
+            data.date = viewModel.dataAPI.date
             favoriteButton.isSelected = true
             viewModel.dataAPI.isFavorite = true
-            viewModel.addFavorite()
+            delegate?.addPlayerTableCell(cell: self, didFavoriteButton: data)
         } else {
             favoriteButton.isSelected = false
             viewModel.dataAPI.isFavorite = false
-            viewModel.deleteFavorite()
+            guard let realm = RealmManager.shared.realm else { return }
+            let result = realm.objects(Player.self).filter(NSPredicate(format: "id = %@", viewModel.dataAPI.id))
+            var data: [Player] = []
+            data = Array(result)
+            delegate?.deletePlayerTableCell(cell: self, didFavoriteButton: data)
         }
     }
 }

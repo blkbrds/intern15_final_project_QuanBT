@@ -29,7 +29,6 @@ final class FavoriteCollectionViewController: UIViewController {
     
     // MARK: - Function
     private func setupView() {
-        bottomCollection.constant = 0
         let nib = UINib(nibName: "LeagueCollectionCell", bundle: .main)
         collectionView.register(nib, forCellWithReuseIdentifier: "LeagueCollectionCell")
         let headerNib = UINib(nibName: "TeamsHeaderView", bundle: Bundle.main)
@@ -69,7 +68,7 @@ final class FavoriteCollectionViewController: UIViewController {
                 collectionView.allowsMultipleSelection = !viewModel.isSelect
                 if !viewModel.isSelect {
                     bottomCollection.constant = 50
-                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
                     viewModel.dictionnarySelectedIndexPath[indexPath] = true
                 } else {
                     bottomCollection.constant = 0

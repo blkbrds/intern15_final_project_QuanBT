@@ -132,6 +132,7 @@ extension LeagueListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
+        cell.delegate = self
         let item = viewModel.dataAPIs[indexPath.row].logo
         Networking.shared().downloadImage(url: item) { (image) in
             if let image = image {
@@ -153,5 +154,15 @@ extension LeagueListViewController: UITableViewDelegate {
         detailLeagueVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)
+    }
+}
+
+extension LeagueListViewController: LeagueTableCellDelegate {
+    func addLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: DetailLeague) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: [DetailLeague]) {
+        RealmManager.shared.deleteAllObject(with: data)
     }
 }

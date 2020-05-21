@@ -11,6 +11,8 @@ import UIKit
 final class FavoriteViewController: ViewController {
     // MARK: - IBOutlet
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var deleteSelectButton: UIButton!
+    @IBOutlet weak var bottomCollection: NSLayoutConstraint!
     
     // MARK: - Properties
     private var viewModel = FavoriteViewModel()
@@ -23,7 +25,7 @@ final class FavoriteViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        updateUI()
     }
     
     // MARK: - Function
@@ -38,7 +40,6 @@ final class FavoriteViewController: ViewController {
         tableView.delegate = self
         viewModel.delegate = self
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longpress))
-               tableView.addGestureRecognizer(longPress)
         tableView.addGestureRecognizer(longPress)
         viewModel.setUpObsever()
         tableView.separatorColor = App.Color.backgroundTableView
@@ -62,6 +63,7 @@ final class FavoriteViewController: ViewController {
         } else {
             tableView.separatorColor = .white
         }
+        resetDeleteSelectButton()
         tableView.reloadData()
     }
     
@@ -69,10 +71,39 @@ final class FavoriteViewController: ViewController {
         if sender.state == UIGestureRecognizer.State.began {
             let touchPoint = sender.location(in: tableView)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                // your code here, get the row for the indexPath or do whatever you want
-                print("Long press Pressed:\(indexPath.row)")
+                deleteSelectButton.isHidden = viewModel.isSelect
+                tableView.allowsMultipleSelection = !viewModel.isSelect
+                if !viewModel.isSelect {
+                    bottomCollection.constant = 50
+                    tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+                    viewModel.dictionnarySelectedIndexPath[indexPath] = true
+                } else {
+                    bottomCollection.constant = 0
+                    for (key, _) in viewModel.dictionnarySelectedIndexPath {
+                        tableView.deselectRow(at: key, animated: true)
+                    }
+                    viewModel.resetDataDelete()
+                }
+                viewModel.isSelect = !viewModel.isSelect
             }
         }
+    }
+    
+    private func resetDeleteSelectButton() {
+        deleteSelectButton.isHidden = true
+        tableView.allowsMultipleSelection = false
+        viewModel.isSelect = false
+        viewModel.resetDataDelete()
+        bottomCollection.constant = 0
+    }
+    
+    @IBAction func deleteSelectButtonTouchUpInside(_ sender: Any) {
+        viewModel.getDataDelete()
+        viewModel.deleteSelect()
+        viewModel.resetDataDelete()
+        deleteSelectButton.isHidden = true
+        tableView.allowsMultipleSelection = false
+        viewModel.isSelect = false
     }
 }
 
@@ -143,23 +174,23 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if indexPath.section == 0 {
-                RealmManager.shared.deleteObject(with: viewModel.getLeague(in: indexPath))
-                viewModel.dataLeagues.remove(at: indexPath.row)
-                updateUI()
-            } else if indexPath.section == 1 {
-                RealmManager.shared.deleteObject(with: viewModel.getTeam(in: indexPath))
-                viewModel.dataTeams.remove(at: indexPath.row)
-                updateUI()
-            } else {
-                RealmManager.shared.deleteObject(with: viewModel.getPlayer(in: indexPath))
-                viewModel.dataPlayers.remove(at: indexPath.row)
-                updateUI()
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                if indexPath.section == 0 {
+                    RealmManager.shared.deleteObject(with: viewModel.getLeague(in: indexPath))
+                    viewModel.dataLeagues.remove(at: indexPath.row)
+                    updateUI()
+                } else if indexPath.section == 1 {
+                    RealmManager.shared.deleteObject(with: viewModel.getTeam(in: indexPath))
+                    viewModel.dataTeams.remove(at: indexPath.row)
+                    updateUI()
+                } else {
+                    RealmManager.shared.deleteObject(with: viewModel.getPlayer(in: indexPath))
+                    viewModel.dataPlayers.remove(at: indexPath.row)
+                    updateUI()
+                }
             }
         }
-    }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = App.Color.backgroundColor
@@ -169,27 +200,41 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let detailLeagueVC = DetailLeagueViewController()
-            let data = viewModel.dataLeagues[indexPath.row]
-            let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: true)
-            detailLeagueVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
-            navigationController?.pushViewController(detailLeagueVC, animated: true)
-        } else if indexPath.section == 1 {
-            let detailTeamVC = DetailTeamViewController()
-            let data = viewModel.dataTeams[indexPath.row]
-            let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: true)
-            detailTeamVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
-            navigationController?.pushViewController(detailTeamVC, animated: true)
+        if viewModel.isSelect == false {
+            if indexPath.section == 0 {
+                let detailLeagueVC = DetailLeagueViewController()
+                let data = viewModel.dataLeagues[indexPath.row]
+                let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: true)
+                detailLeagueVC.viewModel = vm
+                navigationController?.isNavigationBarHidden = false
+                navigationController?.pushViewController(detailLeagueVC, animated: true)
+            } else if indexPath.section == 1 {
+                let detailTeamVC = DetailTeamViewController()
+                let data = viewModel.dataTeams[indexPath.row]
+                let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: true)
+                detailTeamVC.viewModel = vm
+                navigationController?.isNavigationBarHidden = false
+                navigationController?.pushViewController(detailTeamVC, animated: true)
+            } else {
+                let detailPlayerVC = PlayerViewController()
+                let data = viewModel.dataPlayers[indexPath.row]
+                let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: true)
+                detailPlayerVC.viewModel = vm
+                navigationController?.isNavigationBarHidden = false
+                navigationController?.pushViewController(detailPlayerVC, animated: true)
+            }
         } else {
-            let detailPlayerVC = PlayerViewController()
-            let data = viewModel.dataPlayers[indexPath.row]
-            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: true)
-            detailPlayerVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
-            navigationController?.pushViewController(detailPlayerVC, animated: true)
+            viewModel.dictionnarySelectedIndexPath[indexPath] = true
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if viewModel.isSelect {
+            viewModel.dictionnarySelectedIndexPath[indexPath] = false
+            viewModel.testDeleteButton += 1
+        }
+        if viewModel.testDeleteButton == viewModel.dictionnarySelectedIndexPath.count {
+            resetDeleteSelectButton()
         }
     }
 }

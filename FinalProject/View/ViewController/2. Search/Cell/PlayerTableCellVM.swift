@@ -18,21 +18,4 @@ final class PlayerTableCellVM {
         self.dataAPI = dataAPI
         self.isFavorite = favorite
     }
-    
-    func addFavorite() {
-        let data: Player = Player()
-        data.id = dataAPI.id
-        data.name = dataAPI.name
-        data.cutout = dataAPI.cutout
-        data.date = dataAPI.date
-        RealmManager.shared.addObject(with: data)
-    }
-    
-    func deleteFavorite() {
-        guard let realm = RealmManager.shared.realm else { return }
-        let result = realm.objects(Player.self).filter(NSPredicate(format: "id = %@", dataAPI.id))
-        var data: [Player] = []
-        data = Array(result)
-        RealmManager.shared.deleteAllObject(with: data)
-    }
 }

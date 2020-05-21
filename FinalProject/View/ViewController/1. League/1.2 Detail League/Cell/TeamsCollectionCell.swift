@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol TeamsCollectionCellDelegate: class {
+    func addTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: Team)
+    func deleteTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: [Team])
+}
+
 final class TeamsCollectionCell: UICollectionViewCell {
     
     // MARK: - IBOutlet
@@ -24,6 +29,7 @@ final class TeamsCollectionCell: UICollectionViewCell {
             updateView()
         }
     }
+    weak var delegate: TeamsCollectionCellDelegate?
     
     // MARK: - Function
     private func updateView() {
@@ -54,13 +60,22 @@ final class TeamsCollectionCell: UICollectionViewCell {
     
     @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
         if !viewModel.dataAPI.isFavorite {
+            let data: Team = Team()
+            data.id = viewModel.dataAPI.id
+            data.name = viewModel.dataAPI.name
+            data.badge = viewModel.dataAPI.badge
+            data.stadium = viewModel.dataAPI.stadium
             favoriteButton.isSelected = true
             viewModel.dataAPI.isFavorite = true
-            viewModel.addFavorite()
+            delegate?.addTeamsCollectionCell(cell: self, didFavoriteButton: data)
         } else {
             favoriteButton.isSelected = false
             viewModel.dataAPI.isFavorite = false
-            viewModel.deleteFavorite()
+            guard let realm = RealmManager.shared.realm else { return }
+            let result = realm.objects(Team.self).filter(NSPredicate(format: "id = %@", viewModel.dataAPI.id))
+            var data: [Team] = []
+            data = Array(result)
+            delegate?.deleteTeamsCollectionCell(cell: self, didFavoriteButton: data)
         }
     }
 }
