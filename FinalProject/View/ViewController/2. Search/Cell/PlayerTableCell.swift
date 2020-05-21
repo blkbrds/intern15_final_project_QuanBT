@@ -19,8 +19,8 @@ final class PlayerTableCell: UITableViewCell {
     @IBOutlet private weak var namePlayerLabel: UILabel!
     @IBOutlet private weak var ageLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
-    @IBOutlet weak var highlightIndicator: UIView!
-    @IBOutlet weak var selectIndicator: UIImageView!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = PlayerTableCellVM() {

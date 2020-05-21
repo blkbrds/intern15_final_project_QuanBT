@@ -11,7 +11,7 @@ import SVProgressHUD
 
 final class DetailTeamViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     var viewModel = DetailTeamViewModel()
@@ -22,19 +22,19 @@ final class DetailTeamViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           collectionView.reloadData()
-           if viewModel.dataAPI.id != "" {
-               viewModel.updateFavorite()
-           }
-           if viewModel.isFavorite {
-               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
-               navigationItem.rightBarButtonItem = favoriteButton
-           } else {
-               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-               navigationItem.rightBarButtonItem = favoriteButton
-           }
-       }
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+        if viewModel.dataAPI.id != "" {
+            viewModel.updateFavorite()
+        }
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
     
     // MARK: - Function
     private func setupView() {
@@ -55,29 +55,29 @@ final class DetailTeamViewController: UIViewController {
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2743943632, green: 0.7092565894, blue: 0.5255461931, alpha: 1)
     }
     
-     @objc private func favoriteButtonTouchUpInside() {
-           viewModel.addFavorite()
-           viewModel.isFavorite = true
-           if viewModel.isFavorite {
-               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
-               navigationItem.rightBarButtonItem = favoriteButton
-           } else {
-               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-               navigationItem.rightBarButtonItem = favoriteButton
-           }
-       }
-       
-       @objc private func unFavoriteButtonTouchUpInside() {
-           viewModel.deleteFavorite()
-           viewModel.isFavorite = false
-           if viewModel.isFavorite {
-               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
-               navigationItem.rightBarButtonItem = favoriteButton
-           } else {
-               let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-               navigationItem.rightBarButtonItem = favoriteButton
-           }
-       }
+    @objc private func favoriteButtonTouchUpInside() {
+        viewModel.addFavorite()
+        viewModel.isFavorite = true
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
+    
+    @objc private func unFavoriteButtonTouchUpInside() {
+        viewModel.deleteFavorite()
+        viewModel.isFavorite = false
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
     
     private func loadAPI() {
         SVProgressHUD.show()
@@ -93,7 +93,7 @@ final class DetailTeamViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource & UICollectionViewDelegate & UICollectionViewDelegateFlowLayout
 extension DetailTeamViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         viewModel.numberOfSections()

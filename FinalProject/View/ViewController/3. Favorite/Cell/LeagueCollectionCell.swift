@@ -10,13 +10,13 @@ import UIKit
 
 final class LeagueCollectionCell: UICollectionViewCell {
     // MARK: - IBOutlet
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var informationLabel: UILabel!
-    @IBOutlet weak var contentViewCell: UIView!
-    @IBOutlet weak var widthLayout: NSLayoutConstraint!
-    @IBOutlet weak var highlightIndicator: UIView!
-    @IBOutlet weak var selectIndicator: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var informationLabel: UILabel!
+    @IBOutlet private weak var contentViewCell: UIView!
+    @IBOutlet private weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = LeagueCollectionCellVM() {

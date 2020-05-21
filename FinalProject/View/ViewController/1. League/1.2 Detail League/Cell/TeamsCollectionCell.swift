@@ -58,7 +58,7 @@ final class TeamsCollectionCell: UICollectionViewCell {
         badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
     }
     
-    @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
+    @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
         if !viewModel.dataAPI.isFavorite {
             let data: Team = Team()
             data.id = viewModel.dataAPI.id

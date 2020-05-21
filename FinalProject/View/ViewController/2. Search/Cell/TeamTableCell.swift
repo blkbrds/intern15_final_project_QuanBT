@@ -19,8 +19,8 @@ final class TeamTableCell: UITableViewCell {
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var nameStadiumLabel: UILabel!
     @IBOutlet private weak var nameTeamLabel: UILabel!
-    @IBOutlet weak var highlightIndicator: UIView!
-    @IBOutlet weak var selectIndicator: UIImageView!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = TeamTableCellVM() {
@@ -43,6 +43,7 @@ final class TeamTableCell: UITableViewCell {
         }
     }
     
+    // MARK: - Function
     private func updateView() {
         let isFavorite = viewModel.isFavorite
         if isFavorite {

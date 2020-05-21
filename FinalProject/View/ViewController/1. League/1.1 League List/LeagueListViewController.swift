@@ -108,7 +108,7 @@ final class LeagueListViewController: ViewController {
         loadAPI(sport: sport.rawValue, country: sport.country[sender.tag].rawValue)
     }
     
-    @IBAction func changedSportSegmentedControl(_ sender: UISegmentedControl) {
+    @IBAction private func changedSportSegmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             sport = .soccer
@@ -157,6 +157,7 @@ extension LeagueListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - LeagueTableCellDelegate
 extension LeagueListViewController: LeagueTableCellDelegate {
     func addLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: DetailLeague) {
         RealmManager.shared.addObject(with: data)

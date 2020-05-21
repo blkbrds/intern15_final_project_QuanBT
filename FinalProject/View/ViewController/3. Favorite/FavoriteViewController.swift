@@ -11,8 +11,8 @@ import UIKit
 final class FavoriteViewController: ViewController {
     // MARK: - IBOutlet
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var deleteSelectButton: UIButton!
-    @IBOutlet weak var bottomCollection: NSLayoutConstraint!
+    @IBOutlet private weak var deleteSelectButton: UIButton!
+    @IBOutlet private weak var bottomCollection: NSLayoutConstraint!
     
     // MARK: - Properties
     private var viewModel = FavoriteViewModel()
@@ -67,7 +67,7 @@ final class FavoriteViewController: ViewController {
         tableView.reloadData()
     }
     
-    @objc func longpress(sender: UILongPressGestureRecognizer) {
+    @objc private func longpress(sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizer.State.began {
             let touchPoint = sender.location(in: tableView)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
@@ -97,7 +97,8 @@ final class FavoriteViewController: ViewController {
         bottomCollection.constant = 0
     }
     
-    @IBAction func deleteSelectButtonTouchUpInside(_ sender: Any) {
+    // MARK: - IBAction
+    @IBAction private func deleteSelectButtonTouchUpInside(_ sender: Any) {
         viewModel.getDataDelete()
         viewModel.deleteSelect()
         viewModel.resetDataDelete()

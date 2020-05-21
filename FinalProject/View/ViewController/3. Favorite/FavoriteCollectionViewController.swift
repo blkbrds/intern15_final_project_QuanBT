@@ -10,12 +10,12 @@ import UIKit
 
 final class FavoriteCollectionViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var deleteSelectButton: UIButton!
-    @IBOutlet weak var bottomCollection: NSLayoutConstraint!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var deleteSelectButton: UIButton!
+    @IBOutlet private weak var bottomCollection: NSLayoutConstraint!
     
     // MARK: - Properties
-    var viewModel = FavoriteCollectionViewModel()
+    private var viewModel = FavoriteCollectionViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +100,7 @@ final class FavoriteCollectionViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource & UICollectionViewDelegate
 extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3

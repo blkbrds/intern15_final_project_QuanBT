@@ -20,8 +20,8 @@ final class LeagueTableCell: UITableViewCell {
     @IBOutlet private weak var nameLeagueLabel: UILabel!
     @IBOutlet private weak var formedYearLable: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
-    @IBOutlet weak var highlightIndicator: UIView!
-    @IBOutlet weak var selectIndicator: UIImageView!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = LeagueTableCellVM() {
@@ -76,7 +76,7 @@ final class LeagueTableCell: UITableViewCell {
     }
     
     // MARK: - IBAction
-    @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
+    @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
         if !viewModel.dataAPI.isFavorite {
             let data: DetailLeague = DetailLeague()
             data.id = viewModel.dataAPI.id

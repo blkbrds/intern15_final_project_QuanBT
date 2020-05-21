@@ -195,7 +195,7 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
-
+// MARK: - TeamTableCellDelegate & PlayerTableCellDelegate
 extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
     func addTeamTableCell(cell: TeamTableCell, didFavoriteButton data: Team) {
         RealmManager.shared.addObject(with: data)

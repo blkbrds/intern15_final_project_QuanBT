@@ -104,7 +104,7 @@ final class PlayerViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource & UICollectionViewDelegate & UICollectionViewDelegateFlowLayout
 extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         viewModel.numberOfSections()
@@ -179,6 +179,7 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
+// MARK: - PlayerHeaderDelegate
 extension PlayerViewController: PlayerHeaderDelegate {
     func getIdTeam(idTeam: String) {
         let detailTeamVC = DetailTeamViewController()

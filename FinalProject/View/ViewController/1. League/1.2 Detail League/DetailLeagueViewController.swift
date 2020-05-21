@@ -110,7 +110,7 @@ final class DetailLeagueViewController: ViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource & UICollectionViewDelegate & UICollectionViewDelegateFlowLayout
 extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         viewModel.numberOfSections()
@@ -216,6 +216,7 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
     }
 }
 
+// MARK: - TeamsCollectionCellDelegate
 extension DetailLeagueViewController: TeamsCollectionCellDelegate {
     func addTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: Team) {
         RealmManager.shared.addObject(with: data)
