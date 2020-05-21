@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class DetailTeamViewController: UIViewController {
     // MARK: - IBOutlet
@@ -79,8 +80,9 @@ final class DetailTeamViewController: UIViewController {
        }
     
     private func loadAPI() {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.getDataTeam { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.collectionView.reloadData()

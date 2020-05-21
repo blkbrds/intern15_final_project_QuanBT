@@ -21,6 +21,11 @@ final class FavoriteViewController: ViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     // MARK: - Function
     private func setupView() {
         let nib = UINib(nibName: "LeagueTableCell", bundle: .main)
@@ -32,6 +37,9 @@ final class FavoriteViewController: ViewController {
         tableView.dataSource = self
         tableView.delegate = self
         viewModel.delegate = self
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longpress))
+               tableView.addGestureRecognizer(longPress)
+        tableView.addGestureRecognizer(longPress)
         viewModel.setUpObsever()
         tableView.separatorColor = App.Color.backgroundTableView
         fetchData()
@@ -55,6 +63,16 @@ final class FavoriteViewController: ViewController {
             tableView.separatorColor = .white
         }
         tableView.reloadData()
+    }
+    
+    @objc func longpress(sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                // your code here, get the row for the indexPath or do whatever you want
+                print("Long press Pressed:\(indexPath.row)")
+            }
+        }
     }
 }
 

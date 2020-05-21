@@ -22,6 +22,14 @@ final class FavoriteCollectionViewModel {
     var notificationTokenTeam: NotificationToken?
     var notificationTokenPlayer: NotificationToken?
     weak var delegate: FavoriteCollectionViewModelDelegate?
+    var isSelect: Bool = false
+    var selectedIndexPath: [IndexPath] = []
+    var deleteLeagues: [DetailLeague] = []
+    var deleteTeams: [Team] = []
+    var deletePlayers: [Player] = []
+    var dictionnarySelectedIndexPath: [IndexPath: Bool] = [:]
+    var deleteButtonIsHiden: Bool = false
+    var testDeleteButton = 0
     
     // MARK: - Function
     func fetchData(completion: (Bool) -> Void) {
@@ -131,9 +139,7 @@ final class FavoriteCollectionViewModel {
                     break
                 }
             })
-        } catch {}
-        do {
-            let realm = try Realm()
+            
             notificationTokenTeam = realm.objects(Team.self).observe({ [weak self] (action) in
                 guard let self = self else { return }
                 switch action {
@@ -143,9 +149,7 @@ final class FavoriteCollectionViewModel {
                     break
                 }
             })
-        } catch {}
-        do {
-            let realm = try Realm()
+            
             notificationTokenPlayer = realm.objects(Player.self).observe({ [weak self] (action) in
                 guard let self = self else { return }
                 switch action {
@@ -156,5 +160,40 @@ final class FavoriteCollectionViewModel {
                 }
             })
         } catch {}
+    }
+    
+    func deleteSelect() {
+        let leagues = deleteLeagues
+        RealmManager.shared.deleteAllObject(with: leagues)
+        let teams = deleteTeams
+        RealmManager.shared.deleteAllObject(with: teams)
+        let players = deletePlayers
+        RealmManager.shared.deleteAllObject(with: players)
+    }
+    
+    func getDataDelete() {
+        for (key, value) in dictionnarySelectedIndexPath where value {
+                selectedIndexPath.append(key)
+        }
+        
+        for item in selectedIndexPath {
+            switch item.section {
+            case 0:
+                deleteLeagues.append(dataLeagues[item.row])
+            case 1:
+                deleteTeams.append(dataTeams[item.row])
+            default:
+                deletePlayers.append(dataPlayers[item.row])
+            }
+        }
+    }
+    
+    func resetDataDelete() {
+        deleteLeagues = []
+        deleteTeams = []
+        deletePlayers = []
+        selectedIndexPath = []
+        dictionnarySelectedIndexPath = [:]
+        testDeleteButton = 0
     }
 }

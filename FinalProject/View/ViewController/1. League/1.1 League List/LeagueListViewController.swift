@@ -58,7 +58,9 @@ final class LeagueListViewController: ViewController {
     }
     
     private func loadAPI(sport: String, country: String) {
+        SVProgressHUD.show()
         viewModel.loadAPI(sport: sport, country: country) { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.viewModel.downloadImage()

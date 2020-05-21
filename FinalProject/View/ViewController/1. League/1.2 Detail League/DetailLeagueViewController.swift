@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class DetailLeagueViewController: ViewController {
     // MARK: - IBOutlet
@@ -85,8 +86,9 @@ final class DetailLeagueViewController: ViewController {
     }
     
     private func loadAPI() {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.loadAPI { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.collectionView.reloadData()
@@ -95,7 +97,9 @@ final class DetailLeagueViewController: ViewController {
                 this.showAlert(title: "Erorr API", message: msg)
             }
         }
+        SVProgressHUD.show()
         viewModel.loadAPITeams { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.collectionView.reloadData()

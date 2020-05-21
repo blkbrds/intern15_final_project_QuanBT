@@ -68,8 +68,3 @@ enum Search {
     case team
     case player
 }
-
-enum Mode {
-    case view
-    case select
-}

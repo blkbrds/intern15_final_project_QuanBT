@@ -90,9 +90,7 @@ final class FavoriteViewModel {
                     break
                 }
             })
-        } catch {}
-        do {
-            let realm = try Realm()
+            
             notificationTokenTeam = realm.objects(Team.self).observe({ [weak self] (action) in
                 guard let self = self else { return }
                 switch action {
@@ -102,9 +100,7 @@ final class FavoriteViewModel {
                     break
                 }
             })
-        } catch {}
-        do {
-            let realm = try Realm()
+            
             notificationTokenPlayer = realm.objects(Player.self).observe({ [weak self] (action) in
                 guard let self = self else { return }
                 switch action {

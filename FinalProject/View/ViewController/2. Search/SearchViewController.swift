@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class SearchViewController: ViewController {
     // MARK: - IBOutlet
@@ -50,8 +51,9 @@ final class SearchViewController: ViewController {
     }
     
     private func loadAPITeam(teamString: String) {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.getDataTeam(teamString: teamString) { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.tableView.separatorColor = .white
@@ -71,8 +73,9 @@ final class SearchViewController: ViewController {
     }
     
     private func loadAPIPlayer(playerString: String) {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.getDataPlayer(playerString: playerString) { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.tableView.separatorColor = .white

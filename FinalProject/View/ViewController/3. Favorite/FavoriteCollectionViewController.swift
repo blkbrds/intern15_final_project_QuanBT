@@ -11,6 +11,8 @@ import UIKit
 final class FavoriteCollectionViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var deleteSelectButton: UIButton!
+    @IBOutlet weak var bottomCollection: NSLayoutConstraint!
     
     // MARK: - Properties
     var viewModel = FavoriteCollectionViewModel()
@@ -20,8 +22,14 @@ final class FavoriteCollectionViewController: UIViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+    }
+    
     // MARK: - Function
     private func setupView() {
+        bottomCollection.constant = 0
         let nib = UINib(nibName: "LeagueCollectionCell", bundle: .main)
         collectionView.register(nib, forCellWithReuseIdentifier: "LeagueCollectionCell")
         let headerNib = UINib(nibName: "TeamsHeaderView", bundle: Bundle.main)
@@ -30,6 +38,8 @@ final class FavoriteCollectionViewController: UIViewController {
         collectionView.delegate = self
         viewModel.delegate = self
         viewModel.setUpObsever()
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longpress))
+        collectionView.addGestureRecognizer(longPress)
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
@@ -48,6 +58,46 @@ final class FavoriteCollectionViewController: UIViewController {
     
     private func updateUI() {
         collectionView.reloadData()
+        resetDeleteSelectButton()
+    }
+    
+    @objc private func longpress(sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: collectionView)
+            if let indexPath = collectionView.indexPathForItem(at: touchPoint) {
+                deleteSelectButton.isHidden = viewModel.isSelect
+                collectionView.allowsMultipleSelection = !viewModel.isSelect
+                if !viewModel.isSelect {
+                    bottomCollection.constant = 50
+                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+                    viewModel.dictionnarySelectedIndexPath[indexPath] = true
+                } else {
+                    bottomCollection.constant = 0
+                    for (key, _) in viewModel.dictionnarySelectedIndexPath {
+                        collectionView.deselectItem(at: key, animated: true)
+                    }
+                    viewModel.resetDataDelete()
+                }
+                viewModel.isSelect = !viewModel.isSelect
+            }
+        }
+    }
+    
+    private func resetDeleteSelectButton() {
+        deleteSelectButton.isHidden = true
+        collectionView.allowsMultipleSelection = false
+        viewModel.isSelect = false
+        viewModel.resetDataDelete()
+        bottomCollection.constant = 0
+    }
+    
+    @IBAction private func deleteSelectButtonTouchUpInside(_ sender: Any) {
+        viewModel.getDataDelete()
+        viewModel.deleteSelect()
+        viewModel.resetDataDelete()
+        deleteSelectButton.isHidden = true
+        collectionView.allowsMultipleSelection = false
+        viewModel.isSelect = false
     }
 }
 
@@ -75,7 +125,7 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
                 if let image = image {
                     cell.configLogoImage(image: image)
                 } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
+                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
                 }
             }
             return cell
@@ -87,19 +137,21 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
                 if let image = image {
                     cell.configLogoImage(image: image)
                 } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
+                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
                 }
             }
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell ?? LeagueCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else {
+                return UICollectionViewCell()
+            }
             cell.viewModel = viewModel.viewModelForCellPlayer(at: indexPath)
             let item = viewModel.dataPlayers[indexPath.row].cutout
             Networking.shared().downloadImage(url: item) { (image) in
                 if let image = image {
                     cell.configLogoImage(image: image)
                 } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
+                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
                 }
             }
             return cell
@@ -140,27 +192,42 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let detailLeagueVC = DetailLeagueViewController()
-            let data = viewModel.dataLeagues[indexPath.row]
-            let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: true)
-            detailLeagueVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
-            navigationController?.pushViewController(detailLeagueVC, animated: true)
-        } else if indexPath.section == 1 {
-            let detailTeamVC = DetailTeamViewController()
-            let data = viewModel.dataTeams[indexPath.row]
-            let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: true)
-            detailTeamVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
-            navigationController?.pushViewController(detailTeamVC, animated: true)
+        if viewModel.isSelect == false {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            if indexPath.section == 0 {
+                let detailLeagueVC = DetailLeagueViewController()
+                let data = viewModel.dataLeagues[indexPath.row]
+                let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: true)
+                detailLeagueVC.viewModel = vm
+                navigationController?.isNavigationBarHidden = false
+                navigationController?.pushViewController(detailLeagueVC, animated: true)
+            } else if indexPath.section == 1 {
+                let detailTeamVC = DetailTeamViewController()
+                let data = viewModel.dataTeams[indexPath.row]
+                let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: true)
+                detailTeamVC.viewModel = vm
+                navigationController?.isNavigationBarHidden = false
+                navigationController?.pushViewController(detailTeamVC, animated: true)
+            } else {
+                let detailPlayerVC = PlayerViewController()
+                let data = viewModel.dataPlayers[indexPath.row]
+                let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: true)
+                detailPlayerVC.viewModel = vm
+                navigationController?.isNavigationBarHidden = false
+                navigationController?.pushViewController(detailPlayerVC, animated: true)
+            }
         } else {
-            let detailPlayerVC = PlayerViewController()
-            let data = viewModel.dataPlayers[indexPath.row]
-            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: true)
-            detailPlayerVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
-            navigationController?.pushViewController(detailPlayerVC, animated: true)
+            viewModel.dictionnarySelectedIndexPath[indexPath] = true
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if viewModel.isSelect {
+            viewModel.dictionnarySelectedIndexPath[indexPath] = false
+            viewModel.testDeleteButton += 1
+        }
+        if viewModel.testDeleteButton == viewModel.dictionnarySelectedIndexPath.count {
+            resetDeleteSelectButton()
         }
     }
 }
@@ -171,4 +238,3 @@ extension FavoriteCollectionViewController: FavoriteCollectionViewModelDelegate 
         fetchData()
     }
 }
-

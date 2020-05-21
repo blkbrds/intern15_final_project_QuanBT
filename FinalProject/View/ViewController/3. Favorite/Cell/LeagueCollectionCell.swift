@@ -15,11 +15,26 @@ final class LeagueCollectionCell: UICollectionViewCell {
     @IBOutlet weak var informationLabel: UILabel!
     @IBOutlet weak var contentViewCell: UIView!
     @IBOutlet weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet weak var highlightIndicator: UIView!
+    @IBOutlet weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = LeagueCollectionCellVM() {
         didSet {
             updateView()
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isHighlighted
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isSelected
+            selectIndicator.isHidden = !isSelected
         }
     }
     

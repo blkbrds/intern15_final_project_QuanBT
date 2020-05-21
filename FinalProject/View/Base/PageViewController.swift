@@ -15,22 +15,6 @@ final class PageViewController: UIPageViewController {
         ]
     }()
     
-    var mode: Mode = .view {
-        didSet {
-            switch mode {
-            case .view:
-                selectBarButton.title = "Select"
-            case .select:
-                selectBarButton.title = "Cancel"
-            }
-        }
-    }
-    
-    lazy var selectBarButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(didSelectButtonClicked))
-        return barButtonItem
-    }()
-    
     lazy var deleteBarButton: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didDeleteButtonClicked))
         return barButtonItem
@@ -44,8 +28,9 @@ final class PageViewController: UIPageViewController {
         setViewControllers([subViewControllers[0]], direction: .forward, animated: true, completion: nil)
     }
     
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
-        super.init(transitionStyle: .scroll, navigationOrientation: .vertical, options: options)
+    override init(transitionStyle style: UIPageViewController.TransitionStyle,
+                  navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)
     }
     
     required init?(coder: NSCoder) {
@@ -54,12 +39,7 @@ final class PageViewController: UIPageViewController {
     
     private func setupBarButtonItems() {
         navigationController?.navigationBar.tintColor = App.Color.tabBarTintColor
-        navigationItem.rightBarButtonItem = selectBarButton
         navigationItem.leftBarButtonItem = deleteBarButton
-    }
-    
-    @objc private func didSelectButtonClicked() {
-        mode = mode == .view ? .select : .view
     }
     
     @objc private func didDeleteButtonClicked() {
@@ -87,7 +67,7 @@ final class PageViewController: UIPageViewController {
             message = "No data"
             actions = [cancelAction]
         }
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Announce", message: message, preferredStyle: .alert)
         actions.forEach { alert.addAction($0) }
         present(alert, animated: true, completion: nil)
     }
@@ -113,5 +93,4 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         }
         return subViewControllers[currenIndex + 1]
     }
-    
 }
