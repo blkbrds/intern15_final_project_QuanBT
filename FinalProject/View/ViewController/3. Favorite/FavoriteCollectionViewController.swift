@@ -225,6 +225,9 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
             viewModel.testDeleteButton += 1
         }
         if viewModel.testDeleteButton == viewModel.dictionnarySelectedIndexPath.count {
+            for (key, _) in viewModel.dictionnarySelectedIndexPath {
+                collectionView.deselectItem(at: key, animated: true)
+            }
             resetDeleteSelectButton()
         }
     }
