@@ -30,6 +30,7 @@ final class FavoriteCollectionViewModel {
     var dictionnarySelectedIndexPath: [IndexPath: Bool] = [:]
     var deleteButtonIsHiden: Bool = false
     var testDeleteButton = 0
+    var deleteIndexPath: [IndexPath] = []
     
     // MARK: - Function
     func fetchData(completion: (Bool) -> Void) {
@@ -195,5 +196,6 @@ final class FavoriteCollectionViewModel {
         selectedIndexPath = []
         dictionnarySelectedIndexPath = [:]
         testDeleteButton = 0
+        deleteIndexPath = []
     }
 }

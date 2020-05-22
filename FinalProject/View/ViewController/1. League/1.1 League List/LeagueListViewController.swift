@@ -134,14 +134,14 @@ extension LeagueListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell else { return UITableViewCell() }
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
         cell.delegate = self
-        let item = viewModel.dataAPIs[indexPath.row].logo
-        Networking.shared().downloadImage(url: item) { (image) in
-            if let image = image {
-                cell.configImage(image: image)
-            } else {
-                cell.configImage(image: #imageLiteral(resourceName: "img-logo"))
-            }
-        }
+        //        let item = viewModel.dataAPIs[indexPath.row].logo
+        //        Networking.shared().downloadImage(url: item) { (image) in
+        //            if let image = image {
+        //                cell.configImage(image: image)
+        //            } else {
+        //                cell.configImage(image: #imageLiteral(resourceName: "img-logo"))
+        //            }
+        //        }
         return cell
     }
 }

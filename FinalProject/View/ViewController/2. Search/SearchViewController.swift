@@ -195,8 +195,8 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - TeamTableCellDelegate & PlayerTableCellDelegate
-extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
+// MARK: - TeamTableCellDelegate
+extension SearchViewController: TeamTableCellDelegate {
     func addTeamTableCell(cell: TeamTableCell, didFavoriteButton data: Team) {
         RealmManager.shared.addObject(with: data)
     }
@@ -204,7 +204,10 @@ extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
     func deleteTeamTableCell(cell: TeamTableCell, didFavoriteButton data: [Team]) {
         RealmManager.shared.deleteAllObject(with: data)
     }
-    
+}
+
+// MARK: - PlayerTableCellDelegate
+extension SearchViewController: PlayerTableCellDelegate {
     func addPlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: Player) {
         RealmManager.shared.addObject(with: data)
     }

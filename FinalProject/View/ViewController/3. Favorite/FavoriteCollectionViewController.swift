@@ -222,7 +222,12 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if viewModel.isSelect {
             viewModel.dictionnarySelectedIndexPath[indexPath] = false
-            viewModel.testDeleteButton += 1
+            let index = viewModel.deleteIndexPath.firstIndex(of: indexPath)
+            
+            if index == nil {
+                viewModel.deleteIndexPath.append(indexPath)
+                viewModel.testDeleteButton += 1
+            }
         }
         if viewModel.testDeleteButton == viewModel.dictionnarySelectedIndexPath.count {
             for (key, _) in viewModel.dictionnarySelectedIndexPath {

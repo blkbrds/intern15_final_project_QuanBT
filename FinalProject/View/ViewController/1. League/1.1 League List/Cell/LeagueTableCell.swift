@@ -56,6 +56,7 @@ final class LeagueTableCell: UITableViewCell {
             let dataAPI = viewModel.dataAPI
             nameLeagueLabel.text = dataAPI.name
             formedYearLable.text = dataAPI.year
+            logoImageView.image = dataAPI.logoImage
             
             guard let realm = RealmManager.shared.realm else { return }
             if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
