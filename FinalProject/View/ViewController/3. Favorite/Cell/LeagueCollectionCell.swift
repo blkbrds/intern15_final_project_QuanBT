@@ -10,16 +10,31 @@ import UIKit
 
 final class LeagueCollectionCell: UICollectionViewCell {
     // MARK: - IBOutlet
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var badgeImageView: UIImageView!
-    @IBOutlet weak var informationLabel: UILabel!
-    @IBOutlet weak var contentViewCell: UIView!
-    @IBOutlet weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var informationLabel: UILabel!
+    @IBOutlet private weak var contentViewCell: UIView!
+    @IBOutlet private weak var widthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = LeagueCollectionCellVM() {
         didSet {
             updateView()
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isHighlighted
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isSelected
+            selectIndicator.isHidden = !isSelected
         }
     }
     
@@ -44,8 +59,8 @@ final class LeagueCollectionCell: UICollectionViewCell {
         }
     }
     
-    func configbadgeImage(image: UIImage?) {
-        badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
+    func configLogoImage(image: UIImage?) {
+        logoImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
     }
     
     private func setupUI() {

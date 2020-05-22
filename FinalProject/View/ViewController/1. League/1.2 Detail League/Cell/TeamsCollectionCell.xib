@@ -47,32 +47,33 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58w-ZH-FqH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJa-lF-A19">
                                 <rect key="frame" x="160" y="6.5" width="35" height="27.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="58w-ZH-FqH" secondAttribute="height" multiplier="35/30" id="udc-op-CBt"/>
+                                    <constraint firstAttribute="width" secondItem="ZJa-lF-A19" secondAttribute="height" multiplier="35/30" id="xAL-om-ERW"/>
                                 </constraints>
                                 <color key="tintColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" backgroundImage="heart" catalog="system"/>
+                                <state key="selected" backgroundImage="heart.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="favoriteButtonTouchUpInside:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Csn-Uj-BLR"/>
+                                    <action selector="favoriteButtonTouchUpInside:" destination="gTV-IL-0wX" eventType="touchUpInside" id="YOr-ZQ-Nc2"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="M3B-Om-mhp" firstAttribute="centerX" secondItem="xEq-FY-fhq" secondAttribute="centerX" id="0w9-FX-ZBv"/>
-                            <constraint firstItem="58w-ZH-FqH" firstAttribute="top" secondItem="fWx-8j-9rV" secondAttribute="top" constant="5" id="1f9-h1-982"/>
                             <constraint firstItem="xEq-FY-fhq" firstAttribute="width" secondItem="fWx-8j-9rV" secondAttribute="width" multiplier="125/200" id="Afq-Uz-vgg"/>
                             <constraint firstItem="xEq-FY-fhq" firstAttribute="centerX" secondItem="fWx-8j-9rV" secondAttribute="centerX" id="CfT-FK-1MC"/>
                             <constraint firstItem="vXp-3m-YJS" firstAttribute="width" secondItem="fWx-8j-9rV" secondAttribute="width" multiplier="175/200" id="Gxi-WA-YOr"/>
-                            <constraint firstItem="58w-ZH-FqH" firstAttribute="width" secondItem="fWx-8j-9rV" secondAttribute="width" multiplier="35/200" id="Om2-Lh-GVM"/>
                             <constraint firstItem="xEq-FY-fhq" firstAttribute="top" secondItem="fWx-8j-9rV" secondAttribute="top" constant="20" id="PgS-uo-QuU"/>
                             <constraint firstItem="M3B-Om-mhp" firstAttribute="width" secondItem="vXp-3m-YJS" secondAttribute="width" id="W8o-DB-sNk"/>
                             <constraint firstItem="vXp-3m-YJS" firstAttribute="centerX" secondItem="M3B-Om-mhp" secondAttribute="centerX" id="cCP-yn-Qnw"/>
-                            <constraint firstAttribute="trailing" secondItem="58w-ZH-FqH" secondAttribute="trailing" constant="5" id="gnw-ZC-h6U"/>
                             <constraint firstItem="M3B-Om-mhp" firstAttribute="top" secondItem="xEq-FY-fhq" secondAttribute="bottom" constant="20" id="gpZ-RS-8xn"/>
+                            <constraint firstItem="ZJa-lF-A19" firstAttribute="top" secondItem="fWx-8j-9rV" secondAttribute="top" constant="5" id="gpe-2u-E3C"/>
+                            <constraint firstAttribute="trailing" secondItem="ZJa-lF-A19" secondAttribute="trailing" constant="5" id="lW9-bh-s25"/>
                             <constraint firstAttribute="width" constant="200" id="mnC-4n-e3v"/>
+                            <constraint firstItem="ZJa-lF-A19" firstAttribute="width" secondItem="fWx-8j-9rV" secondAttribute="width" multiplier="35/200" id="oRG-Rg-kLv"/>
                             <constraint firstItem="vXp-3m-YJS" firstAttribute="top" secondItem="M3B-Om-mhp" secondAttribute="bottom" constant="10.5" id="oU4-j1-WsA"/>
                             <constraint firstAttribute="width" secondItem="fWx-8j-9rV" secondAttribute="height" multiplier="8:11" id="zO9-dg-Q0Y"/>
                         </constraints>
@@ -89,7 +90,7 @@
             <connections>
                 <outlet property="badgeImageView" destination="xEq-FY-fhq" id="T7l-6e-tSi"/>
                 <outlet property="contentViewCell" destination="fWx-8j-9rV" id="ygH-l7-pjc"/>
-                <outlet property="favoriteButton" destination="58w-ZH-FqH" id="87P-Fj-SdI"/>
+                <outlet property="favoriteButton" destination="ZJa-lF-A19" id="TfD-oG-csz"/>
                 <outlet property="nameTeamLabel" destination="M3B-Om-mhp" id="G5i-xm-3H0"/>
                 <outlet property="stadiumLabel" destination="vXp-3m-YJS" id="ZfV-y0-qUi"/>
                 <outlet property="widthLayout" destination="mnC-4n-e3v" id="N9t-ez-PfQ"/>
@@ -99,5 +100,6 @@
     </objects>
     <resources>
         <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
     </resources>
 </document>

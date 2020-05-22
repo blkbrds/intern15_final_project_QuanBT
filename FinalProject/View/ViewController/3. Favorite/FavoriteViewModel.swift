@@ -10,15 +10,10 @@ import Foundation
 import RealmSwift
 
 protocol FavoriteViewModelDelegate: class {
-    func viewModel(viewModel: FavoriteViewModel, needperform action: FavoriteViewModel.Action)
+    func viewModel(viewModel: FavoriteViewModel, needperform action: Action)
 }
 
 final class FavoriteViewModel {
-    // MARK: - enum
-    enum Action {
-        case reloadData
-    }
-    
     // MARK: - Properties
     var dataLeagues: [DetailLeague] = []
     var dataTeams: [Team] = []
@@ -27,6 +22,14 @@ final class FavoriteViewModel {
     var notificationTokenTeam: NotificationToken?
     var notificationTokenPlayer: NotificationToken?
     weak var delegate: FavoriteViewModelDelegate?
+    var isSelect: Bool = false
+    var selectedIndexPath: [IndexPath] = []
+    var deleteLeagues: [DetailLeague] = []
+    var deleteTeams: [Team] = []
+    var deletePlayers: [Player] = []
+    var dictionnarySelectedIndexPath: [IndexPath: Bool] = [:]
+    var deleteButtonIsHiden: Bool = false
+    var testDeleteButton = 0
     
     // MARK: - Function
     func fetchData(completion: (Bool) -> Void) {
@@ -83,47 +86,39 @@ final class FavoriteViewModel {
         return viewModel
     }
     
-    func setUpObsever<T: Object>(index: Int, type: T.Type) {
-        if index == 0 {
-            do {
-                let realm = try Realm()
-                notificationTokenLeague = realm.objects(T.self).observe({ [weak self] (action) in
-                    guard let self = self else { return }
-                    switch action {
-                    case .update:
-                        self.delegate?.viewModel(viewModel: self, needperform: .reloadData)
-                    default:
-                        break
-                    }
-                })
-            } catch {}
-        } else if index == 1 {
-            do {
-                let realm = try Realm()
-                notificationTokenTeam = realm.objects(T.self).observe({ [weak self] (action) in
-                    guard let self = self else { return }
-                    switch action {
-                    case .update:
-                        self.delegate?.viewModel(viewModel: self, needperform: .reloadData)
-                    default:
-                        break
-                    }
-                })
-            } catch {}
-        } else {
-            do {
-                let realm = try Realm()
-                notificationTokenPlayer = realm.objects(T.self).observe({ [weak self] (action) in
-                    guard let self = self else { return }
-                    switch action {
-                    case .update:
-                        self.delegate?.viewModel(viewModel: self, needperform: .reloadData)
-                    default:
-                        break
-                    }
-                })
-            } catch {}
-        }
+    func setUpObsever() {
+        do {
+            let realm = try Realm()
+            notificationTokenLeague = realm.objects(DetailLeague.self).observe({ [weak self] (action) in
+                guard let self = self else { return }
+                switch action {
+                case .update:
+                    self.delegate?.viewModel(viewModel: self, needperform: .reloadData)
+                default:
+                    break
+                }
+            })
+            
+            notificationTokenTeam = realm.objects(Team.self).observe({ [weak self] (action) in
+                guard let self = self else { return }
+                switch action {
+                case .update:
+                    self.delegate?.viewModel(viewModel: self, needperform: .reloadData)
+                default:
+                    break
+                }
+            })
+            
+            notificationTokenPlayer = realm.objects(Player.self).observe({ [weak self] (action) in
+                guard let self = self else { return }
+                switch action {
+                case .update:
+                    self.delegate?.viewModel(viewModel: self, needperform: .reloadData)
+                default:
+                    break
+                }
+            })
+        } catch {}
     }
     
     func getLeague(in index: IndexPath) -> DetailLeague {
@@ -168,5 +163,40 @@ final class FavoriteViewModel {
         } else {
             return false
         }
+    }
+    
+    func deleteSelect() {
+        let leagues = deleteLeagues
+        RealmManager.shared.deleteAllObject(with: leagues)
+        let teams = deleteTeams
+        RealmManager.shared.deleteAllObject(with: teams)
+        let players = deletePlayers
+        RealmManager.shared.deleteAllObject(with: players)
+    }
+    
+    func getDataDelete() {
+        for (key, value) in dictionnarySelectedIndexPath where value {
+            selectedIndexPath.append(key)
+        }
+        
+        for item in selectedIndexPath {
+            switch item.section {
+            case 0:
+                deleteLeagues.append(dataLeagues[item.row])
+            case 1:
+                deleteTeams.append(dataTeams[item.row])
+            default:
+                deletePlayers.append(dataPlayers[item.row])
+            }
+        }
+    }
+    
+    func resetDataDelete() {
+        deleteLeagues = []
+        deleteTeams = []
+        deletePlayers = []
+        selectedIndexPath = []
+        dictionnarySelectedIndexPath = [:]
+        testDeleteButton = 0
     }
 }

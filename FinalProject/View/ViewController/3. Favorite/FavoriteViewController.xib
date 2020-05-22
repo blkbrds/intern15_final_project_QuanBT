@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteViewController" customModule="FinalProject" customModuleProvider="target">
             <connections>
+                <outlet property="bottomCollection" destination="NcT-IF-P3n" id="2wY-28-7GW"/>
+                <outlet property="deleteSelectButton" destination="Vx1-Yf-qSA" id="h2E-Zv-5pf"/>
                 <outlet property="tableView" destination="GHe-ce-glN" id="0Ui-Ev-DPD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,19 +20,38 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-ce-glN">
-                    <rect key="frame" x="0.0" y="44" width="414" height="808"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="50" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-ce-glN">
+                    <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vx1-Yf-qSA">
+                    <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Delete Select">
+                        <color key="titleColor" red="0.23137254900000001" green="0.66274509800000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="deleteSelectButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="JCx-DI-6E9"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Vx1-Yf-qSA" secondAttribute="trailing" id="0Qm-C2-7mF"/>
                 <constraint firstItem="GHe-ce-glN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="24r-dU-pW9"/>
                 <constraint firstItem="GHe-ce-glN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="L0l-0J-irg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="GHe-ce-glN" secondAttribute="bottom" constant="10" id="NcT-IF-P3n"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="GHe-ce-glN" secondAttribute="bottom" constant="50" id="NcT-IF-P3n"/>
+                <constraint firstItem="Vx1-Yf-qSA" firstAttribute="top" secondItem="GHe-ce-glN" secondAttribute="bottom" id="e1i-hs-fce"/>
+                <constraint firstItem="Vx1-Yf-qSA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kzJ-ew-npB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Vx1-Yf-qSA" secondAttribute="bottom" id="szT-dB-j20"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GHe-ce-glN" secondAttribute="trailing" id="x8q-4c-szJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

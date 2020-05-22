@@ -31,7 +31,7 @@ final class Player: Object {
     @objc dynamic var fanart2: String = ""
     @objc dynamic var fanart3: String = ""
     @objc dynamic var fanart4: String = ""
-    var favorite: Bool = false
+    var isFavorite: Bool = false
     
     convenience init(json: JSObject = JSObject()) {
         self.init()

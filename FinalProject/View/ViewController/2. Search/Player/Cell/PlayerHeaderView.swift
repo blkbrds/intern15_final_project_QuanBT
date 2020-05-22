@@ -60,6 +60,7 @@ final class PlayerHeaderView: UICollectionReusableView {
         backgroundImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
         teamImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
     }
+    
     @IBAction func teamButtonTouchUpInside(_ sender: Any) {
         let dataAPI = viewModel.dataAPI
         if let delegate = delegate {

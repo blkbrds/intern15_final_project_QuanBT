@@ -49,6 +49,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Cg8-gc-wed" firstAttribute="top" secondItem="9y5-ai-UWz" secondAttribute="bottom" constant="20" id="1DQ-bY-OtJ"/>
                             <constraint firstItem="Cg8-gc-wed" firstAttribute="centerX" secondItem="SEx-kT-6cK" secondAttribute="centerX" id="Bl7-Gk-gdV"/>

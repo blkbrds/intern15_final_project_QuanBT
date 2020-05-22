@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol TeamsCollectionCellDelegate: class {
+    func addTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: Team)
+    func deleteTeamsCollectionCell(cell: TeamsCollectionCell, didFavoriteButton data: [Team])
+}
+
 final class TeamsCollectionCell: UICollectionViewCell {
     
     // MARK: - IBOutlet
@@ -24,6 +29,7 @@ final class TeamsCollectionCell: UICollectionViewCell {
             updateView()
         }
     }
+    weak var delegate: TeamsCollectionCellDelegate?
     
     // MARK: - Function
     private func updateView() {
@@ -35,10 +41,16 @@ final class TeamsCollectionCell: UICollectionViewCell {
         widthLayout.constant = screenWidth / 2 - (16)
         contentViewCell.layer.cornerRadius = 10
         contentViewCell.clipsToBounds = true
-        if dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        guard let realm = RealmManager.shared.realm else { return }
+        if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+            dataAPI.isFavorite = false
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            dataAPI.isFavorite = true
+        }
+        if dataAPI.isFavorite {
+            favoriteButton.isSelected = true
+        } else {
+            favoriteButton.isSelected = false
         }
     }
     
@@ -46,19 +58,24 @@ final class TeamsCollectionCell: UICollectionViewCell {
         badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
     }
     
-    @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
-        if !viewModel.dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            viewModel.dataAPI.favorite = true
+    @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
+        if !viewModel.dataAPI.isFavorite {
             let data: Team = Team()
             data.id = viewModel.dataAPI.id
             data.name = viewModel.dataAPI.name
-            data.logo = viewModel.dataAPI.logo
+            data.badge = viewModel.dataAPI.badge
             data.stadium = viewModel.dataAPI.stadium
-            RealmManager.shared.addObject(with: data)
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.isFavorite = true
+            delegate?.addTeamsCollectionCell(cell: self, didFavoriteButton: data)
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            viewModel.dataAPI.favorite = false
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.isFavorite = false
+            guard let realm = RealmManager.shared.realm else { return }
+            let result = realm.objects(Team.self).filter(NSPredicate(format: "id = %@", viewModel.dataAPI.id))
+            var data: [Team] = []
+            data = Array(result)
+            delegate?.deleteTeamsCollectionCell(cell: self, didFavoriteButton: data)
         }
     }
 }

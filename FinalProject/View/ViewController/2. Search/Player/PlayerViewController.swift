@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class PlayerViewController: UIViewController {
     // MARK: - IBOutlet
@@ -19,6 +20,21 @@ final class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+        if viewModel.dataAPI.id != "" {
+            viewModel.updateFavorite()
+        }
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
     }
     
     // MARK: - Function
@@ -38,15 +54,36 @@ final class PlayerViewController: UIViewController {
         }
         loadAPI()
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2743943632, green: 0.7092565894, blue: 0.5255461931, alpha: 1)
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-        navigationItem.rightBarButtonItem = favoriteButton
     }
     
     @objc private func favoriteButtonTouchUpInside() {
+        viewModel.addFavorite()
+        viewModel.isFavorite = true
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
+    
+    @objc private func unFavoriteButtonTouchUpInside() {
+        viewModel.deleteFavorite()
+        viewModel.isFavorite = false
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
     }
     
     private func loadAPI() {
+        SVProgressHUD.show()
         viewModel.loadAPI { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.collectionView.reloadData()
@@ -54,7 +91,9 @@ final class PlayerViewController: UIViewController {
                 this.showAlert(title: "Erorr API", message: msg)
             }
         }
+        SVProgressHUD.show()
         viewModel.loadAPITeams { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 
@@ -65,7 +104,7 @@ final class PlayerViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource & UICollectionViewDelegate & UICollectionViewDelegateFlowLayout
 extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         viewModel.numberOfSections()
@@ -81,11 +120,11 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InformationCollectionCell", for: indexPath) as? InformationCollectionCell ?? InformationCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InformationCollectionCell", for: indexPath) as? InformationCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellInformation(at: indexPath)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell ?? PhotosCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell else { return UICollectionViewCell() }
             let photo = viewModel.photos[indexPath.row]
             Networking.shared().downloadImage(url: photo) { (image) in
                 if let image = image {
@@ -140,10 +179,12 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
+// MARK: - PlayerHeaderDelegate
 extension PlayerViewController: PlayerHeaderDelegate {
     func getIdTeam(idTeam: String) {
         let detailTeamVC = DetailTeamViewController()
-        let vm = DetailTeamViewModel(idTeam: idTeam)
+        let isFavoriteTeam = viewModel.updateFavoriteTeam(id: idTeam)
+        let vm = DetailTeamViewModel(idTeam: idTeam, isFavorite: isFavoriteTeam)
         detailTeamVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailTeamVC, animated: true)

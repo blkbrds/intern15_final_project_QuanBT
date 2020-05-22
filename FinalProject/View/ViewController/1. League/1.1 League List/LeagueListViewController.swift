@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class LeagueListViewController: ViewController {
     // MARK: - IBOutlet
@@ -27,6 +28,7 @@ final class LeagueListViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -56,17 +58,18 @@ final class LeagueListViewController: ViewController {
     }
     
     private func loadAPI(sport: String, country: String) {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.loadAPI(sport: sport, country: country) { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
+                this.tableView.separatorColor = .white
                 this.viewModel.downloadImage()
                 this.tableView.reloadData()
             } else {
                 this.showAlert(title: "Erorr API", message: msg)
             }
         }
-        
         tableView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
@@ -106,7 +109,7 @@ final class LeagueListViewController: ViewController {
         loadAPI(sport: sport.rawValue, country: sport.country[sender.tag].rawValue)
     }
     
-    @IBAction func changedSportSegmentedControl(_ sender: UISegmentedControl) {
+    @IBAction private func changedSportSegmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             sport = .soccer
@@ -128,8 +131,9 @@ extension LeagueListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell ?? LeagueTableCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell else { return UITableViewCell() }
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
+        cell.delegate = self
         let item = viewModel.dataAPIs[indexPath.row].logo
         Networking.shared().downloadImage(url: item) { (image) in
             if let image = image {
@@ -147,9 +151,20 @@ extension LeagueListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailLeagueVC = DetailLeagueViewController()
         let data = viewModel.dataAPIs[indexPath.row]
-        let vm = DetailLeagueViewModel(idLeague: data.id)
+        let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: data.isFavorite)
         detailLeagueVC.viewModel = vm
         navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)
+    }
+}
+
+// MARK: - LeagueTableCellDelegate
+extension LeagueListViewController: LeagueTableCellDelegate {
+    func addLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: DetailLeague) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: [DetailLeague]) {
+        RealmManager.shared.deleteAllObject(with: data)
     }
 }

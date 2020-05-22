@@ -7,6 +7,7 @@ PODS:
   - Realm/Headers (4.4.1)
   - RealmSwift (4.4.1):
     - Realm (= 4.4.1)
+  - SVProgressHUD (2.2.5)
   - SwifterSwift (5.2.0):
     - SwifterSwift/AppKit (= 5.2.0)
     - SwifterSwift/CoreAnimation (= 5.2.0)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - MVVM-Swift
   - ObjectMapper
   - RealmSwift
+  - SVProgressHUD
   - SwifterSwift
   - SwiftLint
   - SwiftUtils (= 4.2)
@@ -51,6 +53,7 @@ SPEC REPOS:
     - ObjectMapper
     - Realm
     - RealmSwift
+    - SVProgressHUD
     - SwifterSwift
     - SwiftLint
     - SwiftUtils
@@ -61,10 +64,11 @@ SPEC CHECKSUMS:
   ObjectMapper: b53ae947d370bf89423e86be7d4e2d2b2a8d3f40
   Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
   RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   SwiftUtils: de77bcd1df216c9be6ec7011777302c60a2018a6
 
-PODFILE CHECKSUM: cacdcbc8053b17342df25a8c1cb07c832fdd78df
+PODFILE CHECKSUM: d098bbc7932629e73aa2adc6fe7e5f4c2a7bf4fb
 
 COCOAPODS: 1.9.1

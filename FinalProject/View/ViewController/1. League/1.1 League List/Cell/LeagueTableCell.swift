@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
+
+protocol LeagueTableCellDelegate: class {
+    func addLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: DetailLeague)
+    func deleteLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: [DetailLeague])
+}
 
 final class LeagueTableCell: UITableViewCell {
     // MARK: - IBOutlet
@@ -14,6 +20,8 @@ final class LeagueTableCell: UITableViewCell {
     @IBOutlet private weak var nameLeagueLabel: UILabel!
     @IBOutlet private weak var formedYearLable: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = LeagueTableCellVM() {
@@ -21,11 +29,25 @@ final class LeagueTableCell: UITableViewCell {
             updateView()
         }
     }
+    weak var delegate: LeagueTableCellDelegate?
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isHighlighted
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isSelected
+            selectIndicator.isHidden = !isSelected
+        }
+    }
     
     // MARK: - Function
     private func updateView() {
-        let favorite = viewModel.isFavorite
-        if favorite {
+        let isFavorite = viewModel.isFavorite
+        if isFavorite {
             let dataFavorite = viewModel.dataFavorite
             nameLeagueLabel.text = dataFavorite.name
             formedYearLable.text = dataFavorite.year
@@ -34,11 +56,17 @@ final class LeagueTableCell: UITableViewCell {
             let dataAPI = viewModel.dataAPI
             nameLeagueLabel.text = dataAPI.name
             formedYearLable.text = dataAPI.year
-            logoImageView.image = dataAPI.logoImage
-            if dataAPI.favorite {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+            guard let realm = RealmManager.shared.realm else { return }
+            if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+                dataAPI.isFavorite = false
             } else {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                dataAPI.isFavorite = true
+            }
+            if dataAPI.isFavorite {
+                favoriteButton.isSelected = true
+            } else {
+                favoriteButton.isSelected = false
             }
         }
     }
@@ -48,19 +76,24 @@ final class LeagueTableCell: UITableViewCell {
     }
     
     // MARK: - IBAction
-    @IBAction func favoriteButtonTouchUpInside(_ sender: Any) {
-        if !viewModel.dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            viewModel.dataAPI.favorite = true
+    @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
+        if !viewModel.dataAPI.isFavorite {
             let data: DetailLeague = DetailLeague()
             data.id = viewModel.dataAPI.id
             data.name = viewModel.dataAPI.name
             data.logo = viewModel.dataAPI.logo
             data.year = viewModel.dataAPI.year
-            RealmManager.shared.addObject(with: data)
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.isFavorite = true
+            delegate?.addLeagueTableCell(cell: self, didFavoriteButton: data)
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            viewModel.dataAPI.favorite = false
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.isFavorite = false
+            guard let realm = RealmManager.shared.realm else { return }
+            let result = realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", viewModel.dataAPI.id))
+            var data: [DetailLeague] = []
+            data = Array(result)
+            delegate?.deleteLeagueTableCell(cell: self, didFavoriteButton: data)
         }
     }
 }

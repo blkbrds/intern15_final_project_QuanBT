@@ -8,12 +8,19 @@
 
 import UIKit
 
+protocol PlayerTableCellDelegate: class {
+    func addPlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: Player)
+    func deletePlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: [Player])
+}
+
 final class PlayerTableCell: UITableViewCell {
     // MARK: - IBOutlet
     @IBOutlet private weak var playerImageView: UIImageView!
     @IBOutlet private weak var namePlayerLabel: UILabel!
     @IBOutlet private weak var ageLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
+    @IBOutlet private weak var highlightIndicator: UIView!
+    @IBOutlet private weak var selectIndicator: UIImageView!
     
     // MARK: - Properties
     var viewModel = PlayerTableCellVM() {
@@ -21,10 +28,24 @@ final class PlayerTableCell: UITableViewCell {
             updateView()
         }
     }
+    weak var delegate: PlayerTableCellDelegate?
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isHighlighted
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            highlightIndicator.isHidden = !isSelected
+            selectIndicator.isHidden = !isSelected
+        }
+    }
     
     private func updateView() {
-        let favorite = viewModel.isFavorite
-        if favorite {
+        let isFavorite = viewModel.isFavorite
+        if isFavorite {
             let dataFavorite = viewModel.dataAPI
             namePlayerLabel.text = dataFavorite.name
             ageLabel.text = dataFavorite.date
@@ -33,10 +54,17 @@ final class PlayerTableCell: UITableViewCell {
             let dataAPI = viewModel.dataAPI
             namePlayerLabel.text = dataAPI.name
             ageLabel.text = dataAPI.date
-            if dataAPI.favorite {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+            guard let realm = RealmManager.shared.realm else { return }
+            if realm.objects(Player.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
+                dataAPI.isFavorite = false
             } else {
-                favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                dataAPI.isFavorite = true
+            }
+            if dataAPI.isFavorite {
+                favoriteButton.isSelected = true
+            } else {
+                favoriteButton.isSelected = false
             }
         }
     }
@@ -47,18 +75,23 @@ final class PlayerTableCell: UITableViewCell {
     
     // MARK: - IBAction
     @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {
-        if !viewModel.dataAPI.favorite {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            viewModel.dataAPI.favorite = true
+        if !viewModel.dataAPI.isFavorite {
             let data: Player = Player()
             data.id = viewModel.dataAPI.id
             data.name = viewModel.dataAPI.name
             data.cutout = viewModel.dataAPI.cutout
             data.date = viewModel.dataAPI.date
-            RealmManager.shared.addObject(with: data)
+            favoriteButton.isSelected = true
+            viewModel.dataAPI.isFavorite = true
+            delegate?.addPlayerTableCell(cell: self, didFavoriteButton: data)
         } else {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            viewModel.dataAPI.favorite = false
+            favoriteButton.isSelected = false
+            viewModel.dataAPI.isFavorite = false
+            guard let realm = RealmManager.shared.realm else { return }
+            let result = realm.objects(Player.self).filter(NSPredicate(format: "id = %@", viewModel.dataAPI.id))
+            var data: [Player] = []
+            data = Array(result)
+            delegate?.deletePlayerTableCell(cell: self, didFavoriteButton: data)
         }
     }
 }

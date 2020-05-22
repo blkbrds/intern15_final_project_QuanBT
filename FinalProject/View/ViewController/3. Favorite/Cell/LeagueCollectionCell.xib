@@ -47,6 +47,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iht-sL-eUd">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="275"/>
+                                <subviews>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nrs-vo-UdA">
+                                        <rect key="frame" x="150" y="225.5" width="40" height="39"/>
+                                        <color key="tintColor" red="0.0" green="0.95294117647058818" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="nrs-vo-UdA" secondAttribute="height" id="8EV-Ru-cct"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nrs-vo-UdA" secondAttribute="trailing" constant="10" id="MKC-XQ-DF6"/>
+                                    <constraint firstAttribute="bottom" secondItem="nrs-vo-UdA" secondAttribute="bottom" constant="10" id="TnB-dR-mdH"/>
+                                    <constraint firstItem="nrs-vo-UdA" firstAttribute="width" secondItem="iht-sL-eUd" secondAttribute="width" multiplier="40/200" id="TpC-R4-BLm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -58,9 +77,13 @@
                             <constraint firstItem="zdN-Ne-Z8J" firstAttribute="top" secondItem="D0K-0F-wEJ" secondAttribute="bottom" constant="10" id="J5q-Ik-CL3"/>
                             <constraint firstItem="CsT-nR-vcE" firstAttribute="centerX" secondItem="yJt-yb-sNo" secondAttribute="centerX" id="JcR-6l-kGC"/>
                             <constraint firstItem="zdN-Ne-Z8J" firstAttribute="centerX" secondItem="yJt-yb-sNo" secondAttribute="centerX" id="NZb-gJ-gcm"/>
+                            <constraint firstItem="iht-sL-eUd" firstAttribute="leading" secondItem="yJt-yb-sNo" secondAttribute="leading" id="P1q-Hr-Vol"/>
                             <constraint firstAttribute="width" secondItem="yJt-yb-sNo" secondAttribute="height" multiplier="8:11" id="Uum-yY-9sL"/>
+                            <constraint firstItem="iht-sL-eUd" firstAttribute="top" secondItem="yJt-yb-sNo" secondAttribute="top" id="V3U-0C-pFB"/>
+                            <constraint firstAttribute="bottom" secondItem="iht-sL-eUd" secondAttribute="bottom" id="YGC-hg-b6i"/>
                             <constraint firstItem="CsT-nR-vcE" firstAttribute="top" secondItem="yJt-yb-sNo" secondAttribute="top" constant="20" id="c5W-6E-frB"/>
                             <constraint firstItem="D0K-0F-wEJ" firstAttribute="centerX" secondItem="yJt-yb-sNo" secondAttribute="centerX" id="jLl-qY-aEW"/>
+                            <constraint firstAttribute="trailing" secondItem="iht-sL-eUd" secondAttribute="trailing" id="p74-KY-wiD"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -73,13 +96,18 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
-                <outlet property="badgeImageView" destination="CsT-nR-vcE" id="d1a-VG-CWw"/>
                 <outlet property="contentViewCell" destination="yJt-yb-sNo" id="jmD-Jv-gjn"/>
+                <outlet property="highlightIndicator" destination="iht-sL-eUd" id="bgN-TF-c26"/>
                 <outlet property="informationLabel" destination="zdN-Ne-Z8J" id="Z2j-It-muz"/>
+                <outlet property="logoImageView" destination="CsT-nR-vcE" id="d1a-VG-CWw"/>
                 <outlet property="nameLabel" destination="D0K-0F-wEJ" id="bay-Rs-oRX"/>
+                <outlet property="selectIndicator" destination="nrs-vo-UdA" id="j3u-IR-arb"/>
                 <outlet property="widthLayout" destination="03L-yp-2dU" id="ctM-7s-YNu"/>
             </connections>
             <point key="canvasLocation" x="139" y="108"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
+    </resources>
 </document>

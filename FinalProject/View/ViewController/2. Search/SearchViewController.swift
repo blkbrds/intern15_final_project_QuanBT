@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class SearchViewController: ViewController {
     // MARK: - IBOutlet
@@ -27,6 +28,7 @@ final class SearchViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        tableView.reloadData()
     }
     
     override func setupUI() {
@@ -49,8 +51,9 @@ final class SearchViewController: ViewController {
     }
     
     private func loadAPITeam(teamString: String) {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.getDataTeam(teamString: teamString) { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.tableView.separatorColor = .white
@@ -70,8 +73,9 @@ final class SearchViewController: ViewController {
     }
     
     private func loadAPIPlayer(playerString: String) {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.getDataPlayer(playerString: playerString) { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.tableView.separatorColor = .white
@@ -123,8 +127,9 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if status == .team {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell ?? TeamTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInTeam(at: indexPath)
+            cell.delegate = self
             let team = viewModel.dataTeams[indexPath.row].logo
             Networking.shared().downloadImage(url: team) { (image) in
                 if let image = image {
@@ -135,8 +140,9 @@ extension SearchViewController: UITableViewDataSource {
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell ?? PlayerTableCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInPlayer(at: indexPath)
+            cell.delegate = self
             let thumb = viewModel.dataPlayers[indexPath.row].cutout
             Networking.shared().downloadImage(url: thumb) { (image) in
                 if let image = image {
@@ -174,17 +180,36 @@ extension SearchViewController: UITableViewDelegate {
         if status == .team {
             let detailTeamVC = DetailTeamViewController()
             let data = viewModel.dataTeams[indexPath.row]
-            let vm = DetailTeamViewModel(idTeam: data.id)
+            let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: data.isFavorite)
             detailTeamVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
         } else {
             let playerVC = PlayerViewController()
             let data = viewModel.dataPlayers[indexPath.row]
-            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam)
+            let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: data.isFavorite)
             playerVC.viewModel = vm
             navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(playerVC, animated: true)
         }
+    }
+}
+
+// MARK: - TeamTableCellDelegate & PlayerTableCellDelegate
+extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
+    func addTeamTableCell(cell: TeamTableCell, didFavoriteButton data: Team) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deleteTeamTableCell(cell: TeamTableCell, didFavoriteButton data: [Team]) {
+        RealmManager.shared.deleteAllObject(with: data)
+    }
+    
+    func addPlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: Player) {
+        RealmManager.shared.addObject(with: data)
+    }
+    
+    func deletePlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: [Player]) {
+        RealmManager.shared.deleteAllObject(with: data)
     }
 }

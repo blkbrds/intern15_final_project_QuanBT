@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class DetailTeamViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     var viewModel = DetailTeamViewModel()
@@ -18,6 +19,21 @@ final class DetailTeamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+        if viewModel.dataAPI.id != "" {
+            viewModel.updateFavorite()
+        }
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
     }
     
     // MARK: - Function
@@ -37,16 +53,36 @@ final class DetailTeamViewController: UIViewController {
         }
         loadAPI()
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2743943632, green: 0.7092565894, blue: 0.5255461931, alpha: 1)
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
-        navigationItem.rightBarButtonItem = favoriteButton
     }
     
     @objc private func favoriteButtonTouchUpInside() {
+        viewModel.addFavorite()
+        viewModel.isFavorite = true
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
+    }
+    
+    @objc private func unFavoriteButtonTouchUpInside() {
+        viewModel.deleteFavorite()
+        viewModel.isFavorite = false
+        if viewModel.isFavorite {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(unFavoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        } else {
+            let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteButtonTouchUpInside))
+            navigationItem.rightBarButtonItem = favoriteButton
+        }
     }
     
     private func loadAPI() {
-        print("Load API")
+        SVProgressHUD.show()
         viewModel.getDataTeam { [weak self] (done, msg) in
+            SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.collectionView.reloadData()
@@ -57,7 +93,7 @@ final class DetailTeamViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDataSource & UICollectionViewDelegate & UICollectionViewDelegateFlowLayout
 extension DetailTeamViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         viewModel.numberOfSections()
@@ -73,11 +109,11 @@ extension DetailTeamViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InformationCollectionCell", for: indexPath) as? InformationCollectionCell ?? InformationCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InformationCollectionCell", for: indexPath) as? InformationCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellInformation(at: indexPath)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell ?? PhotosCollectionCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell else { return UICollectionViewCell() }
             let photo = viewModel.photos[indexPath.row]
             Networking.shared().downloadImage(url: photo) { (image) in
                 if let image = image {
