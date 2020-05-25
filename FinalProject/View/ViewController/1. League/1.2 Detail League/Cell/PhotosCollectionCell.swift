@@ -9,30 +9,30 @@
 import UIKit
 
 final class PhotosCollectionCell: UICollectionViewCell {
-    
     // MARK: - IBOutlet
     @IBOutlet private weak var contentViewCell: UIView!
     @IBOutlet private weak var photoImageView: UIImageView!
     @IBOutlet private weak var widthLayout: NSLayoutConstraint!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    // MARK: - Properties
+    var viewModel = PhotosCollectionCellVM() {
+        didSet {
+            setupView()
+        }
+    }
+    
+    // MARK: - Function
+    private func setupView() {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         let screenWidth = UIScreen.main.bounds.size.width
         widthLayout.constant = screenWidth - (20)
         contentViewCell.layer.cornerRadius = 10
         contentViewCell.clipsToBounds = true
-    }
-    
-    // MARK: - Function
-    func configbadgeImage(image: UIImage?) {
-        photoImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
-    }
-    
-    private func setupView() {
-        let screenWidth = UIScreen.main.bounds.size.width
-        widthLayout.constant = screenWidth - (20)
-        contentViewCell.layer.cornerRadius = 10
-        contentViewCell.clipsToBounds = true
+        let dataAPI = viewModel.photo
+        photoImageView.image = nil
+        photoImageView.sd_setImage(with: URL(string: dataAPI), placeholderImage: nil)
+        if photoImageView.image == nil {
+            photoImageView.image = #imageLiteral(resourceName: "img-DefaultImage")
+        }
     }
 }

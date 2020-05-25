@@ -46,17 +46,5 @@ final class LeagueListViewModel {
         let viewModel = LeagueTableCellVM(dataAPI: item)
         return viewModel
     }
-    
-    func downloadImage() {
-        for item in dataAPIs {
-            Networking.shared().downloadImage(url: item.logo) { (image) in
-                if let image = image {
-                    item.logoImage = image
-                } else {
-                    item.logoImage = #imageLiteral(resourceName: "img-logo")
-                }
-            }
-        }
-    }
 }
 

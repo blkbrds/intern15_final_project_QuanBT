@@ -43,7 +43,7 @@
                         <action selector="changedSearchSegmentedControl:" destination="-1" eventType="valueChanged" id="jEP-2L-ktk"/>
                     </connections>
                 </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZj-UW-N5n">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZj-UW-N5n">
                     <rect key="frame" x="0.0" y="176" width="414" height="676"/>
                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                     <color key="separatorColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>

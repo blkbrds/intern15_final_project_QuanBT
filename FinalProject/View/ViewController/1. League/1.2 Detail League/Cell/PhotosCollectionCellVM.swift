@@ -9,5 +9,11 @@
 import Foundation
 
 final class PhotosCollectionCellVM {
+    // MARK: - Properties
+    var photo: String = ""
     
+    // MARK: - Init
+    init(photo: String = "") {
+        self.photo = photo
+    }
 }

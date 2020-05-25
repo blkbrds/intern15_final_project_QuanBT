@@ -120,38 +120,14 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellLeague(at: indexPath)
-            let item = viewModel.dataLeagues[indexPath.row].logo
-            Networking.shared().downloadImage(url: item) { (image) in
-                if let image = image {
-                    cell.configLogoImage(image: image)
-                } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
-                }
-            }
             return cell
         } else if indexPath.section == 1 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellTeam(at: indexPath)
-            let item = viewModel.dataTeams[indexPath.row].badge
-            Networking.shared().downloadImage(url: item) { (image) in
-                if let image = image {
-                    cell.configLogoImage(image: image)
-                } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
-                }
-            }
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueCollectionCell", for: indexPath) as? LeagueCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellPlayer(at: indexPath)
-            let item = viewModel.dataPlayers[indexPath.row].cutout
-            Networking.shared().downloadImage(url: item) { (image) in
-                if let image = image {
-                    cell.configLogoImage(image: image)
-                } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
-                }
-            }
             return cell
         }
     }
@@ -223,7 +199,6 @@ extension FavoriteCollectionViewController: UICollectionViewDataSource, UICollec
         if viewModel.isSelect {
             viewModel.dictionnarySelectedIndexPath[indexPath] = false
             let index = viewModel.deleteIndexPath.firstIndex(of: indexPath)
-            
             if index == nil {
                 viewModel.deleteIndexPath.append(indexPath)
                 viewModel.testDeleteButton += 1

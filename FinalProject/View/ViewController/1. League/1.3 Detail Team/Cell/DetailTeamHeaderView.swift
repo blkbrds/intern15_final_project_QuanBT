@@ -11,7 +11,7 @@ import UIKit
 final class DetailTeamHeaderView: UICollectionReusableView {
     // MARK: - IBOutlet
     @IBOutlet private weak var logoImageView: UIImageView!
-    @IBOutlet private weak var jerseyImageView: UIImageView!
+    @IBOutlet private weak var badgeImageView: UIImageView!
     @IBOutlet private weak var nameTeamLabel: UILabel!
     @IBOutlet private weak var nameLeagueLabel: UILabel!
     @IBOutlet private weak var stadiumLabel: UILabel!
@@ -33,13 +33,16 @@ final class DetailTeamHeaderView: UICollectionReusableView {
         countryLabel.text = dataAPI.country
         formedYearLable.text = dataAPI.year
         stadiumLabel.text = dataAPI.stadium
-    }
-    
-    func configLogoImage(image: UIImage?) {
-        logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
-    }
-    
-    func configJerseyImage(image: UIImage?) {
-        jerseyImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
+        logoImageView.image = nil
+        logoImageView.sd_setImage(with: URL(string: dataAPI.logo), placeholderImage: nil)
+        if logoImageView.image == nil {
+            logoImageView.image = #imageLiteral(resourceName: "img-logo")
+        }
+        
+        badgeImageView.image = nil
+        badgeImageView.sd_setImage(with: URL(string: dataAPI.badge), placeholderImage: nil)
+        if logoImageView.image == nil {
+            logoImageView.image = #imageLiteral(resourceName: "img-DefaultImage")
+        }
     }
 }

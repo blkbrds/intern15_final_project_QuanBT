@@ -48,6 +48,10 @@ final class FavoriteCollectionViewModel {
             dataTeams = Array(teams)
             dataPlayers = Array(players)
             
+            dataLeagues.reverse()
+            dataTeams.reverse()
+            dataPlayers.reverse()
+            
             // call back
             completion(true)
             
@@ -174,7 +178,7 @@ final class FavoriteCollectionViewModel {
     
     func getDataDelete() {
         for (key, value) in dictionnarySelectedIndexPath where value {
-                selectedIndexPath.append(key)
+            selectedIndexPath.append(key)
         }
         
         for item in selectedIndexPath {

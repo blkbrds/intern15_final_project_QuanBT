@@ -50,10 +50,20 @@ final class PlayerTableCell: UITableViewCell {
             namePlayerLabel.text = dataFavorite.name
             ageLabel.text = dataFavorite.date
             favoriteButton.isHidden = true
+            playerImageView.image = nil
+            playerImageView.sd_setImage(with: URL(string: dataFavorite.cutout), placeholderImage: nil)
+            if playerImageView.image == nil {
+                playerImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
         } else {
             let dataAPI = viewModel.dataAPI
             namePlayerLabel.text = dataAPI.name
             ageLabel.text = dataAPI.date
+            playerImageView.image = nil
+            playerImageView.sd_setImage(with: URL(string: dataAPI.cutout), placeholderImage: nil)
+            if playerImageView.image == nil {
+                playerImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
             
             guard let realm = RealmManager.shared.realm else { return }
             if realm.objects(Player.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
@@ -67,10 +77,6 @@ final class PlayerTableCell: UITableViewCell {
                 favoriteButton.isSelected = false
             }
         }
-    }
-    
-    func configPlayerImage(image: UIImage?) {
-        playerImageView.image = image ?? #imageLiteral(resourceName: "img-player")
     }
     
     // MARK: - IBAction

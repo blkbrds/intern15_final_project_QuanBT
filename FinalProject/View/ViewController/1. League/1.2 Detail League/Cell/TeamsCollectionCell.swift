@@ -14,7 +14,6 @@ protocol TeamsCollectionCellDelegate: class {
 }
 
 final class TeamsCollectionCell: UICollectionViewCell {
-    
     // MARK: - IBOutlet
     @IBOutlet private weak var nameTeamLabel: UILabel!
     @IBOutlet private weak var badgeImageView: UIImageView!
@@ -41,6 +40,12 @@ final class TeamsCollectionCell: UICollectionViewCell {
         widthLayout.constant = screenWidth / 2 - (16)
         contentViewCell.layer.cornerRadius = 10
         contentViewCell.clipsToBounds = true
+        badgeImageView.image = nil
+        badgeImageView.sd_setImage(with: URL(string: dataAPI.badge), placeholderImage: nil)
+        if badgeImageView.image == nil {
+            badgeImageView.image = #imageLiteral(resourceName: "img-DefaultImage")
+        }
+        
         guard let realm = RealmManager.shared.realm else { return }
         if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
             dataAPI.isFavorite = false
@@ -52,10 +57,6 @@ final class TeamsCollectionCell: UICollectionViewCell {
         } else {
             favoriteButton.isSelected = false
         }
-    }
-    
-    func configbadgeImage(image: UIImage?) {
-        badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
     }
     
     @IBAction private func favoriteButtonTouchUpInside(_ sender: Any) {

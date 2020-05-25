@@ -43,6 +43,7 @@ final class FavoriteViewController: ViewController {
         tableView.addGestureRecognizer(longPress)
         viewModel.setUpObsever()
         tableView.separatorColor = App.Color.backgroundTableView
+        tableView.tableFooterView = UIView()
         fetchData()
     }
     
@@ -76,6 +77,8 @@ final class FavoriteViewController: ViewController {
                 if !viewModel.isSelect {
                     bottomCollection.constant = 50
                     tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+                    guard let cell = tableView.cellForRow(at: indexPath) else { return }
+                    cell.isSelected = true
                     viewModel.dictionnarySelectedIndexPath[indexPath] = true
                 } else {
                     bottomCollection.constant = 0
@@ -128,38 +131,14 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellLeague(at: indexPath)
-            let item = viewModel.dataLeagues[indexPath.row].logo
-            Networking.shared().downloadImage(url: item) { (image) in
-                if let image = image {
-                    cell.configImage(image: image)
-                } else {
-                    cell.configImage(image: #imageLiteral(resourceName: "img-logo"))
-                }
-            }
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellTeam(at: indexPath)
-            let item = viewModel.dataTeams[indexPath.row].badge
-            Networking.shared().downloadImage(url: item) { (image) in
-                if let image = image {
-                    cell.configLogoImage(image: image)
-                } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
-                }
-            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellPlayer(at: indexPath)
-            let item = viewModel.dataPlayers[indexPath.row].cutout
-            Networking.shared().downloadImage(url: item) { (image) in
-                if let image = image {
-                    cell.configPlayerImage(image: image)
-                } else {
-                    cell.configPlayerImage(image: #imageLiteral(resourceName: "img-player"))
-                }
-            }
             return cell
         }
     }
@@ -175,23 +154,23 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                if indexPath.section == 0 {
-                    RealmManager.shared.deleteObject(with: viewModel.getLeague(in: indexPath))
-                    viewModel.dataLeagues.remove(at: indexPath.row)
-                    updateUI()
-                } else if indexPath.section == 1 {
-                    RealmManager.shared.deleteObject(with: viewModel.getTeam(in: indexPath))
-                    viewModel.dataTeams.remove(at: indexPath.row)
-                    updateUI()
-                } else {
-                    RealmManager.shared.deleteObject(with: viewModel.getPlayer(in: indexPath))
-                    viewModel.dataPlayers.remove(at: indexPath.row)
-                    updateUI()
-                }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if indexPath.section == 0 {
+                RealmManager.shared.deleteObject(with: viewModel.getLeague(in: indexPath))
+                viewModel.dataLeagues.remove(at: indexPath.row)
+                updateUI()
+            } else if indexPath.section == 1 {
+                RealmManager.shared.deleteObject(with: viewModel.getTeam(in: indexPath))
+                viewModel.dataTeams.remove(at: indexPath.row)
+                updateUI()
+            } else {
+                RealmManager.shared.deleteObject(with: viewModel.getPlayer(in: indexPath))
+                viewModel.dataPlayers.remove(at: indexPath.row)
+                updateUI()
             }
         }
+    }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = App.Color.backgroundColor
@@ -201,6 +180,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         if viewModel.isSelect == false {
             if indexPath.section == 0 {
                 let detailLeagueVC = DetailLeagueViewController()
@@ -226,15 +206,29 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             }
         } else {
             viewModel.dictionnarySelectedIndexPath[indexPath] = true
+            cell.isSelected = true
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         if viewModel.isSelect {
+            cell.isSelected = false
             viewModel.dictionnarySelectedIndexPath[indexPath] = false
-            viewModel.testDeleteButton += 1
+            let index = viewModel.deleteIndexPath.firstIndex(of: indexPath)
+            if index == nil {
+                viewModel.deleteIndexPath.append(indexPath)
+                viewModel.testDeleteButton += 1
+            }
         }
         if viewModel.testDeleteButton == viewModel.dictionnarySelectedIndexPath.count {
+            for (key, _) in viewModel.dictionnarySelectedIndexPath {
+                if let cellDeselect = tableView.cellForRow(at: key) {
+                    cellDeselect.isSelected = false
+                    tableView.deselectRow(at: key, animated: true)
+                }
+                
+            }
             resetDeleteSelectButton()
         }
     }

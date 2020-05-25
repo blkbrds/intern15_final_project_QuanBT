@@ -64,7 +64,6 @@ final class LeagueListViewController: ViewController {
             guard let this = self else { return }
             if done {
                 this.tableView.separatorColor = .white
-                this.viewModel.downloadImage()
                 this.tableView.reloadData()
             } else {
                 this.showAlert(title: "Erorr API", message: msg)
@@ -134,14 +133,6 @@ extension LeagueListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableCell", for: indexPath) as? LeagueTableCell else { return UITableViewCell() }
         cell.viewModel = viewModel.viewModelForCell(at: indexPath)
         cell.delegate = self
-        //        let item = viewModel.dataAPIs[indexPath.row].logo
-        //        Networking.shared().downloadImage(url: item) { (image) in
-        //            if let image = image {
-        //                cell.configImage(image: image)
-        //            } else {
-        //                cell.configImage(image: #imageLiteral(resourceName: "img-logo"))
-        //            }
-        //        }
         return cell
     }
 }
@@ -153,7 +144,6 @@ extension LeagueListViewController: UITableViewDelegate {
         let data = viewModel.dataAPIs[indexPath.row]
         let vm = DetailLeagueViewModel(idLeague: data.id, isFavorite: data.isFavorite)
         detailLeagueVC.viewModel = vm
-        navigationController?.isNavigationBarHidden = false
         navigationController?.pushViewController(detailLeagueVC, animated: true)
     }
 }

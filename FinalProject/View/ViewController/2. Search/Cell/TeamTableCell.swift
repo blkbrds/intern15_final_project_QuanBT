@@ -51,10 +51,20 @@ final class TeamTableCell: UITableViewCell {
             nameTeamLabel.text = dataFavorite.name
             nameStadiumLabel.text = dataFavorite.stadium
             favoriteButton.isHidden = true
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataFavorite.badge), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
         } else {
             let dataAPI = viewModel.dataAPI
             nameTeamLabel.text = dataAPI.name
             nameStadiumLabel.text = dataAPI.stadium
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataAPI.badge), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
             
             guard let realm = RealmManager.shared.realm else { return }
             if realm.objects(Team.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
@@ -68,10 +78,6 @@ final class TeamTableCell: UITableViewCell {
                 favoriteButton.isSelected = false
             }
         }
-    }
-    
-    func configLogoImage(image: UIImage?) {
-        logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
     }
     
     // MARK: - IBAction

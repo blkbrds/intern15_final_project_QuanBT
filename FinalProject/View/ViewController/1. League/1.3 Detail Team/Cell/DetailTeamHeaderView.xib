@@ -158,9 +158,9 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <connections>
+                <outlet property="badgeImageView" destination="Cft-vR-5Bi" id="ZQQ-bM-nSX"/>
                 <outlet property="countryLabel" destination="LNo-wm-gkG" id="Xdc-gj-sTx"/>
                 <outlet property="formedYearLable" destination="ttx-kP-FBR" id="Adm-th-bRV"/>
-                <outlet property="jerseyImageView" destination="Cft-vR-5Bi" id="ZQQ-bM-nSX"/>
                 <outlet property="logoImageView" destination="YCW-Yg-b1H" id="Uc8-dQ-E3H"/>
                 <outlet property="nameLeagueLabel" destination="eyY-gE-YSa" id="Gc5-nx-npH"/>
                 <outlet property="nameTeamLabel" destination="Itm-Px-8p3" id="GYO-Kf-Hk9"/>

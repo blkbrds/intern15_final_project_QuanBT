@@ -102,7 +102,16 @@ final class DetailLeagueViewModel {
     }
     
     func numberOfRowInPhotos() -> Int {
+        photos.removeAll { (photo) -> Bool in
+            photo == ""
+        }
         return photos.count
+    }
+    
+    func viewModelForCellPhotos(at indexPath: IndexPath) -> PhotosCollectionCellVM {
+        let item = photos[indexPath.row]
+        let viewModel = PhotosCollectionCellVM(photo: item)
+        return viewModel
     }
     
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
@@ -133,6 +142,14 @@ final class DetailLeagueViewModel {
             isFavorite = false
         } else {
             isFavorite = true
+        }
+    }
+    
+    func setUpPhoto() -> Float {
+        if photos == [] {
+            return 0
+        } else {
+            return 50
         }
     }
 }

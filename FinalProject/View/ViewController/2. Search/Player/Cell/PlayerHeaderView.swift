@@ -50,15 +50,25 @@ final class PlayerHeaderView: UICollectionReusableView {
             weightLabel.text = dataAPI.weight
             heightLabel.text = dataAPI.height
         }
-    }
-    
-    func configcutoutImage(image: UIImage?) {
-        cutoutImageView.image = image ?? #imageLiteral(resourceName: "img-player")
-    }
-    
-    func configbackgroundImage(image: UIImage?) {
-        backgroundImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
-        teamImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
+        
+        cutoutImageView.image = nil
+        cutoutImageView.sd_setImage(with: URL(string: dataAPI.cutout), placeholderImage: nil)
+        if cutoutImageView.image == nil {
+            cutoutImageView.image = #imageLiteral(resourceName: "img-player")
+        }
+        
+        let dataTeam = viewModel.teamAPI
+        backgroundImageView.image = nil
+        backgroundImageView.sd_setImage(with: URL(string: dataTeam.badge), placeholderImage: nil)
+        if backgroundImageView.image == nil {
+            backgroundImageView.image = #imageLiteral(resourceName: "img-DefaultImage")
+        }
+        
+        teamImageView.image = nil
+        teamImageView.sd_setImage(with: URL(string: dataTeam.badge), placeholderImage: nil)
+        if teamImageView.image == nil {
+            teamImageView.image = #imageLiteral(resourceName: "img-logo")
+        }
     }
     
     @IBAction func teamButtonTouchUpInside(_ sender: Any) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
 
 protocol LeagueTableCellDelegate: class {
     func addLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: DetailLeague)
@@ -31,12 +32,6 @@ final class LeagueTableCell: UITableViewCell {
     }
     weak var delegate: LeagueTableCellDelegate?
     
-    override var isHighlighted: Bool {
-        didSet {
-            highlightIndicator.isHidden = !isHighlighted
-        }
-    }
-    
     override var isSelected: Bool {
         didSet {
             highlightIndicator.isHidden = !isSelected
@@ -52,11 +47,20 @@ final class LeagueTableCell: UITableViewCell {
             nameLeagueLabel.text = dataFavorite.name
             formedYearLable.text = dataFavorite.year
             favoriteButton.isHidden = true
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataFavorite.logo), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
         } else {
             let dataAPI = viewModel.dataAPI
             nameLeagueLabel.text = dataAPI.name
             formedYearLable.text = dataAPI.year
-            logoImageView.image = dataAPI.logoImage
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataAPI.logo), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
             
             guard let realm = RealmManager.shared.realm else { return }
             if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
@@ -70,10 +74,6 @@ final class LeagueTableCell: UITableViewCell {
                 favoriteButton.isSelected = false
             }
         }
-    }
-    
-    func configImage(image: UIImage?) {
-        logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
     }
     
     // MARK: - IBAction

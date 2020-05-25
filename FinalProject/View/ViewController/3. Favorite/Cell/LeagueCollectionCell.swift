@@ -25,12 +25,6 @@ final class LeagueCollectionCell: UICollectionViewCell {
         }
     }
     
-    override var isHighlighted: Bool {
-        didSet {
-            highlightIndicator.isHidden = !isHighlighted
-        }
-    }
-    
     override var isSelected: Bool {
         didSet {
             highlightIndicator.isHidden = !isSelected
@@ -46,21 +40,32 @@ final class LeagueCollectionCell: UICollectionViewCell {
             let dataLeague = viewModel.dataLeague
             nameLabel.text = dataLeague.name
             informationLabel.text = dataLeague.year
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataLeague.logo), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
         } else if index == 1 {
             setupUI()
             let dataTeam = viewModel.dataTeam
             nameLabel.text = dataTeam.name
             informationLabel.text = dataTeam.stadium
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataTeam.badge), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
         } else {
             setupUI()
             let dataPlayer = viewModel.dataPlayer
             nameLabel.text = dataPlayer.name
             informationLabel.text = dataPlayer.date
+            logoImageView.image = nil
+            logoImageView.sd_setImage(with: URL(string: dataPlayer.cutout), placeholderImage: nil)
+            if logoImageView.image == nil {
+                logoImageView.image = #imageLiteral(resourceName: "img-logo")
+            }
         }
-    }
-    
-    func configLogoImage(image: UIImage?) {
-        logoImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
     }
     
     private func setupUI() {

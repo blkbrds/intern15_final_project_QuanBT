@@ -130,27 +130,11 @@ extension SearchViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInTeam(at: indexPath)
             cell.delegate = self
-            let team = viewModel.dataTeams[indexPath.row].logo
-            Networking.shared().downloadImage(url: team) { (image) in
-                if let image = image {
-                    cell.configLogoImage(image: image)
-                } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                }
-            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInPlayer(at: indexPath)
             cell.delegate = self
-            let thumb = viewModel.dataPlayers[indexPath.row].cutout
-            Networking.shared().downloadImage(url: thumb) { (image) in
-                if let image = image {
-                    cell.configPlayerImage(image: image)
-                } else {
-                    cell.configPlayerImage(image: #imageLiteral(resourceName: "img-player"))
-                }
-            }
             return cell
         }
     }
@@ -182,14 +166,12 @@ extension SearchViewController: UITableViewDelegate {
             let data = viewModel.dataTeams[indexPath.row]
             let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: data.isFavorite)
             detailTeamVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
         } else {
             let playerVC = PlayerViewController()
             let data = viewModel.dataPlayers[indexPath.row]
             let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: data.isFavorite)
             playerVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(playerVC, animated: true)
         }
     }
