@@ -85,7 +85,7 @@ final class TeamTableCell: UITableViewCell {
             let data: Team = Team()
             data.id = viewModel.dataAPI.id
             data.name = viewModel.dataAPI.name
-            data.logo = viewModel.dataAPI.logo
+            data.badge = viewModel.dataAPI.badge
             data.stadium = viewModel.dataAPI.stadium
             favoriteButton.isSelected = true
             viewModel.dataAPI.isFavorite = true

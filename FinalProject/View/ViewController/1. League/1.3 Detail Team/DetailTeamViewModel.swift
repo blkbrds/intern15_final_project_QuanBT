@@ -88,7 +88,7 @@ final class DetailTeamViewModel {
         let data: Team = Team()
         data.id = dataAPI.id
         data.name = dataAPI.name
-        data.logo = dataAPI.logo
+        data.badge = dataAPI.badge
         data.stadium = dataAPI.stadium
         RealmManager.shared.addObject(with: data)
     }
