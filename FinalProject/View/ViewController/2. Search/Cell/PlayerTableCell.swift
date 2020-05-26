@@ -30,12 +30,6 @@ final class PlayerTableCell: UITableViewCell {
     }
     weak var delegate: PlayerTableCellDelegate?
     
-    override var isHighlighted: Bool {
-        didSet {
-            highlightIndicator.isHidden = !isHighlighted
-        }
-    }
-    
     override var isSelected: Bool {
         didSet {
             highlightIndicator.isHidden = !isSelected

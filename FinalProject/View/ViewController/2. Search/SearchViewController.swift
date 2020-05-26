@@ -51,40 +51,28 @@ final class SearchViewController: ViewController {
     
     private func loadAPITeam(teamString: String) {
         SVProgressHUD.show()
-        viewModel.getDataTeam(teamString: teamString) { [weak self] (done, msg) in
+        viewModel.getDataTeam(teamString: teamString) { [weak self] (done, _) in
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.tableView.reloadData()
+                this.searchBar.becomeFirstResponder()
             } else {
-                let alert = UIAlertController(title: "Error API", message: msg, preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    this.viewModel.resetData()
-                    this.tableView.reloadData()
-                    this.searchBar.searchTextField.text = nil
-                }))
-                this.present(alert, animated: true)
+                this.searchBar.becomeFirstResponder()
             }
         }
     }
     
     private func loadAPIPlayer(playerString: String) {
         SVProgressHUD.show()
-        viewModel.getDataPlayer(playerString: playerString) { [weak self] (done, msg) in
+        viewModel.getDataPlayer(playerString: playerString) { [weak self] (done, _) in
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
                 this.tableView.reloadData()
+                this.searchBar.becomeFirstResponder()
             } else {
-                let alert = UIAlertController(title: "Error API", message: msg, preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    this.viewModel.resetData()
-                    this.tableView.reloadData()
-                    this.searchBar.searchTextField.text = nil
-                }))
-                this.present(alert, animated: true)
+                this.searchBar.becomeFirstResponder()
             }
         }
     }
@@ -137,7 +125,7 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             searchBar.endEditing(true)
         }
     }
@@ -155,16 +143,6 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            searchBar.becomeFirstResponder()
-        }
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.searchTextField.text = nil
-        viewModel.resetData()
-        tableView.reloadData()
     }
 }
 

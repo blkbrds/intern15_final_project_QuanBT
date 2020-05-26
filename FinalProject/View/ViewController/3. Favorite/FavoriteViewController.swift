@@ -14,7 +14,6 @@ final class FavoriteViewController: ViewController {
     @IBOutlet private weak var deleteSelectButton: UIButton!
     @IBOutlet private weak var bottomCollection: NSLayoutConstraint!
     @IBOutlet private weak var emptyDataImageView: UIImageView!
-    @IBOutlet private weak var emptyDataLabel: UILabel!
     
     // MARK: - Properties
     private var viewModel = FavoriteViewModel()
@@ -61,12 +60,9 @@ final class FavoriteViewController: ViewController {
     private func updateUI() {
         if viewModel.setUpEmptyDataView() {
             emptyDataImageView.isHidden = false
-            emptyDataLabel.isHidden = false
         } else {
             emptyDataImageView.isHidden = true
-            emptyDataLabel.isHidden = true
         }
-        
         resetDeleteSelectButton()
         tableView.reloadData()
     }
