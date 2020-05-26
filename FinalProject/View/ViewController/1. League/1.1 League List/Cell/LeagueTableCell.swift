@@ -47,21 +47,12 @@ final class LeagueTableCell: UITableViewCell {
             nameLeagueLabel.text = dataFavorite.name
             formedYearLable.text = dataFavorite.year
             favoriteButton.isHidden = true
-            logoImageView.image = nil
-            logoImageView.sd_setImage(with: URL(string: dataFavorite.logo), placeholderImage: nil)
-            if logoImageView.image == nil {
-                logoImageView.image = #imageLiteral(resourceName: "img-logo")
-            }
+            downloadImage(imageView: logoImageView, url: dataFavorite.logo)
         } else {
             let dataAPI = viewModel.dataAPI
             nameLeagueLabel.text = dataAPI.name
             formedYearLable.text = dataAPI.year
-            logoImageView.image = nil
-            logoImageView.sd_setImage(with: URL(string: dataAPI.logo), placeholderImage: nil)
-            if logoImageView.image == nil {
-                logoImageView.image = #imageLiteral(resourceName: "img-logo")
-            }
-            
+            downloadImage(imageView: logoImageView, url: dataAPI.logo)
             guard let realm = RealmManager.shared.realm else { return }
             if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
                 dataAPI.isFavorite = false
@@ -73,6 +64,14 @@ final class LeagueTableCell: UITableViewCell {
             } else {
                 favoriteButton.isSelected = false
             }
+        }
+    }
+    
+    private func downloadImage(imageView: UIImageView, url: String) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = #imageLiteral(resourceName: "img-logo")
         }
     }
     

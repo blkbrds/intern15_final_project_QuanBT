@@ -63,7 +63,6 @@ final class LeagueListViewController: ViewController {
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
-                this.tableView.separatorColor = .white
                 this.tableView.reloadData()
             } else {
                 this.showAlert(title: "Erorr API", message: msg)

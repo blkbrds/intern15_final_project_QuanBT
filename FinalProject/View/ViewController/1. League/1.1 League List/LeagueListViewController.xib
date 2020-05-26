@@ -76,7 +76,7 @@
                         <action selector="nationsButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="lez-bQ-fMu"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I5y-Aa-8Ta">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I5y-Aa-8Ta">
                     <rect key="frame" x="0.0" y="181.66666666666669" width="414" height="670.33333333333326"/>
                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="separatorColor" red="0.070588235294117646" green="0.11764705882352941" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>

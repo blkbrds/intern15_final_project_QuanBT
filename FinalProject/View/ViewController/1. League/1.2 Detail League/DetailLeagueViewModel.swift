@@ -39,7 +39,7 @@ final class DetailLeagueViewModel {
                     }
                     self.dataAPI = dataDetail
                     self.informationData.append(contentsOf: [dataDetail.descriptions, dataDetail.facebook, dataDetail.youtube, dataDetail.twitter, dataDetail.website])
-                    self.photos.append(contentsOf: [dataDetail.poster, dataDetail.trophy, dataDetail.fanart1, dataDetail.fanart2, dataDetail.fanart3, dataDetail.fanart4])
+                    self.photos.append(contentsOf: [dataDetail.fanart1, dataDetail.fanart2, dataDetail.fanart3, dataDetail.fanart4])
                     completion(true, "")
                 } else {
                     completion(false, "Data format is error.")

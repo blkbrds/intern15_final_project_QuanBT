@@ -162,14 +162,6 @@ final class FavoriteViewModel {
         }
     }
     
-    func separatorColorTableView() -> Bool {
-        if dataLeagues == [] && dataTeams == [] && dataPlayers == [] {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     func deleteSelect() {
         let leagues = deleteLeagues
         RealmManager.shared.deleteAllObject(with: leagues)
@@ -204,5 +196,13 @@ final class FavoriteViewModel {
         dictionnarySelectedIndexPath = [:]
         testDeleteButton = 0
         deleteIndexPath = []
+    }
+    
+    func setUpEmptyDataView() -> Bool {
+        if dataLeagues == [] && dataTeams == [] && dataPlayers == [] {
+            return true
+        } else {
+            return false
+        }
     }
 }

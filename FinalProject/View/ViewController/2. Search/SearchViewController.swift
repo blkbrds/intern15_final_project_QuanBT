@@ -44,7 +44,6 @@ final class SearchViewController: ViewController {
         tableView.register(nib, forCellReuseIdentifier: "TeamTableCell")
         let nib2 = UINib(nibName: "PlayerTableCell", bundle: .main)
         tableView.register(nib2, forCellReuseIdentifier: "PlayerTableCell")
-        tableView.separatorColor = App.Color.backgroundTableView
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
@@ -56,7 +55,6 @@ final class SearchViewController: ViewController {
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
-                this.tableView.separatorColor = .white
                 this.tableView.reloadData()
             } else {
                 let alert = UIAlertController(title: "Error API", message: msg, preferredStyle: .alert)
@@ -65,7 +63,6 @@ final class SearchViewController: ViewController {
                     this.viewModel.resetData()
                     this.tableView.reloadData()
                     this.searchBar.searchTextField.text = nil
-                    this.tableView.separatorColor = App.Color.backgroundTableView
                 }))
                 this.present(alert, animated: true)
             }
@@ -78,7 +75,6 @@ final class SearchViewController: ViewController {
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
-                this.tableView.separatorColor = .white
                 this.tableView.reloadData()
             } else {
                 let alert = UIAlertController(title: "Error API", message: msg, preferredStyle: .alert)
@@ -87,7 +83,6 @@ final class SearchViewController: ViewController {
                     this.viewModel.resetData()
                     this.tableView.reloadData()
                     this.searchBar.searchTextField.text = nil
-                    this.tableView.separatorColor = App.Color.backgroundTableView
                 }))
                 this.present(alert, animated: true)
             }
@@ -96,7 +91,6 @@ final class SearchViewController: ViewController {
     
     private func setupSearchSegmentedControl() {
         searchBar.searchTextField.text = nil
-        tableView.separatorColor = App.Color.backgroundTableView
         viewModel.resetData()
         tableView.reloadData()
     }
@@ -143,11 +137,27 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let upperText = searchText.uppercased()
-        if status == .team {
-            loadAPITeam(teamString: upperText)
-        } else {
-            loadAPIPlayer(playerString: upperText)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            searchBar.endEditing(true)
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.searchTextField.text {
+            if searchText == "" {
+                self.viewModel.resetData()
+                self.tableView.reloadData()
+            } else {
+                if self.status == .team {
+                    self.loadAPITeam(teamString: searchText)
+                } else {
+                    self.loadAPIPlayer(playerString: searchText)
+                }
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            searchBar.becomeFirstResponder()
         }
     }
     

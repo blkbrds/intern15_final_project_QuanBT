@@ -202,4 +202,12 @@ final class FavoriteCollectionViewModel {
         testDeleteButton = 0
         deleteIndexPath = []
     }
+    
+    func setUpEmptyDataView() -> Bool {
+        if dataLeagues == [] && dataTeams == [] && dataPlayers == [] {
+            return true
+        } else {
+            return false
+        }
+    }
 }

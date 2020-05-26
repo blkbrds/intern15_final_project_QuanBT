@@ -40,31 +40,27 @@ final class LeagueCollectionCell: UICollectionViewCell {
             let dataLeague = viewModel.dataLeague
             nameLabel.text = dataLeague.name
             informationLabel.text = dataLeague.year
-            logoImageView.image = nil
-            logoImageView.sd_setImage(with: URL(string: dataLeague.logo), placeholderImage: nil)
-            if logoImageView.image == nil {
-                logoImageView.image = #imageLiteral(resourceName: "img-logo")
-            }
+            downloadImage(imageView: logoImageView, url: dataLeague.logo, imageLiteral: #imageLiteral(resourceName: "img-logo"))
         } else if index == 1 {
             setupUI()
             let dataTeam = viewModel.dataTeam
             nameLabel.text = dataTeam.name
             informationLabel.text = dataTeam.stadium
-            logoImageView.image = nil
-            logoImageView.sd_setImage(with: URL(string: dataTeam.badge), placeholderImage: nil)
-            if logoImageView.image == nil {
-                logoImageView.image = #imageLiteral(resourceName: "img-logo")
-            }
+            downloadImage(imageView: logoImageView, url: dataTeam.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
         } else {
             setupUI()
             let dataPlayer = viewModel.dataPlayer
             nameLabel.text = dataPlayer.name
             informationLabel.text = dataPlayer.date
-            logoImageView.image = nil
-            logoImageView.sd_setImage(with: URL(string: dataPlayer.cutout), placeholderImage: nil)
-            if logoImageView.image == nil {
-                logoImageView.image = #imageLiteral(resourceName: "img-logo")
-            }
+            downloadImage(imageView: logoImageView, url: dataPlayer.cutout, imageLiteral: #imageLiteral(resourceName: "img-player"))
+        }
+    }
+    
+    private func downloadImage(imageView: UIImageView, url: String, imageLiteral: UIImage) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = imageLiteral
         }
     }
     

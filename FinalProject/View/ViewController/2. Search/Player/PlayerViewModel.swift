@@ -41,7 +41,7 @@ final class PlayerViewModel {
                     }
                     self.dataAPI = dataPlayer
                     self.informationData.append(contentsOf: [dataPlayer.descriptions, dataPlayer.facebook, dataPlayer.youtube, dataPlayer.twitter, dataPlayer.website])
-                    self.photos.append(contentsOf: [dataPlayer.banner, dataPlayer.fanart1, dataPlayer.fanart2, dataPlayer.fanart3, dataPlayer.fanart4])
+                    self.photos.append(contentsOf: [dataPlayer.fanart1, dataPlayer.fanart2, dataPlayer.fanart3, dataPlayer.fanart4])
                     completion(true, "")
                 } else {
                     completion(false, "Data format is error.")

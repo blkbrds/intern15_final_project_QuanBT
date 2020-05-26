@@ -33,16 +33,15 @@ final class DetailTeamHeaderView: UICollectionReusableView {
         countryLabel.text = dataAPI.country
         formedYearLable.text = dataAPI.year
         stadiumLabel.text = dataAPI.stadium
-        logoImageView.image = nil
-        logoImageView.sd_setImage(with: URL(string: dataAPI.logo), placeholderImage: nil)
-        if logoImageView.image == nil {
-            logoImageView.image = #imageLiteral(resourceName: "img-logo")
-        }
-        
-        badgeImageView.image = nil
-        badgeImageView.sd_setImage(with: URL(string: dataAPI.badge), placeholderImage: nil)
-        if logoImageView.image == nil {
-            logoImageView.image = #imageLiteral(resourceName: "img-DefaultImage")
+        downloadImage(imageView: logoImageView, url: dataAPI.logo, imageLiteral: #imageLiteral(resourceName: "img-logo"))
+        downloadImage(imageView: badgeImageView, url: dataAPI.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
+    }
+    
+    private func downloadImage(imageView: UIImageView, url: String, imageLiteral: UIImage) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = imageLiteral
         }
     }
 }

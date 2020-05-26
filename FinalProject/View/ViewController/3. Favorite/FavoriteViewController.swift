@@ -13,6 +13,8 @@ final class FavoriteViewController: ViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var deleteSelectButton: UIButton!
     @IBOutlet private weak var bottomCollection: NSLayoutConstraint!
+    @IBOutlet private weak var emptyDataImageView: UIImageView!
+    @IBOutlet private weak var emptyDataLabel: UILabel!
     
     // MARK: - Properties
     private var viewModel = FavoriteViewModel()
@@ -42,7 +44,6 @@ final class FavoriteViewController: ViewController {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longpress))
         tableView.addGestureRecognizer(longPress)
         viewModel.setUpObsever()
-        tableView.separatorColor = App.Color.backgroundTableView
         tableView.tableFooterView = UIView()
         fetchData()
     }
@@ -58,12 +59,14 @@ final class FavoriteViewController: ViewController {
     }
     
     private func updateUI() {
-        let test = viewModel.separatorColorTableView()
-        if test {
-            tableView.separatorColor = App.Color.backgroundTableView
+        if viewModel.setUpEmptyDataView() {
+            emptyDataImageView.isHidden = false
+            emptyDataLabel.isHidden = false
         } else {
-            tableView.separatorColor = .white
+            emptyDataImageView.isHidden = true
+            emptyDataLabel.isHidden = true
         }
+        
         resetDeleteSelectButton()
         tableView.reloadData()
     }

@@ -13,6 +13,8 @@ final class FavoriteCollectionViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var deleteSelectButton: UIButton!
     @IBOutlet private weak var bottomCollection: NSLayoutConstraint!
+    @IBOutlet weak var emptyDataImageView: UIImageView!
+    @IBOutlet weak var emptyDataLabel: UILabel!
     
     // MARK: - Properties
     private var viewModel = FavoriteCollectionViewModel()
@@ -56,6 +58,14 @@ final class FavoriteCollectionViewController: UIViewController {
     }
     
     private func updateUI() {
+        if viewModel.setUpEmptyDataView() {
+            emptyDataImageView.isHidden = false
+            emptyDataLabel.isHidden = false
+        } else {
+            emptyDataImageView.isHidden = true
+            emptyDataLabel.isHidden = true
+        }
+        
         collectionView.reloadData()
         resetDeleteSelectButton()
     }

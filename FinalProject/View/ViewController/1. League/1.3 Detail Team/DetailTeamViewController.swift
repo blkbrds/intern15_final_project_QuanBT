@@ -123,8 +123,6 @@ extension DetailTeamViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
             return CGSize(width: collectionView.frame.width, height: 325)
-        } else if section == 1 {
-            return CGSize(width: collectionView.frame.width, height: 50)
         } else {
             return CGSize(width: collectionView.frame.width, height: CGFloat(viewModel.setUpPhoto()))
         }

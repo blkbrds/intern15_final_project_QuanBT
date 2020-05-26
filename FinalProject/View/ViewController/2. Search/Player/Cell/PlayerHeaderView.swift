@@ -38,6 +38,7 @@ final class PlayerHeaderView: UICollectionReusableView {
         nationalityImageView.layer.cornerRadius = nationalityImageView.bounds.width / 2
         nationalityImageView.clipsToBounds = true
         let dataAPI = viewModel.dataAPI
+        let dataTeam = viewModel.teamAPI
         nationalityImageView.image = UIImage(named: "img-\(dataAPI.nationality)")
         nameLabel.text = dataAPI.name
         numberLabel.text = dataAPI.number
@@ -50,24 +51,16 @@ final class PlayerHeaderView: UICollectionReusableView {
             weightLabel.text = dataAPI.weight
             heightLabel.text = dataAPI.height
         }
-        
-        cutoutImageView.image = nil
-        cutoutImageView.sd_setImage(with: URL(string: dataAPI.cutout), placeholderImage: nil)
-        if cutoutImageView.image == nil {
-            cutoutImageView.image = #imageLiteral(resourceName: "img-player")
-        }
-        
-        let dataTeam = viewModel.teamAPI
-        backgroundImageView.image = nil
-        backgroundImageView.sd_setImage(with: URL(string: dataTeam.badge), placeholderImage: nil)
-        if backgroundImageView.image == nil {
-            backgroundImageView.image = #imageLiteral(resourceName: "img-DefaultImage")
-        }
-        
-        teamImageView.image = nil
-        teamImageView.sd_setImage(with: URL(string: dataTeam.badge), placeholderImage: nil)
-        if teamImageView.image == nil {
-            teamImageView.image = #imageLiteral(resourceName: "img-logo")
+        downloadImage(imageView: cutoutImageView, url: dataAPI.cutout, imageLiteral: #imageLiteral(resourceName: "img-player") )
+        downloadImage(imageView: backgroundImageView, url: dataTeam.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
+        downloadImage(imageView: teamImageView, url: dataTeam.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
+    }
+    
+    private func downloadImage(imageView: UIImageView, url: String, imageLiteral: UIImage) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = imageLiteral
         }
     }
     
