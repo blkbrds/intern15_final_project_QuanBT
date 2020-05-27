@@ -24,6 +24,7 @@ final class PlayerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         collectionView.reloadData()
         if viewModel.dataAPI.id != "" {
             viewModel.updateFavorite()
@@ -125,14 +126,7 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell else { return UICollectionViewCell() }
-            let photo = viewModel.photos[indexPath.row]
-            Networking.shared().downloadImage(url: photo) { (image) in
-                if let image = image {
-                    cell.configbadgeImage(image: image)
-                } else {
-                    cell.configbadgeImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                }
-            }
+            cell.viewModel = viewModel.viewModelForCellPhotos(at: indexPath)
             return cell
         }
     }
@@ -141,7 +135,7 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
         if section == 0 {
             return CGSize(width: collectionView.frame.width, height: 425)
         } else {
-            return CGSize(width: collectionView.frame.width, height: 50)
+            return CGSize(width: collectionView.frame.width, height: CGFloat(viewModel.setUpPhoto()))
         }
     }
     
@@ -150,22 +144,6 @@ extension PlayerViewController: UICollectionViewDataSource, UICollectionViewDele
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PlayerHeaderView", for: indexPath) as? PlayerHeaderView {
                 sectionHeader.delegate = self
                 sectionHeader.viewModel = viewModel.viewModelForHeader()
-                let cutout = viewModel.dataAPI.cutout
-                Networking.shared().downloadImage(url: cutout) { (image) in
-                    if let image = image {
-                        sectionHeader.configcutoutImage(image: image)
-                    } else {
-                        sectionHeader.configcutoutImage(image: #imageLiteral(resourceName: "img-player"))
-                    }
-                }
-                let badge = viewModel.dataTeam.badge
-                Networking.shared().downloadImage(url: badge) { (image) in
-                    if let image = image {
-                        sectionHeader.configbackgroundImage(image: image)
-                    } else {
-                        sectionHeader.configbackgroundImage(image: #imageLiteral(resourceName: "img-logo"))
-                    }
-                }
                 return sectionHeader
             }
             return UICollectionReusableView()

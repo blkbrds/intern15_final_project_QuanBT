@@ -30,6 +30,7 @@ final class FavoriteViewModel {
     var dictionnarySelectedIndexPath: [IndexPath: Bool] = [:]
     var deleteButtonIsHiden: Bool = false
     var testDeleteButton = 0
+    var deleteIndexPath: [IndexPath] = []
     
     // MARK: - Function
     func fetchData(completion: (Bool) -> Void) {
@@ -46,6 +47,10 @@ final class FavoriteViewModel {
             dataLeagues = Array(leagues)
             dataTeams = Array(teams)
             dataPlayers = Array(players)
+            
+            dataLeagues.reverse()
+            dataTeams.reverse()
+            dataPlayers.reverse()
             
             // call back
             completion(true)
@@ -157,14 +162,6 @@ final class FavoriteViewModel {
         }
     }
     
-    func separatorColorTableView() -> Bool {
-        if dataLeagues == [] && dataTeams == [] && dataPlayers == [] {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     func deleteSelect() {
         let leagues = deleteLeagues
         RealmManager.shared.deleteAllObject(with: leagues)
@@ -198,5 +195,14 @@ final class FavoriteViewModel {
         selectedIndexPath = []
         dictionnarySelectedIndexPath = [:]
         testDeleteButton = 0
+        deleteIndexPath = []
+    }
+    
+    func setUpEmptyDataView() -> Bool {
+        if dataLeagues == [] && dataTeams == [] && dataPlayers == [] {
+            return true
+        } else {
+            return false
+        }
     }
 }

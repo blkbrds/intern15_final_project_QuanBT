@@ -30,6 +30,7 @@ final class FavoriteCollectionViewModel {
     var dictionnarySelectedIndexPath: [IndexPath: Bool] = [:]
     var deleteButtonIsHiden: Bool = false
     var testDeleteButton = 0
+    var deleteIndexPath: [IndexPath] = []
     
     // MARK: - Function
     func fetchData(completion: (Bool) -> Void) {
@@ -46,6 +47,10 @@ final class FavoriteCollectionViewModel {
             dataLeagues = Array(leagues)
             dataTeams = Array(teams)
             dataPlayers = Array(players)
+            
+            dataLeagues.reverse()
+            dataTeams.reverse()
+            dataPlayers.reverse()
             
             // call back
             completion(true)
@@ -173,7 +178,7 @@ final class FavoriteCollectionViewModel {
     
     func getDataDelete() {
         for (key, value) in dictionnarySelectedIndexPath where value {
-                selectedIndexPath.append(key)
+            selectedIndexPath.append(key)
         }
         
         for item in selectedIndexPath {
@@ -195,5 +200,14 @@ final class FavoriteCollectionViewModel {
         selectedIndexPath = []
         dictionnarySelectedIndexPath = [:]
         testDeleteButton = 0
+        deleteIndexPath = []
+    }
+    
+    func setUpEmptyDataView() -> Bool {
+        if dataLeagues == [] && dataTeams == [] && dataPlayers == [] {
+            return true
+        } else {
+            return false
+        }
     }
 }

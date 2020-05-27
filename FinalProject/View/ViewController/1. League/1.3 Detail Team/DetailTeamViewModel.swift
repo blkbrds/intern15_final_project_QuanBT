@@ -37,7 +37,7 @@ final class DetailTeamViewModel {
                     }
                     self.dataAPI = team
                     self.informationData.append(contentsOf: [team.descriptions, team.facebook, team.youtube, team.twitter, team.website])
-                    self.photos.append(contentsOf: [team.jersey, team.banner, team.fanart1, team.fanart2, team.fanart3, team.fanart4])
+                    self.photos.append(contentsOf: [team.fanart1, team.fanart2, team.fanart3, team.fanart4])
                     completion(true, "")
                 } else {
                     completion(false, "Data format is error.")
@@ -67,7 +67,16 @@ final class DetailTeamViewModel {
     }
     
     func numberOfRowInPhotos() -> Int {
+        photos.removeAll { (photo) -> Bool in
+            photo == ""
+        }
         return photos.count
+    }
+    
+    func viewModelForCellPhotos(at indexPath: IndexPath) -> PhotosCollectionCellVM {
+        let item = photos[indexPath.row]
+        let viewModel = PhotosCollectionCellVM(photo: item)
+        return viewModel
     }
     
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
@@ -79,7 +88,7 @@ final class DetailTeamViewModel {
         let data: Team = Team()
         data.id = dataAPI.id
         data.name = dataAPI.name
-        data.logo = dataAPI.logo
+        data.badge = dataAPI.badge
         data.stadium = dataAPI.stadium
         RealmManager.shared.addObject(with: data)
     }
@@ -98,6 +107,14 @@ final class DetailTeamViewModel {
             isFavorite = false
         } else {
             isFavorite = true
+        }
+    }
+    
+    func setUpPhoto() -> Float {
+        if photos == [] {
+            return 0
+        } else {
+            return 50
         }
     }
 }

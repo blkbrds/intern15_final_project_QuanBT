@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkN-FS-ZiU">
+                <searchBar contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="xkN-FS-ZiU">
                     <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                     <color key="backgroundColor" red="0.1333333333" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,7 +43,7 @@
                         <action selector="changedSearchSegmentedControl:" destination="-1" eventType="valueChanged" id="jEP-2L-ktk"/>
                     </connections>
                 </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZj-UW-N5n">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZj-UW-N5n">
                     <rect key="frame" x="0.0" y="176" width="414" height="676"/>
                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.21176470588235294" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                     <color key="separatorColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>

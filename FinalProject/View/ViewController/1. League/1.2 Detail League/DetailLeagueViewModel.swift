@@ -39,7 +39,7 @@ final class DetailLeagueViewModel {
                     }
                     self.dataAPI = dataDetail
                     self.informationData.append(contentsOf: [dataDetail.descriptions, dataDetail.facebook, dataDetail.youtube, dataDetail.twitter, dataDetail.website])
-                    self.photos.append(contentsOf: [dataDetail.poster, dataDetail.trophy, dataDetail.fanart1, dataDetail.fanart2, dataDetail.fanart3, dataDetail.fanart4])
+                    self.photos.append(contentsOf: [dataDetail.fanart1, dataDetail.fanart2, dataDetail.fanart3, dataDetail.fanart4])
                     completion(true, "")
                 } else {
                     completion(false, "Data format is error.")
@@ -102,7 +102,16 @@ final class DetailLeagueViewModel {
     }
     
     func numberOfRowInPhotos() -> Int {
+        photos.removeAll { (photo) -> Bool in
+            photo == ""
+        }
         return photos.count
+    }
+    
+    func viewModelForCellPhotos(at indexPath: IndexPath) -> PhotosCollectionCellVM {
+        let item = photos[indexPath.row]
+        let viewModel = PhotosCollectionCellVM(photo: item)
+        return viewModel
     }
     
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
@@ -133,6 +142,14 @@ final class DetailLeagueViewModel {
             isFavorite = false
         } else {
             isFavorite = true
+        }
+    }
+    
+    func setUpPhoto() -> Float {
+        if photos == [] {
+            return 0
+        } else {
+            return 50
         }
     }
 }

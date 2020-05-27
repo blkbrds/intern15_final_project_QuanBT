@@ -81,10 +81,19 @@
                             <constraint firstItem="IjI-bA-3WZ" firstAttribute="width" secondItem="mze-Gd-38Y" secondAttribute="width" multiplier="40/414" id="r5j-Tj-3P3"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM1-M1-83g">
+                        <rect key="frame" x="0.0" y="249.5" width="414" height="0.5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="fTN-fE-ncE"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.070588235289999995" green="0.1176470588" blue="0.15686274510000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="JM1-M1-83g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1PD-U5-5it"/>
                     <constraint firstItem="sm7-OI-y5h" firstAttribute="leading" secondItem="wth-ox-OPi" secondAttribute="leading" id="DPH-bL-8eP"/>
+                    <constraint firstAttribute="trailing" secondItem="JM1-M1-83g" secondAttribute="trailing" id="GUT-vi-hfn"/>
                     <constraint firstAttribute="bottom" secondItem="mze-Gd-38Y" secondAttribute="bottom" id="NJ1-S7-tny"/>
                     <constraint firstItem="mze-Gd-38Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TVe-S2-vFN"/>
                     <constraint firstItem="wth-ox-OPi" firstAttribute="leading" secondItem="6UE-xd-USU" secondAttribute="leading" id="UdL-dU-WCO"/>
@@ -102,6 +111,7 @@
                     <constraint firstItem="Kvx-QG-Qgu" firstAttribute="centerY" secondItem="sm7-OI-y5h" secondAttribute="centerY" id="rNH-0s-dyt"/>
                     <constraint firstItem="WL9-hI-bOc" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="35/414" id="sdk-x9-IYW"/>
                     <constraint firstAttribute="trailing" secondItem="WL9-hI-bOc" secondAttribute="trailing" constant="5" id="uHY-ue-roQ"/>
+                    <constraint firstAttribute="bottom" secondItem="JM1-M1-83g" secondAttribute="bottom" id="uXa-hr-aOx"/>
                     <constraint firstItem="6UE-xd-USU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xqo-EB-vae"/>
                 </constraints>
             </tableViewCellContentView>

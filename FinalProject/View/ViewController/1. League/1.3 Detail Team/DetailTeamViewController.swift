@@ -23,6 +23,7 @@ final class DetailTeamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         collectionView.reloadData()
         if viewModel.dataAPI.id != "" {
             viewModel.updateFavorite()
@@ -114,14 +115,7 @@ extension DetailTeamViewController: UICollectionViewDataSource, UICollectionView
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell else { return UICollectionViewCell() }
-            let photo = viewModel.photos[indexPath.row]
-            Networking.shared().downloadImage(url: photo) { (image) in
-                if let image = image {
-                    cell.configbadgeImage(image: image)
-                } else {
-                    cell.configbadgeImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                }
-            }
+            cell.viewModel = viewModel.viewModelForCellPhotos(at: indexPath)
             return cell
         }
     }
@@ -130,7 +124,7 @@ extension DetailTeamViewController: UICollectionViewDataSource, UICollectionView
         if section == 0 {
             return CGSize(width: collectionView.frame.width, height: 325)
         } else {
-            return CGSize(width: collectionView.frame.width, height: 50)
+            return CGSize(width: collectionView.frame.width, height: CGFloat(viewModel.setUpPhoto()))
         }
     }
     
@@ -138,22 +132,6 @@ extension DetailTeamViewController: UICollectionViewDataSource, UICollectionView
         if indexPath.section == 0 {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "DetailTeamHeaderView", for: indexPath) as? DetailTeamHeaderView {
                 sectionHeader.viewModel = viewModel.viewModelForHeader()
-                let logo = viewModel.dataAPI.logo
-                Networking.shared().downloadImage(url: logo) { (image) in
-                    if let image = image {
-                        sectionHeader.configLogoImage(image: image)
-                    } else {
-                        sectionHeader.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
-                    }
-                }
-                let badge = viewModel.dataAPI.badge
-                Networking.shared().downloadImage(url: badge) { (image) in
-                    if let image = image {
-                        sectionHeader.configJerseyImage(image: image)
-                    } else {
-                        sectionHeader.configJerseyImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                    }
-                }
                 return sectionHeader
             }
             return UICollectionReusableView()

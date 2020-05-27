@@ -29,13 +29,15 @@ final class LeagueHeaderView: UICollectionReusableView {
         nameLeagueLabel.text = dataAPI.name
         formedYearLable.text = dataAPI.year
         countryLabel.text = dataAPI.country
+        downloadImage(imageView: logoImageView, url: dataAPI.logo, imageLiteral: #imageLiteral(resourceName: "img-logo"))
+        downloadImage(imageView: badgeImageView, url: dataAPI.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
     }
     
-    func configLogoImage(image: UIImage?) {
-        logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
-    }
-    
-    func configbadgeImage(image: UIImage?) {
-        badgeImageView.image = image ?? #imageLiteral(resourceName: "img-DefaultImage")
+    private func downloadImage(imageView: UIImageView, url: String, imageLiteral: UIImage) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = imageLiteral
+        }
     }
 }

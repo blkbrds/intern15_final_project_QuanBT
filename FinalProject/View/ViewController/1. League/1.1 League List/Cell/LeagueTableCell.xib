@@ -86,9 +86,18 @@
                             <constraint firstItem="zQB-br-fbw" firstAttribute="width" secondItem="ljB-TB-hnl" secondAttribute="width" multiplier="40/414" id="eMA-tw-h8X"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjl-Gp-hG1">
+                        <rect key="frame" x="0.0" y="211.5" width="414" height="0.5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="uBs-09-Hif"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.070588235294117646" green="0.11764705882352941" blue="0.15686274509803921" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="rjl-Gp-hG1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0JJ-EK-voY"/>
+                    <constraint firstAttribute="bottom" secondItem="rjl-Gp-hG1" secondAttribute="bottom" id="29b-u9-KuZ"/>
                     <constraint firstItem="N5M-wl-f1G" firstAttribute="leading" secondItem="6u5-Hu-hvs" secondAttribute="leading" id="2fa-3O-5cr"/>
                     <constraint firstItem="Krh-jh-vik" firstAttribute="leading" secondItem="Dar-tD-mUM" secondAttribute="trailing" constant="10" id="3Ft-Kg-jvL"/>
                     <constraint firstItem="Dar-tD-mUM" firstAttribute="leading" secondItem="6u5-Hu-hvs" secondAttribute="leading" id="3Ru-EZ-V7a"/>
@@ -105,6 +114,7 @@
                     <constraint firstItem="Krh-jh-vik" firstAttribute="centerY" secondItem="Dar-tD-mUM" secondAttribute="centerY" id="bcU-29-O70"/>
                     <constraint firstItem="ljB-TB-hnl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ijM-XK-hyz"/>
                     <constraint firstItem="N5M-wl-f1G" firstAttribute="top" secondItem="6u5-Hu-hvs" secondAttribute="bottom" constant="5" id="lyc-e3-wAS"/>
+                    <constraint firstAttribute="trailing" secondItem="rjl-Gp-hG1" secondAttribute="trailing" id="qkz-AA-PIo"/>
                     <constraint firstAttribute="trailing" secondItem="IYs-YG-iDH" secondAttribute="trailing" constant="5" id="sg6-AZ-boe"/>
                     <constraint firstItem="IYs-YG-iDH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ysd-L3-OLn"/>
                     <constraint firstItem="ljB-TB-hnl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zRS-Wn-utK"/>

@@ -41,7 +41,7 @@ final class PlayerViewModel {
                     }
                     self.dataAPI = dataPlayer
                     self.informationData.append(contentsOf: [dataPlayer.descriptions, dataPlayer.facebook, dataPlayer.youtube, dataPlayer.twitter, dataPlayer.website])
-                    self.photos.append(contentsOf: [dataPlayer.banner, dataPlayer.fanart1, dataPlayer.fanart2, dataPlayer.fanart3, dataPlayer.fanart4])
+                    self.photos.append(contentsOf: [dataPlayer.fanart1, dataPlayer.fanart2, dataPlayer.fanart3, dataPlayer.fanart4])
                     completion(true, "")
                 } else {
                     completion(false, "Data format is error.")
@@ -95,7 +95,16 @@ final class PlayerViewModel {
     }
     
     func numberOfRowInPhotos() -> Int {
+        photos.removeAll { (photo) -> Bool in
+            photo == ""
+        }
         return photos.count
+    }
+    
+    func viewModelForCellPhotos(at indexPath: IndexPath) -> PhotosCollectionCellVM {
+        let item = photos[indexPath.row]
+        let viewModel = PhotosCollectionCellVM(photo: item)
+        return viewModel
     }
     
     func viewModelForHeaderTeam(title: String) -> TeamsHeaderVM {
@@ -135,6 +144,14 @@ final class PlayerViewModel {
             return false
         } else {
             return true
+        }
+    }
+    
+    func setUpPhoto() -> Float {
+        if photos == [] {
+            return 0
+        } else {
+            return 50
         }
     }
 }

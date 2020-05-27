@@ -44,7 +44,6 @@ final class SearchViewController: ViewController {
         tableView.register(nib, forCellReuseIdentifier: "TeamTableCell")
         let nib2 = UINib(nibName: "PlayerTableCell", bundle: .main)
         tableView.register(nib2, forCellReuseIdentifier: "PlayerTableCell")
-        tableView.separatorColor = App.Color.backgroundTableView
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
@@ -52,51 +51,34 @@ final class SearchViewController: ViewController {
     
     private func loadAPITeam(teamString: String) {
         SVProgressHUD.show()
-        viewModel.getDataTeam(teamString: teamString) { [weak self] (done, msg) in
+        viewModel.getDataTeam(teamString: teamString) { [weak self] (done, _) in
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
-                this.tableView.separatorColor = .white
                 this.tableView.reloadData()
+                this.searchBar.becomeFirstResponder()
             } else {
-                let alert = UIAlertController(title: "Error API", message: msg, preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    this.viewModel.resetData()
-                    this.tableView.reloadData()
-                    this.searchBar.searchTextField.text = nil
-                    this.tableView.separatorColor = App.Color.backgroundTableView
-                }))
-                this.present(alert, animated: true)
+                this.searchBar.becomeFirstResponder()
             }
         }
     }
     
     private func loadAPIPlayer(playerString: String) {
         SVProgressHUD.show()
-        viewModel.getDataPlayer(playerString: playerString) { [weak self] (done, msg) in
+        viewModel.getDataPlayer(playerString: playerString) { [weak self] (done, _) in
             SVProgressHUD.dismiss()
             guard let this = self else { return }
             if done {
-                this.tableView.separatorColor = .white
                 this.tableView.reloadData()
+                this.searchBar.becomeFirstResponder()
             } else {
-                let alert = UIAlertController(title: "Error API", message: msg, preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    this.viewModel.resetData()
-                    this.tableView.reloadData()
-                    this.searchBar.searchTextField.text = nil
-                    this.tableView.separatorColor = App.Color.backgroundTableView
-                }))
-                this.present(alert, animated: true)
+                this.searchBar.becomeFirstResponder()
             }
         }
     }
     
     private func setupSearchSegmentedControl() {
         searchBar.searchTextField.text = nil
-        tableView.separatorColor = App.Color.backgroundTableView
         viewModel.resetData()
         tableView.reloadData()
     }
@@ -130,27 +112,11 @@ extension SearchViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamTableCell", for: indexPath) as? TeamTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInTeam(at: indexPath)
             cell.delegate = self
-            let team = viewModel.dataTeams[indexPath.row].logo
-            Networking.shared().downloadImage(url: team) { (image) in
-                if let image = image {
-                    cell.configLogoImage(image: image)
-                } else {
-                    cell.configLogoImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                }
-            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell", for: indexPath) as? PlayerTableCell else { return UITableViewCell() }
             cell.viewModel = viewModel.viewModelForCellInPlayer(at: indexPath)
             cell.delegate = self
-            let thumb = viewModel.dataPlayers[indexPath.row].cutout
-            Networking.shared().downloadImage(url: thumb) { (image) in
-                if let image = image {
-                    cell.configPlayerImage(image: image)
-                } else {
-                    cell.configPlayerImage(image: #imageLiteral(resourceName: "img-player"))
-                }
-            }
             return cell
         }
     }
@@ -159,18 +125,24 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let upperText = searchText.uppercased()
-        if status == .team {
-            loadAPITeam(teamString: upperText)
-        } else {
-            loadAPIPlayer(playerString: upperText)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            searchBar.endEditing(true)
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.searchTextField.text = nil
-        viewModel.resetData()
-        tableView.reloadData()
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.searchTextField.text {
+            if searchText == "" {
+                self.viewModel.resetData()
+                self.tableView.reloadData()
+            } else {
+                if self.status == .team {
+                    self.loadAPITeam(teamString: searchText)
+                } else {
+                    self.loadAPIPlayer(playerString: searchText)
+                }
+            }
+        }
     }
 }
 
@@ -182,21 +154,19 @@ extension SearchViewController: UITableViewDelegate {
             let data = viewModel.dataTeams[indexPath.row]
             let vm = DetailTeamViewModel(idTeam: data.id, isFavorite: data.isFavorite)
             detailTeamVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(detailTeamVC, animated: true)
         } else {
             let playerVC = PlayerViewController()
             let data = viewModel.dataPlayers[indexPath.row]
             let vm = PlayerViewModel(idPlayer: data.id, idTeam: data.idTeam, isFavorite: data.isFavorite)
             playerVC.viewModel = vm
-            navigationController?.isNavigationBarHidden = false
             navigationController?.pushViewController(playerVC, animated: true)
         }
     }
 }
 
-// MARK: - TeamTableCellDelegate & PlayerTableCellDelegate
-extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
+// MARK: - TeamTableCellDelegate
+extension SearchViewController: TeamTableCellDelegate {
     func addTeamTableCell(cell: TeamTableCell, didFavoriteButton data: Team) {
         RealmManager.shared.addObject(with: data)
     }
@@ -204,7 +174,10 @@ extension SearchViewController: TeamTableCellDelegate, PlayerTableCellDelegate {
     func deleteTeamTableCell(cell: TeamTableCell, didFavoriteButton data: [Team]) {
         RealmManager.shared.deleteAllObject(with: data)
     }
-    
+}
+
+// MARK: - PlayerTableCellDelegate
+extension SearchViewController: PlayerTableCellDelegate {
     func addPlayerTableCell(cell: PlayerTableCell, didFavoriteButton data: Player) {
         RealmManager.shared.addObject(with: data)
     }

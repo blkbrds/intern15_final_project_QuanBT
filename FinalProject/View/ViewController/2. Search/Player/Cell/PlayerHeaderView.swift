@@ -38,6 +38,7 @@ final class PlayerHeaderView: UICollectionReusableView {
         nationalityImageView.layer.cornerRadius = nationalityImageView.bounds.width / 2
         nationalityImageView.clipsToBounds = true
         let dataAPI = viewModel.dataAPI
+        let dataTeam = viewModel.teamAPI
         nationalityImageView.image = UIImage(named: "img-\(dataAPI.nationality)")
         nameLabel.text = dataAPI.name
         numberLabel.text = dataAPI.number
@@ -50,15 +51,17 @@ final class PlayerHeaderView: UICollectionReusableView {
             weightLabel.text = dataAPI.weight
             heightLabel.text = dataAPI.height
         }
+        downloadImage(imageView: cutoutImageView, url: dataAPI.cutout, imageLiteral: #imageLiteral(resourceName: "img-player") )
+        downloadImage(imageView: backgroundImageView, url: dataTeam.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
+        downloadImage(imageView: teamImageView, url: dataTeam.badge, imageLiteral: #imageLiteral(resourceName: "img-DefaultImage"))
     }
     
-    func configcutoutImage(image: UIImage?) {
-        cutoutImageView.image = image ?? #imageLiteral(resourceName: "img-player")
-    }
-    
-    func configbackgroundImage(image: UIImage?) {
-        backgroundImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
-        teamImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
+    private func downloadImage(imageView: UIImageView, url: String, imageLiteral: UIImage) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = imageLiteral
+        }
     }
     
     @IBAction func teamButtonTouchUpInside(_ sender: Any) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
 
 protocol LeagueTableCellDelegate: class {
     func addLeagueTableCell(cell: LeagueTableCell, didFavoriteButton data: DetailLeague)
@@ -31,12 +32,6 @@ final class LeagueTableCell: UITableViewCell {
     }
     weak var delegate: LeagueTableCellDelegate?
     
-    override var isHighlighted: Bool {
-        didSet {
-            highlightIndicator.isHidden = !isHighlighted
-        }
-    }
-    
     override var isSelected: Bool {
         didSet {
             highlightIndicator.isHidden = !isSelected
@@ -52,11 +47,12 @@ final class LeagueTableCell: UITableViewCell {
             nameLeagueLabel.text = dataFavorite.name
             formedYearLable.text = dataFavorite.year
             favoriteButton.isHidden = true
+            downloadImage(imageView: logoImageView, url: dataFavorite.logo)
         } else {
             let dataAPI = viewModel.dataAPI
             nameLeagueLabel.text = dataAPI.name
             formedYearLable.text = dataAPI.year
-            
+            downloadImage(imageView: logoImageView, url: dataAPI.logo)
             guard let realm = RealmManager.shared.realm else { return }
             if realm.objects(DetailLeague.self).filter(NSPredicate(format: "id = %@", dataAPI.id)).isEmpty {
                 dataAPI.isFavorite = false
@@ -71,8 +67,12 @@ final class LeagueTableCell: UITableViewCell {
         }
     }
     
-    func configImage(image: UIImage?) {
-        logoImageView.image = image ?? #imageLiteral(resourceName: "img-logo")
+    private func downloadImage(imageView: UIImageView, url: String) {
+        imageView.image = nil
+        imageView.sd_setImage(with: URL(string: url), placeholderImage: nil)
+        if imageView.image == nil {
+            imageView.image = #imageLiteral(resourceName: "img-logo")
+        }
     }
     
     // MARK: - IBAction

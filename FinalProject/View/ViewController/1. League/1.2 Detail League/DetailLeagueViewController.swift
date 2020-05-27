@@ -24,6 +24,7 @@ final class DetailLeagueViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         collectionView.reloadData()
         if viewModel.dataAPI.id != "" {
             viewModel.updateFavorite()
@@ -135,25 +136,10 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamsCollectionCell", for: indexPath) as? TeamsCollectionCell else { return UICollectionViewCell() }
             cell.viewModel = viewModel.viewModelForCellTeams(at: indexPath)
             cell.delegate = self
-            let badge = viewModel.teams[indexPath.row].badge
-            Networking.shared().downloadImage(url: badge) { (image) in
-                if let image = image {
-                    cell.configbadgeImage(image: image)
-                } else {
-                    cell.configbadgeImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                }
-            }
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionCell", for: indexPath) as? PhotosCollectionCell else { return UICollectionViewCell() }
-            let photo = viewModel.photos[indexPath.row]
-            Networking.shared().downloadImage(url: photo) { (image) in
-                if let image = image {
-                    cell.configbadgeImage(image: image)
-                } else {
-                    cell.configbadgeImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                }
-            }
+            cell.viewModel = viewModel.viewModelForCellPhotos(at: indexPath)
             return cell
         }
     }
@@ -161,8 +147,10 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
             return CGSize(width: collectionView.frame.width, height: 325)
-        } else {
+        } else if section == 1 {
             return CGSize(width: collectionView.frame.width, height: 50)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: CGFloat(viewModel.setUpPhoto()))
         }
     }
     
@@ -170,22 +158,6 @@ extension DetailLeagueViewController: UICollectionViewDataSource, UICollectionVi
         if indexPath.section == 0 {
             if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LeagueHeaderView", for: indexPath) as? LeagueHeaderView {
                 sectionHeader.viewModel = viewModel.viewModelForHeader()
-                let logo = viewModel.dataAPI.logo
-                Networking.shared().downloadImage(url: logo) { (image) in
-                    if let image = image {
-                        sectionHeader.configLogoImage(image: image)
-                    } else {
-                        sectionHeader.configLogoImage(image: #imageLiteral(resourceName: "img-logo"))
-                    }
-                }
-                let badge = viewModel.dataAPI.badge
-                Networking.shared().downloadImage(url: badge) { (image) in
-                    if let image = image {
-                        sectionHeader.configbadgeImage(image: image)
-                    } else {
-                        sectionHeader.configbadgeImage(image: #imageLiteral(resourceName: "img-DefaultImage"))
-                    }
-                }
                 return sectionHeader
             }
             return UICollectionReusableView()
